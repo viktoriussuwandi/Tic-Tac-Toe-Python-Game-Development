@@ -8,3 +8,4 @@ class Game :
     self.comp   = Player()
     self.game_start = True
     self.game_over  = False
+    self.difficult_options = ["Easy", "Medium", "Impossible"]

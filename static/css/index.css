@@ -1,15 +1,44 @@
 html,body {
   min-width:100%;
   min-height:100%;
-  display: flex;
 }
 
 .container{
+  display: flex;
+  direction:column;
   width:  80%;
   height: 50%;
   margin: 5px;
+  padding:0;
   border-color:#E0E0E0;
   border-width: 1.5px;
   border-style: solid;
   border-radius:15px;
+}
+
+.game{
+  background:#E0E0E0;
+  width: 100%;
+  padding:0;
+  margin:1px;
+}
+
+.game-level{
+  display:flex;
+  background:yellow;
+}
+
+.game-role{
+  background:green;
+}
+
+.game-turn{
+  background:yellow;
+}
+.game-board{
+  background:rgb(20, 189, 172);
+}
+
+.game-restart{
+  background:yellow;
 }

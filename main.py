@@ -8,7 +8,8 @@ Bootstrap(app)
 
 @app.route("/")
 def home() :
-  return render_template("index.html")
-  
+  difficult_options = game.difficult_options
+  return render_template("index.html", options = difficult_options)
+
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)
