@@ -21,8 +21,8 @@ html,body {
 .game{
   display:flex;
   background:#FFF;
-  width: 100%;
-  height:100%;
+  max-width: 99%;
+  max-height:99%;
   padding:0;
   margin-left: 5px;
   margin : 5px 5px;
@@ -53,11 +53,11 @@ html,body {
 .game-role{
   display:flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
-.game-role .btn:focus {
+.game-role .btn:focus, .game-role .btn:hover {
   border-bottom-color: rgb(20, 189, 172) !important;
   border-bottom-width:2px !important;
 }
@@ -67,7 +67,8 @@ html,body {
   flex-direction: row;
   text-decoration: none;
   
-  width: 140px;
+  width: 25%;
+  margin: 5px;
   justify-content: space-between;
   align-items: center;
   
@@ -116,4 +117,17 @@ html,body {
 /* ---------------------------------------------------------------------------- */
 /* Game Restart */
 /* ---------------------------------------------------------------------------- */
-.game-restart{}
+.game-restart{
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-restart .btn, .game-restart .btn:focus, .game-restart .btn:hover{
+  width:99%;
+  text-decoration: none;
+  color:rgb(20, 189, 172);
+  border-radius:15px;
+  overflow:hidden;
+}
