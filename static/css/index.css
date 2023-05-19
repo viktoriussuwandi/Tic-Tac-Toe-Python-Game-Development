@@ -37,10 +37,7 @@ html,body {
   align-items: center;
 }
 
-.game-level .dropdown-item {
-  font-size: 12px;
-}
-
+.game-level .dropdown-item { font-size: 12px; }
 .game-level .icon{
   width:  18px;
   height: 18px;
@@ -126,13 +123,8 @@ html,body {
   min-width:95%;
 }
 
-.game-board .squares {
-  padding: 5%;
-}
-
-.game-board .square:hover{
-  border-color:#69F0AE;
-}
+.game-board .squares { padding: 5%; }
+.game-board .square:hover{ border-color:#69F0AE; }
 
 .game-board .square{
   min-height: 25%;
@@ -149,22 +141,10 @@ html,body {
   font-size: 25px;
 }
 
-
-.game-board .no-top-border{
-  border-top: none;
-}
-
-.game-board .no-bottom-border{
-  border-bottom: none;
-}
-
-.game-board .no-left-border{
-  border-left: none;
-}
-
-.game-board .no-right-border{
-  border-right: none;
-}
+.game-board .no-top-border{ border-top: none; }
+.game-board .no-bottom-border{ border-bottom: none; }
+.game-board .no-left-border{ border-left: none; }
+.game-board .no-right-border{ border-right: none; }
 
 /* ---------------------------------------------------------------------------- */
 /* Game Restart */
