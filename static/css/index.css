@@ -121,9 +121,8 @@ html,body {
   align-items: center;
   justify-content: center;
 
-  
   background:rgb(20, 189, 172);
-  min-height:300px;
+  min-height:95%;
   min-width:95%;
 }
 
@@ -132,10 +131,11 @@ html,body {
 }
 
 .game-board .square{
-  min-width:25%;
-  min-height:25%;
+  min-height: 25%;
+  min-width:  25%;
   background:white;
-  margin:2px;
+  font-size: 20px;
+  margin:1px;
 }
 
 /* ---------------------------------------------------------------------------- */
