@@ -11,7 +11,7 @@ def home() :
   difficult_options = game.difficult_options
   game_board = game.get_board()
   game_score = game.get_score()
-  # print(game_board)
+
   return render_template(
     "index.html", 
     options = difficult_options, 
