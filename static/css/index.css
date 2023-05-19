@@ -50,7 +50,27 @@ html,body {
 /* ---------------------------------------------------------------------------- */
 /* Game Role */
 /* ---------------------------------------------------------------------------- */
-.game-role{}
+.game-role{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.game-role a{
+  display:flex;
+  flex-direction: row;
+  text-decoration: none;
+  
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-role a .char{
+  font-size: 25px;
+  color:#000000; 
+}
 
 /* ---------------------------------------------------------------------------- */
 /* Game Turn */
