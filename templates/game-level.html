@@ -1,7 +1,7 @@
-<div class="row game game-level">Game level
+<div class="game game-level">
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown button
+    <button class="btn btn-transparent dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Difficult
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {% if options : %}
@@ -11,4 +11,5 @@
       {% endif %}
     </div>
   </div>
+  <img class="icon" src="{{ url_for('static', filename='img/share_icon.png')}}">
 </div>
