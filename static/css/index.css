@@ -67,7 +67,7 @@ html,body {
   flex-direction: row;
   text-decoration: none;
   
-  width: 120px;
+  width: 140px;
   justify-content: space-between;
   align-items: center;
   
@@ -87,13 +87,30 @@ html,body {
 /* ---------------------------------------------------------------------------- */
 /* Game Turn */
 /* ---------------------------------------------------------------------------- */
-.game-turn{}
+.game-turn{
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-turn .player-turn{
+  font-size:15px;
+  font-weight:600;
+}
+
+.game-turn .text-turn{
+  font-size:12px;
+  font-weight:400;
+  margin-left: 5px;
+}
 
 /* ---------------------------------------------------------------------------- */
 /* Game Board */
 /* ---------------------------------------------------------------------------- */
 .game-board{
   background:rgb(20, 189, 172);
+  min-height:300px;
 }
 
 /* ---------------------------------------------------------------------------- */
