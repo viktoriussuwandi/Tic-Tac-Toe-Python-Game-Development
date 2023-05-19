@@ -130,6 +130,10 @@ html,body {
   padding: 5%;
 }
 
+.game-board .square:hover{
+  border-color:#69F0AE;
+}
+
 .game-board .square{
   min-height: 25%;
   min-width: 25%;
@@ -143,8 +147,8 @@ html,body {
   text-decoration: none;
   color:white;
   font-size: 25px;
-
 }
+
 
 .game-board .no-top-border{
   border-top: none;
