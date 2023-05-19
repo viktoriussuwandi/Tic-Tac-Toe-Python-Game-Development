@@ -138,11 +138,28 @@ html,body {
   
   border-color:#78909C; 
   border-width: 2px;
+  border-radius:0;
 
   text-decoration: none;
   color:white;
   font-size: 25px;
 
+}
+
+.game-board .no-top-border{
+  border-top: none;
+}
+
+.game-board .no-bottom-border{
+  border-bottom: none;
+}
+
+.game-board .no-left-border{
+  border-left: none;
+}
+
+.game-board .no-right-border{
+  border-right: none;
 }
 
 /* ---------------------------------------------------------------------------- */
