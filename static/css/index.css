@@ -42,8 +42,8 @@ html,body {
 }
 
 .game-level .icon{
-  width:  15px;
-  height: 15px;
+  width:  18px;
+  height: 18px;
   margin-right: 20px;
 }
 
@@ -57,19 +57,31 @@ html,body {
   align-items: center;
 }
 
-.game-role a{
+.game-role .btn:focus {
+  border-bottom-color: rgb(20, 189, 172) !important;
+  border-bottom-width:2px !important;
+}
+
+.game-role .btn {
   display:flex;
   flex-direction: row;
   text-decoration: none;
   
-  width: 100px;
+  width: 120px;
   justify-content: space-between;
   align-items: center;
+  
+  border-color:#E0E0E0;
+  border-width: 1.8px;
+  
+  border-style: solid;
+  border-radius:7px;
 }
 
-.game-role a .char{
-  font-size: 25px;
-  color:#000000; 
+.game-role .btn .char{
+  font-size: 15px;
+  font-weight:500;
+  color:#000000;
 }
 
 /* ---------------------------------------------------------------------------- */
