@@ -68,7 +68,7 @@ html,body {
   text-decoration: none;
   
   width: 25%;
-  margin: 5px;
+  margin: 3%;
   justify-content: space-between;
   align-items: center;
   
@@ -109,7 +109,7 @@ html,body {
 .game-turn .text-turn{
   font-size:12px;
   font-weight:400;
-  margin-left: 5px;
+  margin-left: 2%;
 }
 
 /* ---------------------------------------------------------------------------- */
@@ -120,22 +120,29 @@ html,body {
   flex-direction:row;
   align-items: center;
   justify-content: center;
-
+  
   background:rgb(20, 189, 172);
   min-height:95%;
   min-width:95%;
 }
 
 .game-board .squares {
-  margin:2px;
+  padding: 5%;
 }
 
 .game-board .square{
   min-height: 25%;
-  min-width:  25%;
-  background:white;
-  font-size: 20px;
-  margin:1px;
+  min-width: 25%;
+  margin-right: -12px;
+  margin-left: -12px;
+  
+  border-color:#78909C; 
+  border-width: 2px;
+
+  text-decoration: none;
+  color:white;
+  font-size: 25px;
+
 }
 
 /* ---------------------------------------------------------------------------- */

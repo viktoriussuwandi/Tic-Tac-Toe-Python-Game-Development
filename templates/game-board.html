@@ -3,7 +3,17 @@
       {% for row in range(board['row']) %}
         <div class="row">
           {% for col in range(board['col']) %}
-            <div class="col-auto square">{{ row }}-{{ col }}</div>
+            <div class="col-auto">
+              {% if row==0 %}
+                <div class="btn square no-top no-left" href="#">{{ row }}-{{ col }}
+              {% elif row== %}
+                <div class="btn square" href="#">{{ row }}-{{ col }}
+              {% else %}
+                <div class="btn square" href="#">{{ row }}-{{ col }}
+              {% endif %}
+              
+              </div>
+            </div>
           {% endfor %}
         </div>
       {% endfor %}
