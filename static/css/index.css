@@ -1,0 +1,15 @@
+html,body {
+  min-width:100%;
+  min-height:100%;
+  display: flex;
+}
+
+.container{
+  width:  80%;
+  height: 50%;
+  margin: 5px;
+  border-color:#E0E0E0;
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius:15px;
+}
