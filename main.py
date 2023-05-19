@@ -9,11 +9,17 @@ Bootstrap(app)
 @app.route("/")
 def home() :
   difficult_options = game.difficult_options
+  game_board = game.get_board()
+  game_score = game.get_score()
+  # print(game_board)
   return render_template(
     "index.html", 
     options = difficult_options, 
-    select_option = difficult_options[1]
+    select_option = difficult_options[1],
+    board = game_board,
+    score = game_score
   )
+
 
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)

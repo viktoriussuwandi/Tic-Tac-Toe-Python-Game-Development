@@ -1,13 +1,25 @@
   <div class="game game-role">
     
     <a class="btn" href="#">
-      <div class="char">X</div>
-      <div class="char">-</div>
+      <div class="char-player">X</div>
+      <div class="char-score">
+        {% if score['X'] == 0 %}
+        -
+        {% else %}
+        {{ score['X'] }}
+        {% endif %}
+      </div>
     </a>
     
     <a class="btn" href="#">
-      <div class="char">O</div>
-      <div class="char">-</div>
+      <div class="char-player">O</div>
+      <div class="char-score">
+        {% if score['O'] == 0 %}
+        -
+        {% else %}
+        {{ score['O'] }}
+        {% endif %}
+      </div>
     </a>
     
   </div>
