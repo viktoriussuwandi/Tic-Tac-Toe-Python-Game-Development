@@ -30,10 +30,6 @@ class Game :
     score_O = self.comp.score
     scores ={ "X" : score_X, "O" : score_O }
     return scores
-  
-  def update_score(self) :
-    self.player.score = 0
-    self.comp.score   = 0
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -71,12 +67,24 @@ class Game :
     while not self.game_over :
       clear()
       print(self)
-      row = self.get_board()['row']
-      col = self.get_board()['col']
-      print(f'Rows : {row}')
-      print(f'Cols : {col}')
       self.game_over = True
-
+  
+  def update_score(self) :
+    self.player.score = 0
+    self.comp.score   = 0
+    
+  def update_board(self) :
+    rows  = self.get_board()['row']
+    cols  = self.get_board()['col']
+    board = ''
+    for row in range(rows) : 
+      board += '\n'
+      for col in range(cols) : board += f'    {col}'
+    return board
+    
+# ----------------------------------------------------------------------------------
+# OTHER FUNCTIONS
+# ----------------------------------------------------------------------------------  
   def __repr__(self) :
     game_level  = self.level_options[self.game_level]
     player_role = self.role_options[self.player.role]
@@ -86,11 +94,7 @@ class Game :
     Player cells : {self.player.cells_selected }
     Comp   cells : {self.comp.cells_selected }
     -------------------------------------------
-    Board :
+    Board : 
+    { self.update_board() }
     '''
-    # print(f'Level : {game_level}; (Player : {player_role}; Comp : {comp_role})')
-    # print(f'Player cells : {self.player.cells_selected }')
-    # print(f'Comp   cells : {self.comp.cells_selected }')
-    # print('-------------------------------------------')
-    # print('Board :')
     

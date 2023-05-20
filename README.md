@@ -7,8 +7,10 @@
 #### Documentation can be found on : 
 
 ## Development : 
-1. Preparation : game's difficulties and user's role.
-2. Events : game start, game running, and game over.
+1. Game attributes :
+   - Players : role, score, cell selected
+   - Game    : board, level, start-timing, end-timing
+2. Game events : game start, game running, and game over.
 3. Potential future development :
    - Multiplayer gaming.
    - Online database to store game attributes.
