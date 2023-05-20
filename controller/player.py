@@ -1,6 +1,7 @@
 class Player :
   def __init__(self) :
     self.role  = None
+    self.cells_selected = []
     self.score = 0
   
   def __repr__(self) :

@@ -7,11 +7,8 @@ app  = Flask(__name__)
 Bootstrap(app)
 
 # select difficulties & role
-while not game.game_start : game.start_game()
-print(f'Game level  : { game.level_options[game.game_level] }')
-print(f'Player role : { game.role_options[game.player.role] }')
-print(f'Comp role   : { game.role_options[game.comp.role] }')
-
+game.start_game()
+game.game_loop()
 
 # @app.route("/")
 # def home() :

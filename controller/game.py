@@ -35,12 +35,16 @@ class Game :
     self.player.score = 0
     self.comp.score   = 0
 
+# ----------------------------------------------------------------------------------
+# START THE GAME
+# ----------------------------------------------------------------------------------
   def start_game(self) :
     # select difficulties & role
-    while self.game_level  == None : self.select_game_level()
-    while self.player.role == None : self.select_player_role()
-    self.game_start = True
-    
+    while not self.game_start :
+      while self.game_level  == None : self.select_game_level()
+      while self.player.role == None : self.select_player_role()
+      self.game_start = True
+
   def select_game_level(self) :
     print('Game level :')
     for i in range(len(self.level_options)) : print(f'{i+1}.{self.level_options[i]}')
@@ -59,3 +63,34 @@ class Game :
       clear()
       self.player.role = int(user_input) - 1
       self.comp.role = 1 if self.player.role == 0 else 0
+
+# ----------------------------------------------------------------------------------
+# RUNNING THE GAME
+# ----------------------------------------------------------------------------------
+  def game_loop(self) :
+    while not self.game_over :
+      clear()
+      print(self)
+      row = self.get_board()['row']
+      col = self.get_board()['col']
+      print(f'Rows : {row}')
+      print(f'Cols : {col}')
+      self.game_over = True
+
+  def __repr__(self) :
+    game_level  = self.level_options[self.game_level]
+    player_role = self.role_options[self.player.role]
+    comp_role   = self.role_options[self.comp.role]
+    return f'''
+    Level : {game_level}; (Player : {player_role}; Comp : {comp_role})
+    Player cells : {self.player.cells_selected }
+    Comp   cells : {self.comp.cells_selected }
+    -------------------------------------------
+    Board :
+    '''
+    # print(f'Level : {game_level}; (Player : {player_role}; Comp : {comp_role})')
+    # print(f'Player cells : {self.player.cells_selected }')
+    # print(f'Comp   cells : {self.comp.cells_selected }')
+    # print('-------------------------------------------')
+    # print('Board :')
+    
