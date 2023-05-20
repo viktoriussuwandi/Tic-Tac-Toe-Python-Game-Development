@@ -6,4 +6,9 @@
 
 #### Documentation can be found on : 
 
-## Development : under development
+## Development : 
+1. Preparation : game's difficulties and user's role.
+2. Events : game start, game running, and game over.
+3. Potential future development :
+   - Multiplayer gaming.
+   - Online database to store game attributes.
