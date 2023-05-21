@@ -1,16 +1,31 @@
 <div class="game game-level">
-  <div class="dropdown">
+  
+  <!-- <div class="dropdown">
     {% if options %}
-    <button class="btn btn-transparent dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button  class="btn btn-transparent dropdown-toggle btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ select_option }}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         {% for o in options : %}
-          <a class="dropdown-item" href="#"> {{ o }} </a>
+          <a class="dropdown-item" href="#" value="{{ o }}" onclick="ExecPythonCommand('select_level1()')"> {{ o }} </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div> -->
+  
+  <div class="dropdown">
+    {% if options %}
+    <button  class="btn btn-transparent dropdown-toggle btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ select_option }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for o in options : %}
+          <a class="dropdown-item" href="#" onclick="get_level()"> {{ o }} </a>
         {% endfor %}
       {% endif %}
     </div>
   </div>
+
   <a href="#">
     <img class="icon" src="{{ url_for('static', filename='img/share_icon.png')}}">
   </a>
