@@ -4,26 +4,37 @@ from controller.game import Game
 import json
 
 # -------------------------------------------------------------------------------------------
-# Initialization
+# Initialization & additional functions
 # -------------------------------------------------------------------------------------------
 game = Game()
 app  = Flask(__name__)
 Bootstrap(app)
 
+ATTR = {
+  "game_board" : {},
+  "game_score" : {},
+  "player_turn" : '',
+}
+
+def update_attributes():
+  ATTR['game_board']  = game.update_board()
+  ATTR['game_score']  = game.update_score()
+  ATTR['player_turn'] = game.update_turn()
+  
 # -------------------------------------------------------------------------------------------
 # Common Routes
 # -------------------------------------------------------------------------------------------
 @app.route("/")
 def home() :
-  game_board = game.get_board()
-  game_score = game.get_score()
   
   return render_template(
     "index.html",
-    options    = game.level_options,
-    board = game_board,
-    score = game_score
+    options = game.level_options,
+    board   = ATTR['game_board'],
+    score   = ATTR['game_score']
   )
+
+
 
 # -------------------------------------------------------------------------------------------
 # Routes to receive data from javascript on click event

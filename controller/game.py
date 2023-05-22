@@ -1,8 +1,5 @@
 from controller.player import Player
 import math
-import os
-
-clear = lambda: os.system('clear')
 
 class Game :
   def __init__(self) :
@@ -16,20 +13,7 @@ class Game :
     self.player = Player()
     self.comp   = Player()
     self.game_level = None
-
-  def get_board(self) :
-    total_squares = self.total_squares
-    row = math.sqrt(total_squares)
-    col = row
-    board = { "row": int(row), "col" : int(col) }
-    return board
-
-  def get_score(self) :
-    self.update_score()
-    score_X = self.player.score
-    score_O = self.comp.score
-    scores ={ "X" : score_X, "O" : score_O }
-    return scores
+    self.scores     = { "X" : 0, "O" : 0 }
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -40,6 +24,8 @@ class Game :
       self.player.role is not None and 
       self.comp.role   is not None
     )
+    self.player.score = 0
+    self.comp.score   = 0
     self.game_start = check_level_and_role
 
   def select_game_level(self, level_selected=None) :
@@ -58,24 +44,22 @@ class Game :
 # RUNNING THE GAME
 # ----------------------------------------------------------------------------------
   def game_loop(self) :
-    while not self.game_over :
-      clear()
-      print(self)
-      self.game_over = True
+    pass
   
   def update_score(self) :
-    self.player.score = 0
-    self.comp.score   = 0
+    self.update_score()
+    score_X = self.player.score
+    score_O = self.comp.score
+    scores = { "X" : score_X, "O" : score_O }
+    return scores
     
   def update_board(self) :
-    rows  = self.get_board()['row']
-    cols  = self.get_board()['col']
-    board = ''
-    for row in range(rows) : 
-      board += '\n'
-      for col in range(cols) : board += f'    {col}'
+    total_squares = self.total_squares
+    row = math.sqrt(total_squares)
+    col = row
+    board = { "row": int(row), "col" : int(col) }
     return board
-
+    
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------  
