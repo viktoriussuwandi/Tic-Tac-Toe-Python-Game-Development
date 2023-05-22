@@ -20,7 +20,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         {% for o in options : %}
-          <a class="dropdown-item" href="#" onclick="get_level()"> {{ o }} </a>
+          <a class="dropdown-item" href="#" onclick="get_level(level='{{ o }}')"> {{ o }} </a>
         {% endfor %}
       {% endif %}
     </div>
