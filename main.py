@@ -33,9 +33,12 @@ def select_level(selected_level=None) :
   user_level = json.loads(selected_level).strip()
   check_user_level = game.game_level is None and user_level in game.level_options
   game.game_level  = user_level if check_user_level else game.game_level
+  print(game.game_level)
   return '/'
 
-
+# @app.route('update_role/<string:selected_role>', methods=['POST'])
+def select_role(selected_role=None) :
+  pass
 
 # -------------------------------------------------------------------------------------------
 if __name__ == "__main__" :

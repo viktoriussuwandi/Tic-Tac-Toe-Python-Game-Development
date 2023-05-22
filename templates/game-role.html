@@ -1,7 +1,7 @@
   <div class="game game-role">
     
-    <a class="btn" href="#">
-      <div class="char-player">X</div>
+    <a class="btn btn-role-X" onclick="set_role_X()" href="#">
+      <div class="char-player role-X">X</div>
       <div class="char-score">
         {% if score['X'] == 0 %}
         -
@@ -11,8 +11,8 @@
       </div>
     </a>
     
-    <a class="btn" href="#">
-      <div class="char-player">O</div>
+    <a class="btn btn-role-O" onclick="set_role_O()" href="#">
+      <div class="char-player role-O">O</div>
       <div class="char-score">
         {% if score['O'] == 0 %}
         -
