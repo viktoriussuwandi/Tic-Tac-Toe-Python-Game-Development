@@ -18,7 +18,7 @@ def home() :
   
   return render_template(
     "index.html",
-    options = game.level_options,
+    options    = game.level_options,
     board = game_board,
     score = game_score
   )
@@ -35,5 +35,8 @@ def select_level(selected_level=None) :
   game.game_level  = user_level if check_user_level else game.game_level
   return '/'
 
+
+
+# -------------------------------------------------------------------------------------------
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)

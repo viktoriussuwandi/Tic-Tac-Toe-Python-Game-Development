@@ -9,9 +9,10 @@ function get_level() {
     request.open("POST", `/update_level/${JSON.stringify(txt)}`)
     request.send()
     
-    //Change button value of dropdown as selected
+    //Change button value of dropdown as selected, and make the button disable
     $(".level-btn").text($(this).text());
     $(".level-btn").val($(this).text());
+    $(".level-btn").addClass('disabled');
   });
 
 }
