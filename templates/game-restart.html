@@ -1,3 +1,7 @@
   <div class="game game-restart">
-    <a class="btn btn-sm">Restart Game</a>
+    <a class="btn btn-sm">
+      {% if attr['game_over'] %}
+        Restart Game
+      {% endif %}
+    </a>
   </div>

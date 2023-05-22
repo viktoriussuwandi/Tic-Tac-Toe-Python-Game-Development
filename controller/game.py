@@ -5,7 +5,7 @@ class Game :
   def __init__(self) :
     self.game_no       = 0
     self.game_start    = False
-    self.game_over     = False
+    self.game_over     = True
     self.total_squares = 9
     
     self.role_options  = ['X', 'O']
