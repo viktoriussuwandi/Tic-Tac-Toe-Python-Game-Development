@@ -1,12 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 import json
 
+# -------------------------------------------------------------------------------------------
+# Initialization
+# -------------------------------------------------------------------------------------------
 game = Game()
 app  = Flask(__name__)
 Bootstrap(app)
 
+# -------------------------------------------------------------------------------------------
+# Common Routes
+# -------------------------------------------------------------------------------------------
 @app.route("/")
 def home() :
   game_board = game.get_board()
