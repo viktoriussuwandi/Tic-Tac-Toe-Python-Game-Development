@@ -23,14 +23,13 @@ def update_attributes() :
   ATTR['player_turn']  = game.turn
   ATTR['game_board']   = game.board
   ATTR['game_over']    = game.game_over
-  
 
 def game_loop() :
   game.update_board()
   game.update_score()
   game.update_turn()
   update_attributes()
-  
+
 # -------------------------------------------------------------------------------------------
 # Common Routes
 # -------------------------------------------------------------------------------------------
