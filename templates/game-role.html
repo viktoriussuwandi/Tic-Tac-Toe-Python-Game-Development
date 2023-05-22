@@ -3,10 +3,10 @@
     <a class="btn btn-role-X" onclick="set_role_X()" href="#">
       <div class="char-player role-X">X</div>
       <div class="char-score">
-        {% if score['X'] == 0 %}
+        {% if attr['game_score']['X'] == 0 %}
         -
         {% else %}
-        {{ score['X'] }}
+        {{ attr['game_score']['X'] }}
         {% endif %}
       </div>
     </a>
@@ -14,10 +14,10 @@
     <a class="btn btn-role-O" onclick="set_role_O()" href="#">
       <div class="char-player role-O">O</div>
       <div class="char-score">
-        {% if score['O'] == 0 %}
+        {% if attr['game_score']['O'] == 0 %}
         -
         {% else %}
-        {{ score['O'] }}
+        {{ attr['game_score']['O'] }}
         {% endif %}
       </div>
     </a>

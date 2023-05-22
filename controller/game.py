@@ -4,16 +4,20 @@ import math
 class Game :
   def __init__(self) :
     self.game_no       = 0
-    self.layout        = []
     self.game_start    = False
     self.game_over     = False
     self.total_squares = 9
+    
     self.role_options  = ['X', 'O']
     self.level_options = ["Easy", "Medium", "Impossible"]
-    self.player = Player()
-    self.comp   = Player()
-    self.game_level = None
-    self.scores     = { "X" : 0, "O" : 0 }
+    
+    self.player        = Player()
+    self.comp          = Player()
+    
+    self.game_level    = None
+    self.scores        = { "X" : 0, "O" : 0 }
+    self.turn          = None
+    self.board         = {}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -43,30 +47,28 @@ class Game :
 # ----------------------------------------------------------------------------------
 # RUNNING THE GAME
 # ----------------------------------------------------------------------------------
-  def game_loop(self) :
-    pass
   
   def update_score(self) :
     score_X = self.player.score
     score_O = self.comp.score
-    scores = { "X" : score_X, "O" : score_O }
-    return scores
+    game_scores = { "X" : score_X, "O" : score_O }
+    self.scores = game_scores
     
   def update_board(self) :
     total_squares = self.total_squares
     row = math.sqrt(total_squares)
     col = row
-    board = { "row": int(row), "col" : int(col) }
-    return board
-
+    game_board = { "row": int(row), "col" : int(col) }
+    self.board = game_board
+    
   def update_turn(self) :
-    if self.game_start == False :
-      return None
+    if self.game_start == False : self.turn = None
     else :
       player_cells = len(self.player.cells_selected)
       comp_cells   = len(self.comp.cells_selected)
-      role_turn     = self.player.role if player_cells < comp_cells else self.comp.role
-      return self.role_options[role_turn]
+      is_player_turn  = self.player.role == 0 or player_cells < comp_cells
+      role_turn    = 0 if is_player_turn else self.comp.role
+      self.turn = self.role_options[role_turn]
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS

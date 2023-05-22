@@ -6,7 +6,7 @@
     </button>
     
     <div class="dropdown-menu menu-level" aria-labelledby="dropdownMenuButton">
-        {% for o in options : %}
+        {% for o in attr['game_options'] : %}
           <a class="dropdown-item item-level" onclick="get_level()" href="#"> {{ o }} </a>
         {% endfor %}
     </div>
