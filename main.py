@@ -60,7 +60,15 @@ def select_role(selected_role = None) :
     game.select_player_role(role_selected = user_role)
     print(f'Player Role : {game.player.role} ; Comp role : {game.comp.role}')
   return '/'
-  
+
+# Select square cells on game board
+@app.route('/update_cells/<int:row_selected>/<int:col_selected>', methods=['POST'])
+def select_cell(row_selected=None, col_selected=None) :
+  row = row_selected
+  col = col_selected
+  print(f'row : {row} ; col : {col}')
+  return '/'
+
 # -------------------------------------------------------------------------------------------
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)

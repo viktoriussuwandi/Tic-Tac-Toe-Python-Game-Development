@@ -3,16 +3,16 @@
 // ----------------------------------------------------------------------------
 
 function get_level() {
-  $('.game-level .menu-level .item-level').on('click', function() {
-
+  $('.game-level .menu-level .item-level').one('click', function() {
+    
     //1.Get selected html item value
     $('.item-level').val($(this).text());
     let level_selected = ($(this).text());
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_level/${JSON.stringify(level_selected)}`);
-    let res = request.send();
+    request.open("POST", `/update_level/${JSON.stringify(level_selected)}`, false);
+    request.send();
     
     //3.Change html button value of dropdown as selected, and make the html button disable
     $(".level-btn").text($(this).text());
@@ -30,8 +30,9 @@ function get_level() {
 function get_role(role_selected) {
   //Send variable to flask function
   let request = new XMLHttpRequest();
-  request.open("POST", `/update_role/${JSON.stringify(role_selected)}`);
-  let res = request.send();
+  request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
+  request.send();
+  
 }
 
 function set_role_X() {
@@ -59,7 +60,14 @@ function set_role_O() {
 
 function cells(row,col) {
   $('.game-board .square').on('click', function() {
-    console.log({'row' : row, 'col' : col})
+    //1.Get selected html item value
+    let cell = {'row' : row, 'col' : col}
+
+    //2.Send variable to flask function
+    let request = new XMLHttpRequest();
+    request.open("POST", `/update_cells/${JSON.stringify(cell.row)}/${JSON.stringify(cell.col)}`, false);
+    
+    //3.Change html button value of square cell, and make the square cell disable    
     $(this).addClass('disabled');
   })
 }
