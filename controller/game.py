@@ -35,31 +35,25 @@ class Game :
 # START THE GAME
 # ----------------------------------------------------------------------------------
   def start_game(self) :
-    # select difficulties & role
-    while not self.game_start :
-      while self.game_level  == None : self.select_game_level()
-      while self.player.role == None : self.select_player_role()
-      self.game_start = True
+    check_level_and_role = (
+      self.game_level  is not None and 
+      self.player.role is not None and 
+      self.comp.role   is not None
+    )
+    self.game_start = check_level_and_role
 
-  def select_game_level(self) :
-    print('Game level :')
-    for i in range(len(self.level_options)) : print(f'{i+1}.{self.level_options[i]}')
-    user_input = input('Please select game difficulties : ')
-    correct_input = (user_input.isnumeric() and int(user_input) in range(1,4))
-    if not correct_input : self.game_level = None; clear()
-    else : clear(); self.game_level = int(user_input) - 1
-
-  def select_player_role(self) :
-    print('Player Role :')
-    for i in range(len(self.role_options)) : print(f'{i+1}.{self.role_options[i]}')
-    user_input   = input('Please Player Role (X or O) : ')
-    correct_input = (user_input.isnumeric() and int(user_input) in range(1,3))
-    if not correct_input : self.player.role = None; clear()
-    else :
-      clear()
-      self.player.role = int(user_input) - 1
-      self.comp.role = 1 if self.player.role == 0 else 0
-
+  def select_game_level(self, level_selected=None) :
+    check_user_input = level_selected is not None and level_selected in self.level_options
+    self.game_level  = self.level_options.index(level_selected) if check_user_input else self.game_level
+    self.start_game()
+    
+  def select_player_role(self, role_selected=None) :
+    check_user_input  = role_selected is not None and role_selected in self.role_options
+    self.player.role  = self.role_options.index(role_selected) if check_user_input else self.player.role
+    check_player_is_X = check_user_input and self.player.role == 0
+    self.comp.role = None if not check_user_input else 1 if check_player_is_X else 0
+    self.start_game()
+    
 # ----------------------------------------------------------------------------------
 # RUNNING THE GAME
 # ----------------------------------------------------------------------------------

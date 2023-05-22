@@ -7,10 +7,6 @@ game = Game()
 app  = Flask(__name__)
 Bootstrap(app)
 
-# select difficulties & role
-# game.start_game()
-# game.game_loop()
-
 @app.route("/")
 def home() :
   game_board = game.get_board()
@@ -23,25 +19,26 @@ def home() :
     score = game_score
   )
 
-
 # -------------------------------------------------------------------------------------------
 # Routes to receive data from javascript on click event
 # -------------------------------------------------------------------------------------------
 
+# select game difficulties (easy, medium, impossible)
 @app.route('/update_level/<string:selected_level>', methods=['POST'])
-def select_level(selected_level=None) :
-  user_level = json.loads(selected_level).strip()
-  check_user_level = game.game_level is None and user_level in game.level_options
-  game.game_level  = user_level if check_user_level else game.game_level
-  print(game.game_level)
+def select_level(selected_level = None) :
+  game_level = json.loads(selected_level).strip()
+  if game.game_start == False and game.game_over == False :
+    game.select_game_level(level_selected = game_level)
+    print(f'Game Level : {game.game_level}')
   return '/'
 
-@app.route('update_role/<string:selected_role>', methods=['POST'])
-def select_role(selected_role=None) :
-  user_role  = json.loads(selected_level).strip()
-  check_role = game.game_level is None and user_level in game.level_options
-  game.game_level  = user_level if check_user_level else game.game_level
-  print(game.game_level)
+# select user role (X or O)
+@app.route('/update_role/<string:selected_role>', methods=['POST'])
+def select_role(selected_role = None) :
+  user_role  = json.loads(selected_role).strip()
+  if not game.game_start and not game.game_over :
+    game.select_player_role(role_selected = user_role)
+    print(f'Player Role : {game.player.role} ; Comp role : {game.comp.role}')
   return '/'  
 
 # -------------------------------------------------------------------------------------------
