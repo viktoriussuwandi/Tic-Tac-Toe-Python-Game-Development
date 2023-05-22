@@ -40,7 +40,7 @@ def home() :
   return render_template("index.html", options = game.level_options, attr = ATTR )
 
 # -------------------------------------------------------------------------------------------
-# Routes for data transfer from/to javascript
+# Routes for data transfer from/to index.js
 # -------------------------------------------------------------------------------------------
 
 # select game difficulties (easy, medium, impossible)
