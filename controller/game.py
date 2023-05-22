@@ -47,7 +47,6 @@ class Game :
     pass
   
   def update_score(self) :
-    self.update_score()
     score_X = self.player.score
     score_O = self.comp.score
     scores = { "X" : score_X, "O" : score_O }
@@ -59,6 +58,15 @@ class Game :
     col = row
     board = { "row": int(row), "col" : int(col) }
     return board
+
+  def update_turn(self) :
+    if self.game_start == False :
+      return None
+    else :
+      player_cells = len(self.player.cells_selected)
+      comp_cells   = len(self.comp.cells_selected)
+      role_turn     = self.player.role if player_cells < comp_cells else self.comp.role
+      return self.role_options[role_turn]
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS

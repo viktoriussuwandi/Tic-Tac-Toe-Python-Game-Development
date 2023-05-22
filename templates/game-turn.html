@@ -1,7 +1,8 @@
   <div class="game game-turn">
-    {% if player_turn : %}
-      <div class="player-turn">{{ player_turn }} XO</div>
+    {% if turn : %}
+      <div class="player-turn">{{ turn }}</div>
+      <div class="text-turn">Turn</div>
+    {% else %}
+      <div class="text-turn">Start game or select player</div>
     {% endif %}
-    <div class="player-turn">X</div>
-    <div class="text-turn">Turn</div>
   </div>

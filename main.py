@@ -27,11 +27,14 @@ def update_attributes():
 @app.route("/")
 def home() :
   
+  update_attributes()
+  
   return render_template(
     "index.html",
     options = game.level_options,
     board   = ATTR['game_board'],
-    score   = ATTR['game_score']
+    score   = ATTR['game_score'],
+    turn    = ATTR['player_turn']
   )
 
 
