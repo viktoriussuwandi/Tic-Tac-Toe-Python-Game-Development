@@ -1,20 +1,6 @@
 <div class="game game-level">
-  
-  <!-- <div class="dropdown">
-    {% if options %}
-    <button  class="btn btn-transparent dropdown-toggle btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{ select_option }}
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {% for o in options : %}
-          <a class="dropdown-item" href="#" value="{{ o }}" onclick="ExecPythonCommand('select_level1()')"> {{ o }} </a>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div> -->
-  
+  {% if options %}
   <div class="dropdown">
-    {% if options %}
     <button  class="btn btn-transparent dropdown-toggle btn-sm level-btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       game level
     </button>
@@ -22,10 +8,10 @@
         {% for o in options : %}
           <a class="dropdown-item item-level" onclick="get_level()" href="#"> {{ o }} </a>
         {% endfor %}
-      {% endif %}
     </div>
   </div>
-
+  {% endif %}
+  
   <a href="#">
     <img class="icon" src="{{ url_for('static', filename='img/share_icon.png')}}">
   </a>
