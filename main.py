@@ -49,7 +49,6 @@ def select_level(selected_level = None) :
   game_level = json.loads(selected_level).strip()
   if game.game_start == False and game.game_over == False :
     game.select_game_level(level_selected = game_level)
-    # print(f'Game Level : {game.game_level}')
   return '/'
 
 # select user role (X or O)
