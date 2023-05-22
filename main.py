@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 import json
