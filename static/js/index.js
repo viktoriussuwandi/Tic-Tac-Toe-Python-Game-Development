@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------------
 // Game Level
 // ----------------------------------------------------------------------------
+
 function get_level() {
   $('.game-level .menu-level .item-level').on('click', function() {
 
@@ -25,6 +26,7 @@ function get_level() {
 // ----------------------------------------------------------------------------
 // Player Role
 // ----------------------------------------------------------------------------
+
 function get_role(role_selected) {
   //Send variable to flask function
   let request = new XMLHttpRequest();
@@ -56,5 +58,8 @@ function set_role_O() {
 // ----------------------------------------------------------------------------
 
 function cells(row,col) {
-  console.log({'row' : row, 'col' : col})
+  $('.game-board .square').on('click', function() {
+    console.log({'row' : row, 'col' : col})
+    $(this).addClass('disabled');
+  })
 }
