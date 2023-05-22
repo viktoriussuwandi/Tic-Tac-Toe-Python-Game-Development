@@ -36,7 +36,6 @@ def home() :
   game_loop()
   return render_template("index.html", options = game.level_options, attr = ATTR )
 
-
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to javascript
 # -------------------------------------------------------------------------------------------

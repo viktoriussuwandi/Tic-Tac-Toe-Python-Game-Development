@@ -1,17 +1,17 @@
   <div class="game game-board">
     <div class="squares">
-      {% for row in range(board['row']) %}
+      {% for row in range(attr['game_board']['row']) %}
         <div class="row">
-          {% for col in range(board['col']) %}
+          {% for col in range(attr['game_board']['col']) %}
             <div class="col-auto">
               {% if row == 0 and col == 0 %}
                 <div class="btn square no-top-border no-left-border" href="#">{{ row }}-{{ col }}
                   
-             {% elif row == (board['row']-1) and col == 0 %}
+             {% elif row == (attr['game_board']['row']-1) and col == 0 %}
                 <div class="btn square no-bottom-border no-left-border" href="#">{{ row }}-{{ col }}
-              {% elif row == 0 and col == (board['col']-1) %}
+              {% elif row == 0 and col == (attr['game_board']['col']-1) %}
                 <div class="btn square no-top-border no-right-border" href="#">{{ row }}-{{ col }}
-              {% elif row == (board['row']-1) and col == (board['col']-1) %}
+              {% elif row == (attr['game_board']['row']-1) and col == (attr['game_board']['col']-1) %}
                 <div class="btn square no-bottom-border no-right-border" href="#">{{ row }}-{{ col }}
                   
               {% elif row == 0 %}
@@ -19,10 +19,10 @@
               {% elif col == 0 %}
                 <div class="btn square no-left-border" href="#">{{ row }}-{{ col }}
 
-              {% elif row == (board['row']-1) %}
+              {% elif row == (attr['game_board']['row']-1) %}
                 <div class="btn square no-bottom-border" href="#">{{ row }}-{{ col }}
 
-              {% elif col == (board['col']-1)  %}
+              {% elif col == (attr['game_board']['col']-1)  %}
                 <div class="btn square no-right-border" href="#">{{ row }}-{{ col }}
                   
               {% else %}
