@@ -20,7 +20,6 @@ function get_level() {
     $(".level-btn").addClass('disabled');
     
   });
-
 }
 
 // ----------------------------------------------------------------------------
@@ -32,7 +31,6 @@ function get_role(role_selected) {
   let request = new XMLHttpRequest();
   request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
   request.send();
-  
 }
 
 function set_role_X() {
@@ -51,7 +49,6 @@ function set_role_O() {
     get_role(role_selected);
     $(".btn-role-X").addClass('disabled');
   });
-  
 }
 
 // ----------------------------------------------------------------------------
