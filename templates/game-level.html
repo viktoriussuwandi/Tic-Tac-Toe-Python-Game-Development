@@ -15,12 +15,12 @@
   
   <div class="dropdown">
     {% if options %}
-    <button  class="btn btn-transparent dropdown-toggle btn-sm" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{ select_option }}
+    <button  class="btn btn-transparent dropdown-toggle btn-sm level-btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      game level
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu menu-level" aria-labelledby="dropdownMenuButton">
         {% for o in options : %}
-          <a class="dropdown-item" href="#" onclick="get_level(level='{{ o }}')"> {{ o }} </a>
+          <a class="dropdown-item item-level" onclick="get_level()" href="#"> {{ o }} </a>
         {% endfor %}
       {% endif %}
     </div>

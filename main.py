@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from controller.game import Game
+import json
 
 game = Game()
 app  = Flask(__name__)
@@ -17,25 +18,22 @@ def home() :
   
   return render_template(
     "index.html",
-    options = game.level_options, 
-    select_option = game.level_options[1],
+    options = game.level_options,
     board = game_board,
     score = game_score
   )
 
-def select_level1() :
-  print ("Hello")
-  return None
 
-def select_level2(level=None) :
-  print(level)
-  return None
+# -------------------------------------------------------------------------------------------
+# Routes to receive data from javascript on click event
+# -------------------------------------------------------------------------------------------
 
-#Additional Function using javascript
-@app.route('/<function>')
-def command(function=None):
-  exec(function.replace("<br>", "\n"))
-  return ''
-  
+@app.route('/update_level/<string:selected_level>', methods=['POST'])
+def select_level(selected_level=None) :
+  user_level = json.loads(selected_level).strip()
+  check_user_level = game.game_level is None and user_level in game.level_options
+  game.game_level  = user_level if check_user_level else game.game_level
+  return '/'
+
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)
