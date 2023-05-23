@@ -3,7 +3,7 @@
 // ----------------------------------------------------------------------------
 
 $(document).ready(function () {
-  $('.game-level .menu-level a').one('click', function (e) {
+  $('.game-level .menu-level .item-level').one('click', function (e) {
     e.preventDefault();
     
     //1.Get selected html item value
@@ -71,20 +71,38 @@ $(document).ready(function () {
 // ----------------------------------------------------------------------------
 // Game Board
 // ----------------------------------------------------------------------------
-
-function cells(row_selected, col_selected) {
-  $('.game-board .square').on('click', function() {
+$(document).ready(function () {
+  $('.game-board .squares .square').one('click', function (e) {
+    e.preventDefault();
+    
     //1.Get selected html item value
-    row = row_selected
-    col = col_selected
-    let cell = {'row' : row, 'col' : col}
+    cell = $(this).text().replace(/^\s+|\s+$/gm,'')
+    console.log(cell)
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_cells/${JSON.stringify(cell.row)}/${JSON.stringify(cell.col)}`, false);
+    request.open("POST", `/update_cells/${JSON.stringify(cell)}`, false);
     request.send()
     
     //3.Change html button value of square cell, and make the square cell disable    
     $(this).addClass('disabled');
-  })
-}
+    
+  });
+});
+
+// function cells(row_selected, col_selected) {
+//   $('.game-board .square').on('click', function() {
+//     //1.Get selected html item value
+//     row = row_selected
+//     col = col_selected
+//     let cell = {'row' : row, 'col' : col}
+
+//     //2.Send variable to flask function
+//     let request = new XMLHttpRequest();
+//     request.open("POST", `/update_cells/${JSON.stringify(cell.row)}/${JSON.stringify(cell.col)}`, false);
+//     request.send()
+    
+//     //3.Change html button value of square cell, and make the square cell disable    
+//     $(this).addClass('disabled');
+//   })
+// }
