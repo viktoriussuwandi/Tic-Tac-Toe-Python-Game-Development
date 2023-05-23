@@ -80,9 +80,10 @@ class Game :
       comp_cells     = len(self.comp.cells_selected)
       print(f'Player cells : {player_cells} ; Comp cells : {comp_cells}')
       
-      is_player_turn = player_cells < comp_cells or self.player.role == 0 or self.turn == self.comp.role
+      is_player_turn = player_cells < comp_cells or self.player.role == 0
+      print(f'Player turn ? {is_player_turn}')
       
-      role_turn      = self.player.role if is_player_turn else self.comp.role
+      role_turn      = self.comp.role if is_player_turn else self.player.role
       
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[role_turn]
@@ -110,7 +111,7 @@ class Game :
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
     -------------------------------------------
-     Current Turn : {self.turn} - {self.turn_name}
+     Current Turn : {self.turn_mark} - {self.turn_name}
      Board : 
      { self.board }
     '''
