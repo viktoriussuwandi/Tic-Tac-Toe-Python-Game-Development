@@ -7,7 +7,7 @@ class Game :
     self.game_start    = False
     self.game_over     = True
     self.total_squares = 9
-    
+
     self.role_options  = ['X', 'O']
     self.level_options = ["Easy", "Medium", "Impossible"]
     
@@ -17,17 +17,18 @@ class Game :
     self.game_level    = None
     self.scores        = { "X" : 0, "O" : 0 }
     self.turn          = None
+    self.turn_name     = None
     self.board         = {}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
   def game_update_attr(self) :
-    print(self)
     self.update_turn()
     self.update_score()
     self.update_board()
     self.start_game()
+    print(self)
     
   def start_game(self) :
     check_level_and_role = (
@@ -40,6 +41,9 @@ class Game :
     self.game_start = check_level_and_role
     self.game_over  = not check_level_and_role
 
+# ----------------------------------------------------------------------------------
+# USER INTERACTIONS
+# ----------------------------------------------------------------------------------
   def select_game_level(self, level_selected=None) :
     check_user_input = level_selected is not None and level_selected in self.level_options
     self.game_level  = self.level_options.index(level_selected) if check_user_input else self.game_level
@@ -51,9 +55,12 @@ class Game :
     check_player_is_X = check_user_input and self.player.role == 0
     self.comp.role = None if not check_user_input else 1 if check_player_is_X else 0
     self.game_update_attr()
+
+  def select_cells(self, row = None, col = None) :
+    pass
     
 # ----------------------------------------------------------------------------------
-# RUNNING THE GAME
+# UPDATE GAME ATTRIBUTE
 # ----------------------------------------------------------------------------------
     
   def update_score(self) :
@@ -65,20 +72,21 @@ class Game :
   def update_turn(self) :
     if self.game_start == False : self.turn = None
     else :
-      player_cells = len(self.player.cells_selected)
-      comp_cells   = len(self.comp.cells_selected)
-      is_player_turn  = self.player.role == 0 or player_cells < comp_cells
-      role_turn    = 0 if is_player_turn else self.comp.role
-      self.turn = self.role_options[role_turn]
+      player_cells   = len(self.player.cells_selected)
+      comp_cells     = len(self.comp.cells_selected)
+      is_player_turn = self.player.role == 0 or player_cells < comp_cells
+      role_turn      = 0 if is_player_turn else self.comp.role
+      self.turn_name = 'Player' if is_player_turn else 'Comp'
+      self.turn      = self.role_options[role_turn]
 
-      
+   
   def update_board(self) :
     total_squares = self.total_squares
     row = math.sqrt(total_squares)
     col = row
     game_board = { "row": int(row), "col" : int(col) }
     self.board = game_board
-
+  
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
@@ -86,12 +94,14 @@ class Game :
     game_level  = None if self.game_level  is None else self.level_options[int(self.game_level)]
     player_role = None if self.player.role is None else self.role_options[int(self.player.role)]
     comp_role   = None if self.comp.role   is None else self.role_options[int(self.comp.role)]
+    
     return f'''
-     Level        : {game_level}; (Player : {player_role}; Comp : {comp_role})
+     Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
     -------------------------------------------
+     Current Turn : {self.turn} - {self.turn_name}
      Board : 
      { self.board }
     '''

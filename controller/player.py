@@ -1,5 +1,6 @@
 class Player :
   def __init__(self) :
+    self.name  = None
     self.role  = None
     self.cells_selected = []
     self.score = 0

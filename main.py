@@ -62,7 +62,6 @@ def select_cell(row_selected=None, col_selected=None) :
   print(f'row : {row} ; col : {col}')
   return '/'
   
-
 # -------------------------------------------------------------------------------------------
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)
