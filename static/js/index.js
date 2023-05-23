@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------
-// Game Level
+// Game Level - Function to select level
 // ----------------------------------------------------------------------------
-// Get Level Function
+
 $(document).ready(function () {
   $('.game-level .menu-level a').one('click', function (e) {
     e.preventDefault();
