@@ -26,7 +26,6 @@ def game_loop() :
   while game.game_start == True and game.game_over == False :
     if game.game_over == True : break
     else : game_loop()
-      
   redirect(url_for('home'))
       
 # -------------------------------------------------------------------------------------------

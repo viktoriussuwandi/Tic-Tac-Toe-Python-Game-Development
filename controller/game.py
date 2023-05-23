@@ -87,13 +87,12 @@ class Game :
     player_role = None if self.player.role is None else self.role_options[int(self.player.role)]
     comp_role   = None if self.comp.role   is None else self.role_options[int(self.comp.role)]
     return f'''
-    Level        : {game_level}; (Player : {player_role}; Comp : {comp_role})
-    Game start   : {self.game_start}
-    Game over    : {self.game_over}
-    Player cells : {self.player.cells_selected }
-    Comp   cells : {self.comp.cells_selected }
+     Level        : {game_level}; (Player : {player_role}; Comp : {comp_role})
+    (Game start   : {self.game_start}) ; (Game over : {self.game_over})
+     Player cells : {self.player.cells_selected }
+     Comp   cells : {self.comp.cells_selected }
     -------------------------------------------
-    Board : 
-    { self.board }
+     Board : 
+     { self.board }
     '''
     
