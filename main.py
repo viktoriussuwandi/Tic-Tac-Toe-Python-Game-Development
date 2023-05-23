@@ -55,7 +55,7 @@ def select_role(selected_role = None) :
   return '/'
 
 # Select square cells on game board
-@app.route('/update_cells/<int:cell>', methods=['POST'])
+@app.route('/update_cells/<string:cell>', methods=['POST'])
 def select_cell(cell = None) :
   print(cell.strip())
   # row = 

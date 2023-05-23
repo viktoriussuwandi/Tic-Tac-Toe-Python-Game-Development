@@ -76,7 +76,8 @@ $(document).ready(function () {
     e.preventDefault();
     
     //1.Get selected html item value
-    cell = $(this).text().replace(/^\s+|\s+$/gm,'')
+    cell = $(this).text().trim()
+    // cell = $(this).text().replace(/^\s+|\s+$/gm,'')
     console.log(cell)
 
     //2.Send variable to flask function
