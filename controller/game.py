@@ -22,6 +22,13 @@ class Game :
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
+  def game_update_attr(self) :
+    print(self)
+    self.update_turn()
+    self.update_score()
+    self.update_board()
+    self.start_game()
+    
   def start_game(self) :
     check_level_and_role = (
       self.game_level  is not None and 
@@ -31,26 +38,23 @@ class Game :
     self.player.score = 0
     self.comp.score   = 0
     self.game_start = check_level_and_role
+    self.game_over  = not check_level_and_role
 
   def select_game_level(self, level_selected=None) :
     check_user_input = level_selected is not None and level_selected in self.level_options
     self.game_level  = self.level_options.index(level_selected) if check_user_input else self.game_level
+    self.game_update_attr()
     
   def select_player_role(self, role_selected=None) :
     check_user_input  = role_selected is not None and role_selected in self.role_options
     self.player.role  = self.role_options.index(role_selected) if check_user_input else self.player.role
     check_player_is_X = check_user_input and self.player.role == 0
     self.comp.role = None if not check_user_input else 1 if check_player_is_X else 0
-    self.game_over = True
+    self.game_update_attr()
     
 # ----------------------------------------------------------------------------------
 # RUNNING THE GAME
 # ----------------------------------------------------------------------------------
-  def game_update_attr(self) :
-    self.update_score()
-    self.update_turn()
-    self.update_board()
-    print(self)
     
   def update_score(self) :
     score_X = self.player.score
@@ -66,6 +70,7 @@ class Game :
       is_player_turn  = self.player.role == 0 or player_cells < comp_cells
       role_turn    = 0 if is_player_turn else self.comp.role
       self.turn = self.role_options[role_turn]
+
       
   def update_board(self) :
     total_squares = self.total_squares
@@ -73,22 +78,22 @@ class Game :
     col = row
     game_board = { "row": int(row), "col" : int(col) }
     self.board = game_board
-    
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
   def __repr__(self) :
-    game_level  = None if self.game_level is None else self.level_options[int(self.game_level)]
+    game_level  = None if self.game_level  is None else self.level_options[int(self.game_level)]
     player_role = None if self.player.role is None else self.role_options[int(self.player.role)]
-    comp_role   = None if self.player.role is None else self.role_options[int(self.comp.role)]
+    comp_role   = None if self.comp.role   is None else self.role_options[int(self.comp.role)]
     return f'''
-    Level : {game_level}; (Player : {player_role}; Comp : {comp_role})
+    Level        : {game_level}; (Player : {player_role}; Comp : {comp_role})
+    Game start   : {self.game_start}
+    Game over    : {self.game_over}
+    Player cells : {self.player.cells_selected }
+    Comp   cells : {self.comp.cells_selected }
+    -------------------------------------------
+    Board : 
+    { self.board }
     '''
-    # Player cells : {self.player.cells_selected }
-    # Comp   cells : {self.comp.cells_selected }
-    # -------------------------------------------
-    # Board : 
-    # { self.update_board() }
-    # '''
     
