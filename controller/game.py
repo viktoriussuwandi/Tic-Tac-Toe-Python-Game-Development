@@ -35,19 +35,23 @@ class Game :
   def select_game_level(self, level_selected=None) :
     check_user_input = level_selected is not None and level_selected in self.level_options
     self.game_level  = self.level_options.index(level_selected) if check_user_input else self.game_level
-    self.start_game()
     
   def select_player_role(self, role_selected=None) :
     check_user_input  = role_selected is not None and role_selected in self.role_options
     self.player.role  = self.role_options.index(role_selected) if check_user_input else self.player.role
     check_player_is_X = check_user_input and self.player.role == 0
     self.comp.role = None if not check_user_input else 1 if check_player_is_X else 0
-    self.start_game()
+    self.game_over = True
     
 # ----------------------------------------------------------------------------------
 # RUNNING THE GAME
 # ----------------------------------------------------------------------------------
-  
+  def game_update_attr(self) :
+    self.update_score()
+    self.update_turn()
+    self.update_board()
+    print(self)
+    
   def update_score(self) :
     score_X = self.player.score
     score_O = self.comp.score
@@ -71,7 +75,6 @@ class Game :
     self.board = game_board
     
 
-    
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------

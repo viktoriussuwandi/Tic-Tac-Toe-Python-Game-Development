@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 import json
@@ -25,15 +25,19 @@ def update_attributes() :
   ATTR['game_over']    = game.game_over
 
 def game_loop() :
-  game.update_score()
-  game.update_turn()
-  game.update_board()
-  update_attributes()
-  if game.game_start == False and game.game_over == True : 
+  if game.game_start == False and game.game_over == True :
+    game.game_update_attr()
+    update_attributes()
     game.start_game()
-  else :
-    print(game)
-
+    return redirect("/", options = game.level_options, attr = ATTR)
+    
+  while game.game_start == True and game.game_over == False :
+    if game.game_over == True : break
+    else :
+      game.game_update_attr()
+      update_attributes()
+      return redirect("/", options = game.level_options, attr = ATTR)
+      
 # -------------------------------------------------------------------------------------------
 # Common Routes
 # -------------------------------------------------------------------------------------------
@@ -41,7 +45,7 @@ def game_loop() :
 def home() :
   game_loop()
   return render_template("index.html", options = game.level_options, attr = ATTR )
-
+  
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to index.js
 # -------------------------------------------------------------------------------------------
@@ -52,7 +56,6 @@ def select_level(selected_level = None) :
   game_level = json.loads(selected_level).strip()
   if game.game_start == False and game.game_over == False :
     game.select_game_level(level_selected = game_level)
-    game_loop()
   return '/'
 
 # select user role (X or O)
@@ -62,7 +65,6 @@ def select_role(selected_role = None) :
   if not game.game_start and not game.game_over :
     game.select_player_role(role_selected = user_role)
     print(f'Player Role : {game.player.role} ; Comp role : {game.comp.role}')
-    game_loop()
   return '/'
 
 # Select square cells on game board
