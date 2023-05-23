@@ -26,6 +26,9 @@ $(document).ready(function () {
 // Player Role - Function to select User Role
 // ----------------------------------------------------------------------------
 
+// ------------------------------------------------------------
+// Role X
+// ------------------------------------------------------------
 $(document).ready(function () {
   $('.game-role .btn-role-X').one('click', function (e) {
     e.preventDefault();
@@ -44,6 +47,9 @@ $(document).ready(function () {
   });
 });
 
+// ------------------------------------------------------------
+// Role O
+// ------------------------------------------------------------
 $(document).ready(function () {
   $('.game-role .btn-role-O').one('click', function (e) {
     e.preventDefault();
@@ -61,31 +67,6 @@ $(document).ready(function () {
     
   });
 });
-
-function get_role(role_selected) {
-  //Send variable to flask function
-//   let request = new XMLHttpRequest();
-//   request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
-//   request.send();
-// }
-
-// function set_role_X() {
-//   // Get selected html item value
-//   $('.game-role .btn-role-X').on('click',function() {
-//     let role_selected = $('.role-X').text();
-//     get_role(role_selected);
-//     $(".btn-role-O").addClass('disabled');
-//   });
-// }
-
-// function set_role_O() {
-//   // Get selected html item value
-//   $('.game-role .btn-role-O').on('click',function() {
-//     let role_selected = $('.role-O').text();
-//     get_role(role_selected);
-//     $(".btn-role-X").addClass('disabled');
-//   });
-}
 
 // ----------------------------------------------------------------------------
 // Game Board
