@@ -20,6 +20,7 @@ class Game :
     self.turn_name     = None #Game role : Player or comp
     self.turn_mark     = None #Game mark : X or O
     self.board_start   = {}
+    self.board_current = {'current board updated'}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -87,10 +88,14 @@ class Game :
     total_squares = self.total_squares
     row = math.sqrt(total_squares)
     col = row
-    
-    game_board       = { "row": int(row), "col" : int(col) }
-    self.board_start = game_board
-  
+
+    if self.game_start == False and self.game_over == True :
+      game_board       = { "row": int(row), "col" : int(col) }
+      self.board_start = game_board
+      self.board_current = self.board_current
+    elif self.game_start == True and self.game_over == False :
+      self.board_current = self.board_current
+      
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
@@ -108,6 +113,6 @@ class Game :
     -------------------------------------------
      Current Turn : {self.turn_mark} - {self.turn_name}
      Board : 
-     { self.board }
+     { self.board_current }
     '''
     
