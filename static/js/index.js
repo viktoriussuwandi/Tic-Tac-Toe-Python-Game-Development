@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_level/${JSON.stringify(level_selected)}`, false);
+    request.open("POST", `/update_level/${level_selected}`, false);
     request.send();
     
     //3.Change html button value of dropdown as selected, and make the html button disable
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
+    request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
     
     //3.Disabled O button
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
+    request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
     
     //3.Disabled O button
