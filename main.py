@@ -15,7 +15,7 @@ ATTR = { "game_board"  : {}, "game_score"  : {}, "player_turn" : '', "game_over"
 def update_attributes() :
   ATTR['game_options'] = game.level_options
   ATTR['game_score']   = game.scores
-  ATTR['player_turn']  = game.turn
+  ATTR['player_turn']  = game.turn_mark
   ATTR['game_board']   = game.board_start
   ATTR['game_over']    = game.game_over
 
@@ -26,7 +26,7 @@ def game_loop() :
   while game.game_start == True and game.game_over == False :
     if game.game_over == True : break
     else : game_loop()
-  redirect(url_for('home'))
+  redirect(url_for('home', attr = ATTR))
       
 # -------------------------------------------------------------------------------------------
 # Common Routes
