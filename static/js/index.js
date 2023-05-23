@@ -55,7 +55,7 @@ function set_role_O() {
 // Game Board
 // ----------------------------------------------------------------------------
 
-function cells(row_selected,col_selected) {
+function cells(row_selected, col_selected) {
   $('.game-board .square').on('click', function() {
     //1.Get selected html item value
     row = row_selected

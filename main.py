@@ -59,7 +59,7 @@ def select_role(selected_role = None) :
 def select_cell(row_selected=None, col_selected=None) :
   row = row_selected
   col = col_selected
-  print(f'row : {row} ; col : {col}')
+  game.select_cells(row, col)
   return '/'
   
 # -------------------------------------------------------------------------------------------

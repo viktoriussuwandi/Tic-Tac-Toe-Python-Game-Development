@@ -57,7 +57,9 @@ class Game :
     self.game_update_attr()
 
   def select_cells(self, row = None, col = None) :
-    pass
+    if   self.turn_name == 'Player' : self.player.cells_selected.append([row,col])
+    elif self.turn_name == 'Comp'   : self.comp.cells_selected.append([row,col])
+    self.game_update_attr()
     
 # ----------------------------------------------------------------------------------
 # UPDATE GAME ATTRIBUTE
@@ -74,6 +76,8 @@ class Game :
     else :
       player_cells   = len(self.player.cells_selected)
       comp_cells     = len(self.comp.cells_selected)
+      print(f'Player cells : {player_cells} ; Comp cells : {comp_cells}')
+      
       is_player_turn = self.player.role == 0 or player_cells < comp_cells
       role_turn      = 0 if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
