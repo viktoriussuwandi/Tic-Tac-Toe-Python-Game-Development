@@ -29,7 +29,7 @@ class Game :
     self.update_turn()
     self.update_score()
     self.update_board()
-    print(self)
+    if self.game_start == True and self.game_over == False : print(self)
     
   def start_game(self) :
     check_level_and_role = (
@@ -99,6 +99,7 @@ class Game :
     comp_role   = None if self.comp.role   is None else self.role_options[int(self.comp.role)]
     
     return f'''
+    -----------------TIC TAC TOE GAME----------
      Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
