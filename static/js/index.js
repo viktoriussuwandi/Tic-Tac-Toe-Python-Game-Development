@@ -7,7 +7,7 @@ $(document).ready(function () {
     e.preventDefault();
     
     //1.Get selected html item value
-    var level_selected= ($(this).text());
+    let level_selected= ($(this).text());
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
@@ -18,37 +18,73 @@ $(document).ready(function () {
     $(".level-btn").text($(this).text());
     $(".level-btn").val($(this).text());
     $(".level-btn").addClass('disabled');
-    alert("Your Favourite Sports is "+txt);
   });
+
 });
 
 // ----------------------------------------------------------------------------
-// Player Role
+// Player Role - Function to select User Role
 // ----------------------------------------------------------------------------
+
+$(document).ready(function () {
+  $('.game-role .btn-role-X').one('click', function (e) {
+    e.preventDefault();
+    
+    //1.Get selected html item value
+    let role_selected = $('.role-X').text();
+
+    //2.Send variable to flask function
+    let request = new XMLHttpRequest();
+    request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
+    request.send();
+    
+    //3.Disabled O button
+    $(".btn-role-O").addClass('disabled');
+    
+  });
+});
+
+$(document).ready(function () {
+  $('.game-role .btn-role-O').one('click', function (e) {
+    e.preventDefault();
+    
+    //1.Get selected html item value
+    let role_selected = $('.role-O').text();
+
+    //2.Send variable to flask function
+    let request = new XMLHttpRequest();
+    request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
+    request.send();
+    
+    //3.Disabled O button
+    $(".btn-role-X").addClass('disabled');
+    
+  });
+});
 
 function get_role(role_selected) {
   //Send variable to flask function
-  let request = new XMLHttpRequest();
-  request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
-  request.send();
-}
+//   let request = new XMLHttpRequest();
+//   request.open("POST", `/update_role/${JSON.stringify(role_selected)}`, false);
+//   request.send();
+// }
 
-function set_role_X() {
-  // Get selected html item value
-  $('.game-role .btn-role-X').on('click',function() {
-    let role_selected = $('.role-X').text();
-    get_role(role_selected);
-    $(".btn-role-O").addClass('disabled');
-  });
-}
+// function set_role_X() {
+//   // Get selected html item value
+//   $('.game-role .btn-role-X').on('click',function() {
+//     let role_selected = $('.role-X').text();
+//     get_role(role_selected);
+//     $(".btn-role-O").addClass('disabled');
+//   });
+// }
 
-function set_role_O() {
-  // Get selected html item value
-  $('.game-role .btn-role-O').on('click',function() {
-    let role_selected = $('.role-O').text();
-    get_role(role_selected);
-    $(".btn-role-X").addClass('disabled');
-  });
+// function set_role_O() {
+//   // Get selected html item value
+//   $('.game-role .btn-role-O').on('click',function() {
+//     let role_selected = $('.role-O').text();
+//     get_role(role_selected);
+//     $(".btn-role-X").addClass('disabled');
+//   });
 }
 
 // ----------------------------------------------------------------------------
