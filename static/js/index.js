@@ -7,7 +7,7 @@ $(document).ready(function () {
     e.preventDefault();
     
     //1.Get selected html item value
-    let level_selected= ($(this).text());
+    let level_selected = $(this).text().trim();
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
@@ -76,9 +76,7 @@ $(document).ready(function () {
     e.preventDefault();
     
     //1.Get selected html item value
-    cell = $(this).text().trim()
-    // cell = $(this).text().replace(/^\s+|\s+$/gm,'')
-    console.log(cell)
+    cell = $(this).text().trim();
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
@@ -90,20 +88,3 @@ $(document).ready(function () {
     
   });
 });
-
-// function cells(row_selected, col_selected) {
-//   $('.game-board .square').on('click', function() {
-//     //1.Get selected html item value
-//     row = row_selected
-//     col = col_selected
-//     let cell = {'row' : row, 'col' : col}
-
-//     //2.Send variable to flask function
-//     let request = new XMLHttpRequest();
-//     request.open("POST", `/update_cells/${JSON.stringify(cell.row)}/${JSON.stringify(cell.col)}`, false);
-//     request.send()
-    
-//     //3.Change html button value of square cell, and make the square cell disable    
-//     $(this).addClass('disabled');
-//   })
-// }
