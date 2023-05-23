@@ -78,17 +78,10 @@ class Game :
     else :
       player_cells   = len(self.player.cells_selected)
       comp_cells     = len(self.comp.cells_selected)
-      print(f'Player cells : {player_cells} ; Comp cells : {comp_cells}')
-      
-      is_player_turn = player_cells < comp_cells or self.player.role == 0
-      print(f'Player turn ? {is_player_turn}')
-      
-      role_turn      = self.comp.role if is_player_turn else self.player.role
-      
+      is_player_turn = player_cells < comp_cells or (self.player.role == 0 and player_cells == comp_cells)
+      self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
-      self.turn_mark = self.role_options[role_turn]
-      self.turn      = role_turn
-
+      self.turn_mark = self.role_options[self.turn]
    
   def update_board(self) :
     total_squares = self.total_squares
