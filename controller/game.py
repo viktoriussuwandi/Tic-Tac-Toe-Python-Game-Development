@@ -19,7 +19,7 @@ class Game :
     self.turn          = None
     self.turn_name     = None #Game role : Player or comp
     self.turn_mark     = None #Game mark : X or O
-    self.board         = {}
+    self.board_start   = {}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -87,8 +87,9 @@ class Game :
     total_squares = self.total_squares
     row = math.sqrt(total_squares)
     col = row
-    game_board = { "row": int(row), "col" : int(col) }
-    self.board = game_board
+    
+    game_board       = { "row": int(row), "col" : int(col) }
+    self.board_start = game_board
   
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
