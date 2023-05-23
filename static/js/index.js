@@ -82,7 +82,7 @@ $(document).ready(function () {
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_cells/${JSON.stringify(cell)}`, false);
+    request.open("POST", `/update_cells/${cell}`, false);
     request.send()
     
     //3.Change html button value of square cell, and make the square cell disable    
