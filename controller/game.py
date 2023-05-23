@@ -17,17 +17,18 @@ class Game :
     self.game_level    = None
     self.scores        = { "X" : 0, "O" : 0 }
     self.turn          = None
-    self.turn_name     = None
+    self.turn_name     = None #Game role : Player or comp
+    self.turn_mark     = None #Game mark : X or O
     self.board         = {}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
   def game_update_attr(self) :
+    if self.game_start == False and self.game_over == True : self.start_game()
     self.update_turn()
     self.update_score()
     self.update_board()
-    self.start_game()
     print(self)
     
   def start_game(self) :
@@ -64,7 +65,7 @@ class Game :
 # ----------------------------------------------------------------------------------
 # UPDATE GAME ATTRIBUTE
 # ----------------------------------------------------------------------------------
-    
+
   def update_score(self) :
     score_X = self.player.score
     score_O = self.comp.score
@@ -72,18 +73,20 @@ class Game :
     self.scores = game_scores
 
   def update_turn(self) :
-    if self.game_start == False : self.turn = None
+    if self.game_start == False and self.game_over == True :
+      self.turn = None
     else :
       player_cells   = len(self.player.cells_selected)
       comp_cells     = len(self.comp.cells_selected)
       print(f'Player cells : {player_cells} ; Comp cells : {comp_cells}')
       
-      is_player_turn = self.player.role == 0 or player_cells < comp_cells
+      is_player_turn = player_cells < comp_cells or self.player.role == 0 or self.turn == self.comp.role
       
-      role_turn      = 0 if is_player_turn else self.comp.role
+      role_turn      = self.player.role if is_player_turn else self.comp.role
       
       self.turn_name = 'Player' if is_player_turn else 'Comp'
-      self.turn      = self.role_options[role_turn]
+      self.turn_mark = self.role_options[role_turn]
+      self.turn      = role_turn
 
    
   def update_board(self) :
