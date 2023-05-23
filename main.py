@@ -25,10 +25,14 @@ def update_attributes() :
   ATTR['game_over']    = game.game_over
 
 def game_loop() :
-  game.update_board()
   game.update_score()
   game.update_turn()
+  game.update_board()
   update_attributes()
+  if game.game_start == False and game.game_over == True : 
+    game.start_game()
+  else :
+    print(game)
 
 # -------------------------------------------------------------------------------------------
 # Common Routes
@@ -48,6 +52,7 @@ def select_level(selected_level = None) :
   game_level = json.loads(selected_level).strip()
   if game.game_start == False and game.game_over == False :
     game.select_game_level(level_selected = game_level)
+    game_loop()
   return '/'
 
 # select user role (X or O)
@@ -57,6 +62,7 @@ def select_role(selected_role = None) :
   if not game.game_start and not game.game_over :
     game.select_player_role(role_selected = user_role)
     print(f'Player Role : {game.player.role} ; Comp role : {game.comp.role}')
+    game_loop()
   return '/'
 
 # Select square cells on game board
@@ -66,6 +72,7 @@ def select_cell(row_selected=None, col_selected=None) :
   col = col_selected
   print(f'row : {row} ; col : {col}')
   return '/'
+  
 
 # -------------------------------------------------------------------------------------------
 if __name__ == "__main__" :

@@ -53,14 +53,7 @@ class Game :
     score_O = self.comp.score
     game_scores = { "X" : score_X, "O" : score_O }
     self.scores = game_scores
-    
-  def update_board(self) :
-    total_squares = self.total_squares
-    row = math.sqrt(total_squares)
-    col = row
-    game_board = { "row": int(row), "col" : int(col) }
-    self.board = game_board
-    
+
   def update_turn(self) :
     if self.game_start == False : self.turn = None
     else :
@@ -69,20 +62,30 @@ class Game :
       is_player_turn  = self.player.role == 0 or player_cells < comp_cells
       role_turn    = 0 if is_player_turn else self.comp.role
       self.turn = self.role_options[role_turn]
+      
+  def update_board(self) :
+    total_squares = self.total_squares
+    row = math.sqrt(total_squares)
+    col = row
+    game_board = { "row": int(row), "col" : int(col) }
+    self.board = game_board
+    
+
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
   def __repr__(self) :
-    game_level  = self.level_options[self.game_level]
-    player_role = self.role_options[self.player.role]
-    comp_role   = self.role_options[self.comp.role]
+    game_level  = None if self.game_level is None else self.level_options[int(self.game_level)]
+    player_role = None if self.player.role is None else self.role_options[int(self.player.role)]
+    comp_role   = None if self.player.role is None else self.role_options[int(self.comp.role)]
     return f'''
     Level : {game_level}; (Player : {player_role}; Comp : {comp_role})
-    Player cells : {self.player.cells_selected }
-    Comp   cells : {self.comp.cells_selected }
-    -------------------------------------------
-    Board : 
-    { self.update_board() }
     '''
+    # Player cells : {self.player.cells_selected }
+    # Comp   cells : {self.comp.cells_selected }
+    # -------------------------------------------
+    # Board : 
+    # { self.update_board() }
+    # '''
     
