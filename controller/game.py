@@ -79,7 +79,9 @@ class Game :
       print(f'Player cells : {player_cells} ; Comp cells : {comp_cells}')
       
       is_player_turn = self.player.role == 0 or player_cells < comp_cells
+      
       role_turn      = 0 if is_player_turn else self.comp.role
+      
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn      = self.role_options[role_turn]
 

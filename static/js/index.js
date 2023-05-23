@@ -1,13 +1,13 @@
 // ----------------------------------------------------------------------------
 // Game Level
 // ----------------------------------------------------------------------------
-
-function get_level() {
-  $('.game-level .menu-level .item-level').one('click', function() {
+// Get Level Function
+$(document).ready(function () {
+  $('.game-level .menu-level a').one('click', function (e) {
+    e.preventDefault();
     
     //1.Get selected html item value
-    $('.item-level').val($(this).text());
-    let level_selected = ($(this).text());
+    var level_selected= ($(this).text());
 
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
@@ -18,9 +18,9 @@ function get_level() {
     $(".level-btn").text($(this).text());
     $(".level-btn").val($(this).text());
     $(".level-btn").addClass('disabled');
-    
+    alert("Your Favourite Sports is "+txt);
   });
-}
+});
 
 // ----------------------------------------------------------------------------
 // Player Role
