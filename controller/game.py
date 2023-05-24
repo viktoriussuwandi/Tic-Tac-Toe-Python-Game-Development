@@ -109,21 +109,20 @@ class Game :
       cell_owners  = [ None for i in all_cells ]
       player_cells = self.player.cells_selected
       comp_cells   = self.comp.cells_selected
-      
-      # check if player or comp already select one cell (at least)
-      is_player_selecting = len(self.player.cells_selected) > 0
-      if is_player_selecting :
-        for i in range(len(player_cells)) :
-          for j in range(len(all_cells)) :
-            check_owner    = cell_owners[j] is None and player_cells[i] == all_cells[j]
-            cell_owners[j] = player_role if check_owner else cell_owners[j]
-          
-      is_comp_selecting = len(self.comp.cells_selected) > 0
-      if is_comp_selecting :
-        for i in range(len(comp_cells)) :
-          for j in range(len(all_cells)) :
-            check_owner    = cell_owners[j] is None and comp_cells[i] == all_cells[j]
-            cell_owners[j] = comp_role if check_owner else cell_owners[j]
+
+      for i in range(len(all_cells)) :
+        is_player_selecting = len(self.player.cells_selected) > 0
+        is_comp_selecting   = len(self.comp.cells_selected) > 0
+        
+        if is_player_selecting :
+          for j in range(len(player_cells)) :
+            player_own = cell_owners[i] is None and all_cells[i] == player_cells[j]
+            cell_owners[i] = player_role if player_own else cell_owners[i]
+            
+        if is_comp_selecting :
+          for j in range(len(comp_cells)) :
+            comp_own = cell_owners[i] is None and all_cells[i] == comp_cells[j]
+            cell_owners[i] = comp_role if comp_own else cell_owners[i]
       
       self.board_printed +=f'''
      cell_owners  : {cell_owners}
