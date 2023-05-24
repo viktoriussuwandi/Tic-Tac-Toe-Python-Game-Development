@@ -1,6 +1,5 @@
 from controller.player import Player
 from controller.board  import Board
-import math
 
 class Game :
   def __init__(self) :
@@ -20,7 +19,7 @@ class Game :
     self.turn          = None
     self.turn_name     = None #Game role : Player or comp
     self.turn_mark     = None #Game mark : X or O
-    self.board_current = {'current board updated'}
+    self.board_current = {}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -85,28 +84,43 @@ class Game :
       self.turn_mark = self.role_options[self.turn]
    
   def update_board(self) :
-    if self.game_start == False and self.game_over == True :
-      self.board_current = self.board.starting_board 
-    elif self.game_start == True and self.game_over == False :
-      self.board_current = self.board.update_board()
+    if   self.game_start == False and self.game_over == True  : self.board_current = self.board.starting_board 
+    elif self.game_start == True  and self.game_over == False : self.board_current = self.board.update_board()
       
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
-  def __repr__(self) :
-    game_level  = None if self.game_level  is None else self.level_options[int(self.game_level)]
-    player_role = None if self.player.role is None else self.role_options[int(self.player.role)]
-    comp_role   = None if self.comp.role   is None else self.role_options[int(self.comp.role)]
+
+  def print_board(self) :
+    board_printed = ''
+    if self.board_current == None :
+      board_printed += 'no board printed'
+    else :
+      rows = self.board_current['row']
+      cols = self.board_current['col']
+      player_rows = [cell[0] for cell in self.player.cells_selected]
+      comp_rows   = [cell[0] for cell in self.comp.cells_selected] 
+      player_cols = [cell[1] for cell in self.player.cells_selected]
+      comp_cols   = [cell[1] for cell in self.comp.cells_selected]
+      
+      print(f'player_rows : {player_rows}')
+      print(f'player_cols : {player_cols}')
+      print(f'comp_rows : {comp_rows}')
+      print(f'comp_cols : {comp_cols}')
+      
     
+    return board_printed
+    
+  def __repr__(self) :
+    game_level  = None if self.game_level  is None else self.level_options[ int(self.game_level) ]
+    player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
+    comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
     return f'''
     -----------------TIC TAC TOE GAME----------
-     Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
-    (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
     -------------------------------------------
      Current Turn : {self.turn_mark} - {self.turn_name}
      Board : 
-     { self.board_current }
+     { self.print_board() }
     '''
-    
