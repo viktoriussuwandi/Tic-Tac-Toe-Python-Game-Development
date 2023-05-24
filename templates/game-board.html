@@ -5,28 +5,28 @@
           {% for col in range(attr['game_board']['col']) %}
             <div class="col-auto">
               {% if row == 0 and col == 0 %}
-                <div value="{{ attr['player_turn'] }}" class="btn square no-top-border no-left-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-top-border no-left-border" href="#">{{row}}-{{col}}
                   
              {% elif row == (attr['game_board']['row']-1) and col == 0 %}
-                <div value="{{ attr['player_turn'] }}" class="btn square no-bottom-border no-left-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-bottom-border no-left-border" href="#">{{row}}-{{col}}
               {% elif row == 0 and col == (attr['game_board']['col']-1) %}
-                <div value="{{ attr['player_turn'] }}" class="btn square no-top-border no-right-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-top-border no-right-border" href="#">{{row}}-{{col}}
               {% elif row == (attr['game_board']['row']-1) and col == (attr['game_board']['col']-1) %}
-                <div value="{{ attr['player_turn'] }}" class="btn square no-bottom-border no-right-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-bottom-border no-right-border" href="#">{{row}}-{{col}}
                   
               {% elif row == 0 %}
-                <div class="btn square no-top-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-top-border" href="#">{{row}}-{{col}}
               {% elif col == 0 %}
-                <div class="btn square no-left-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-left-border" href="#">{{row}}-{{col}}
 
               {% elif row == (attr['game_board']['row']-1) %}
-                <div class="btn square no-bottom-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-bottom-border" href="#">{{row}}-{{col}}
 
               {% elif col == (attr['game_board']['col']-1)  %}
-                <div class="btn square no-right-border" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square no-right-border" href="#">{{row}}-{{col}}
                   
               {% else %}
-                <div class="btn square" href="#">{{row}}-{{col}}
+                <div value="{{ attr['game'].turn_mark }}" class="btn square" href="#">{{row}}-{{col}}
               {% endif %}
               </div>
             </div>

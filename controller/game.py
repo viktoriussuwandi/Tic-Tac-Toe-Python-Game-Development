@@ -44,8 +44,8 @@ class Game :
     )
     self.player.score = 0
     self.comp.score   = 0
-    self.game_start = check_level_and_role
-    self.game_over  = not check_level_and_role
+    self.game_start   = check_level_and_role
+    self.game_over    = not check_level_and_role
 
 # ----------------------------------------------------------------------------------
 # USER INTERACTIONS

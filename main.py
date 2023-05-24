@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, jsonify
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
@@ -9,30 +9,37 @@ game = Game()
 app  = Flask(__name__)
 Bootstrap(app)
 
-ATTR = { "game_board"  : {}, "game_score"  : {}, "player_turn" : '', "game_over"   : False }
+ATTR = { "game_board"  : {}, "game_score"  : {}, "player_turn" : '', "game_over"   : False, 'game' : game }
 
 def update_attributes() :
+  
   ATTR['game_options'] = game.level_options
   ATTR['game_score']   = game.scores
   ATTR['player_turn']  = game.turn_mark
   ATTR['game_board']   = game.board_current
   ATTR['game_over']    = game.game_over
-
+  ATTR['game'] = game
+  
 def game_loop() :
   game.game_update_attr()
   update_attributes()
     
   while game.game_start == True and game.game_over == False :
     if game.game_over == True : break
-    else : game_loop()
-  redirect(url_for('home', attr = ATTR))
+    else : 
+      game_loop()
+      return redirect(url_for('home', attr = ATTR))
       
 # -------------------------------------------------------------------------------------------
 # Common Routes
 # -------------------------------------------------------------------------------------------
 @app.route("/")
 def home() :
-  if game.game_start == False and game.game_over == True : game_loop()
+  check_loop = (
+    game.game_start == False and game.game_over == True) or (
+    game.game_start == True and game.game_over == False
+  )
+  if check_loop : game_loop()
   return render_template("index.html", attr = ATTR )
   
 # -------------------------------------------------------------------------------------------

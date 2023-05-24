@@ -78,7 +78,6 @@ $(document).ready(function () {
     //1.Get selected html item value
     cell = $(this).text().trim();
     // let turn_mark = $(this).val();
-    alert($(this).attr('value'));
     
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
@@ -87,6 +86,7 @@ $(document).ready(function () {
     
     //3.Change html button value of square cell, and make the square cell disable    
     $(this).addClass('disabled');
+    console.log($(this).attr('value'));
     
   });
 });
