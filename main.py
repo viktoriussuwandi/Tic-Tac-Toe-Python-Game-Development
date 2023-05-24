@@ -26,9 +26,7 @@ def game_loop() :
     
   while game.game_start == True and game.game_over == False :
     if game.game_over == True : break
-    else : 
-      game_loop()
-      return redirect(url_for('home', attr = ATTR))
+    else : redirect(url_for('home', attr = ATTR))
       
 # -------------------------------------------------------------------------------------------
 # Common Routes
