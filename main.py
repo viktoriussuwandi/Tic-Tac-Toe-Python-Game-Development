@@ -18,7 +18,6 @@ def update_attributes() :
   ATTR['player_turn']  = game.turn_mark
   ATTR['game_board']   = game.board_current
   ATTR['game_over']    = game.game_over
-  ATTR['game'] = game
   
 def game_loop() :
   game.game_update_attr()
