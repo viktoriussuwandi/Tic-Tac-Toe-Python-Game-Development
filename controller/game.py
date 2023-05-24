@@ -32,8 +32,10 @@ class Game :
     self.update_turn()
     self.update_score()
     self.update_board()
-    if self.game_start == True and self.game_over == False : print(self)
-    
+    if self.game_start == True and self.game_over == False : 
+      self.print_board()
+      print(self)
+      
   def start_game(self) :
     check_level_and_role = (
       self.game_level  is not None and 
@@ -89,7 +91,6 @@ class Game :
   def update_board(self) :
     if   self.game_start == False and self.game_over == True  : self.board_current = self.board.starting_board 
     elif self.game_start == True  and self.game_over == False : self.board_current = self.board.update_board()
-    self.print_board()
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
@@ -97,30 +98,33 @@ class Game :
 
   def print_board(self) :
     self.board_printed = ''
-    if self.board_current == None :
+    if self.board_current == {} :
       self.board_printed += 'no board printed'
     else :
       player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
       comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
       
-      # check if player or comp already select one cell (at least)
-      is_player_selecting = len(self.player.cells_selected) > 0
-      # is_comp_selecting   = len(self.comp.cells_selected)   > 0
-
       # check if cell is own by player or comp
       all_cells    = self.board.all_cells
+      cell_owners  = [ None for i in all_cells ]
       player_cells = self.player.cells_selected
       comp_cells   = self.comp.cells_selected
-
-      cell_owners = []
+      
+      # check if player or comp already select one cell (at least)
+      is_player_selecting = len(self.player.cells_selected) > 0
       if is_player_selecting :
-        for i in range(len(all_cells)) :
-          own_by_player = is_player_selecting and all_cells[i] == player_cells[i]
-          # own_by_comp   = is_player_selecting and all_cells[i] == comp_cells[i]
-          if   own_by_player : cell_owners[i] = player_role
-          # elif own_by_comp   : cell_owners[i] = comp_role
-          else : cell_owners[i] = None
+        for i in range(len(player_cells)) :
+          for j in range(len(all_cells)) :
+            check_last_owner = all_cells[j] == None and player_cells[i] == all_cells[j]
+            cell_owners[j]   = player_role if check_last_owner else None
           
+      is_comp_selecting = len(self.comp.cells_selected) > 0
+      if is_comp_selecting :
+        for i in range(len(comp_cells)) :
+          for j in range(len(all_cells)) :
+            check_last_owner = all_cells[j] == None and comp_cells[i] == all_cells[j]
+            cell_owners[j] = comp_role if check_last_owner else None
+      
       self.board_printed +=f'''
      cell_owners  : {cell_owners}
      '''
