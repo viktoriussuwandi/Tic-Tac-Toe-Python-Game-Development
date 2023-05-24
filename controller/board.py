@@ -8,6 +8,7 @@ class Board :
     self.all_cells = [] 
     self.starting_board = {}
     self.create_board()
+    self.cell_owners  = [ None for i in self.all_cells ]
 
   def create_board(self) :
     if self.total_square is not None :
@@ -16,5 +17,33 @@ class Board :
       self.all_cells = [ [row,col] for row in range(self.row) for col in range(self.col) ]
       self.starting_board = { "row": self.row, "col" : self.col }
   
-  def update_board(self) :
-    return self.starting_board
+  def update_board(
+    self,
+    player_role = None, 
+    comp_role   = None,
+    is_player_selecting = False,
+    is_comp_selecting   = False,
+    player_cells = None,
+    comp_cells   = None
+  ) :
+    # return self.starting_board
+    
+    # check if cell is own by player or comp
+    all_cells    = self.all_cells
+
+    for i in range(len(all_cells)) :
+      # Check if cell own by player     
+      if is_player_selecting :
+        for j in range(len(player_cells)) :
+          player_own = self.cell_owners[i] is None and all_cells[i] == player_cells[j]
+          self.cell_owners[i] = player_role if player_own else self.cell_owners[i]
+          
+      # Check if cell own by Comp
+      if is_comp_selecting :
+        for j in range(len(comp_cells)) :
+          comp_own = self.cell_owners[i] is None and all_cells[i] == comp_cells[j]
+          self.cell_owners[i] = comp_role if comp_own else self.cell_owners[i]
+    
+    
+    
+  

@@ -32,9 +32,7 @@ class Game :
     self.update_turn()
     self.update_score()
     self.update_board()
-    if self.game_start == True and self.game_over == False : 
-      self.print_board()
-      print(self)
+    if self.game_start == True and self.game_over == False : print(self)
       
   def start_game(self) :
     check_level_and_role = (
@@ -71,12 +69,6 @@ class Game :
 # UPDATE GAME ATTRIBUTE
 # ----------------------------------------------------------------------------------
 
-  def update_score(self) :
-    score_X = self.player.score
-    score_O = self.comp.score
-    game_scores = { "X" : score_X, "O" : score_O }
-    self.scores = game_scores
-
   def update_turn(self) :
     if self.game_start == False and self.game_over == True :
       self.turn = None
@@ -87,60 +79,53 @@ class Game :
       self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
+      
+  def update_score(self) :
+    score_X = self.player.score
+    score_O = self.comp.score
+    game_scores = { "X" : score_X, "O" : score_O }
+    self.scores = game_scores
    
   def update_board(self) :
-    if   self.game_start == False and self.game_over == True  : self.board_current = self.board.starting_board 
-    elif self.game_start == True  and self.game_over == False : self.board_current = self.board.update_board()
+    if   self.game_start == False and self.game_over == True  : 
+      self.board_current = self.board.starting_board 
+    elif self.game_start == True  and self.game_over == False : 
+      player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
+      comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
+      
+      is_player_selecting = len(self.player.cells_selected) > 0
+      is_comp_selecting   = len(self.comp.cells_selected) > 0
+
+      player_cells = self.player.cells_selected if is_player_selecting else []
+      comp_cells   = self.comp.cells_selected   if is_comp_selecting   else []
+      
+      self.board.update_board(
+        player_role, comp_role, is_player_selecting, is_comp_selecting, player_cells, comp_cells
+      )
+  
+      self.board_current = self.board.update_board()
+      self.board_printed +=f'''
+     cell_owners  : {self.board.cell_owners}
+     '''
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
-
-  def print_board(self) :
-    self.board_printed = ''
-    if self.board_current == {} :
-      self.board_printed += 'no board printed'
-    else :
-      player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-      comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
-      
-      # check if cell is own by player or comp
-      all_cells    = self.board.all_cells
-      cell_owners  = [ None for i in all_cells ]
-      player_cells = self.player.cells_selected
-      comp_cells   = self.comp.cells_selected
-
-      for i in range(len(all_cells)) :
-        is_player_selecting = len(self.player.cells_selected) > 0
-        is_comp_selecting   = len(self.comp.cells_selected) > 0
-        
-        if is_player_selecting :
-          for j in range(len(player_cells)) :
-            player_own = cell_owners[i] is None and all_cells[i] == player_cells[j]
-            cell_owners[i] = player_role if player_own else cell_owners[i]
-            
-        if is_comp_selecting :
-          for j in range(len(comp_cells)) :
-            comp_own = cell_owners[i] is None and all_cells[i] == comp_cells[j]
-            cell_owners[i] = comp_role if comp_own else cell_owners[i]
-      
-      self.board_printed +=f'''
-     cell_owners  : {cell_owners}
-     '''
     
   def __repr__(self) :
-    game_level  = None if self.game_level  is None else self.level_options[ int(self.game_level) ]
-    player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-    comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
-    return f'''
-    -----------------TIC TAC TOE GAME----------
-     Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
-    (Game start   : {self.game_start}) ; (Game over : {self.game_over})
-     Player cells : {self.player.cells_selected }
-     Comp   cells : {self.comp.cells_selected }
-    -------------------------------------------
-     Current Turn : {self.turn_mark} - {self.turn_name}
-    ===========================================
-     Board : 
-     { self.board_printed }
-    '''
+    # game_level  = None if self.game_level  is None else self.level_options[ int(self.game_level) ]
+    # player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
+    # comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
+    # return f'''
+    # -----------------TIC TAC TOE GAME----------
+    #  Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
+    # (Game start   : {self.game_start}) ; (Game over : {self.game_over})
+    #  Player cells : {self.player.cells_selected }
+    #  Comp   cells : {self.comp.cells_selected }
+    # -------------------------------------------
+    #  Current Turn : {self.turn_mark} - {self.turn_name}
+    # ===========================================
+    #  Board : 
+    #  { self.board_printed }
+    # '''
+    return self.board_printed
