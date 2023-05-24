@@ -104,7 +104,7 @@ class Game :
       )
   
       self.board_current = self.board.update_board()
-      self.board_printed +=f'''
+      self.board_printed = f'''
      cell_owners  : {self.board.cell_owners}
      '''
 
@@ -113,19 +113,18 @@ class Game :
 # ----------------------------------------------------------------------------------
     
   def __repr__(self) :
-    # game_level  = None if self.game_level  is None else self.level_options[ int(self.game_level) ]
-    # player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-    # comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
-    # return f'''
-    # -----------------TIC TAC TOE GAME----------
-    #  Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
-    # (Game start   : {self.game_start}) ; (Game over : {self.game_over})
-    #  Player cells : {self.player.cells_selected }
-    #  Comp   cells : {self.comp.cells_selected }
-    # -------------------------------------------
-    #  Current Turn : {self.turn_mark} - {self.turn_name}
-    # ===========================================
-    #  Board : 
-    #  { self.board_printed }
-    # '''
-    return self.board_printed
+    game_level  = None if self.game_level  is None else self.level_options[ int(self.game_level) ]
+    player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
+    comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
+    return f'''
+    -----------------TIC TAC TOE GAME----------
+     Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
+    (Game start   : {self.game_start}) ; (Game over : {self.game_over})
+     Player cells : {self.player.cells_selected }
+     Comp   cells : {self.comp.cells_selected }
+    -------------------------------------------
+     Current Turn : {self.turn_mark} - {self.turn_name}
+    ===========================================
+     Board : 
+     { self.board_printed }
+    '''

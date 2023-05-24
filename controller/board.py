@@ -5,10 +5,11 @@ class Board :
     self.total_square = total_cells if total_cells is not None else None
     self.row       = None
     self.col       = None
-    self.all_cells = [] 
+    self.all_cells = []
     self.starting_board = {}
     self.create_board()
     self.cell_owners  = [ None for i in self.all_cells ]
+    
 
   def create_board(self) :
     if self.total_square is not None :
@@ -43,7 +44,9 @@ class Board :
         for j in range(len(comp_cells)) :
           comp_own = self.cell_owners[i] is None and all_cells[i] == comp_cells[j]
           self.cell_owners[i] = comp_role if comp_own else self.cell_owners[i]
-    
+
+  def __repr__(self) :
+    pass
     
     
   
