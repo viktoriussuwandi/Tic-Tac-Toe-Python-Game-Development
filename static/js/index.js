@@ -8,7 +8,7 @@ $(document).ready(function () {
     
     //1.Get selected html item value
     let level_selected = $(this).text().trim();
-
+    
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
     request.open("POST", `/update_level/${level_selected}`, false);
@@ -77,7 +77,9 @@ $(document).ready(function () {
     
     //1.Get selected html item value
     cell = $(this).text().trim();
-
+    // let turn_mark = $(this).val();
+    alert($(this).attr('value'));
+    
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
     request.open("POST", `/update_cells/${cell}`, false);

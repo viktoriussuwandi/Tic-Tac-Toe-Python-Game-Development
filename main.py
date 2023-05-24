@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, jsonify
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
@@ -60,7 +60,7 @@ def select_cell(cells = None) :
   col = int(cells.split('-')[-1])
   game.select_cells(row, col)
   return '/'
-  
+
 # -------------------------------------------------------------------------------------------
 if __name__ == "__main__" :
   app.run(debug=True, host="0.0.0.0", port=2000)

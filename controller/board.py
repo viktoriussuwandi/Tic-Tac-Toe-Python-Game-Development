@@ -21,9 +21,11 @@ class Board :
   def update_board(
     self, player_role = None, comp_role = None, is_player_selecting = False, 
     is_comp_selecting = False, player_cells = None, comp_cells = None ) :
-    all_cells    = self.all_cells
+    
+    all_cells = self.all_cells
+    # Checking cell's owner
     for i in range(len(all_cells)) :
-      # Check if cell own by player     
+      # Check if cell own by player    
       if is_player_selecting :
         for j in range(len(player_cells)) :
           player_own = self.cell_owners[i] is None and all_cells[i] == player_cells[j]
@@ -35,6 +37,7 @@ class Board :
           comp_own = self.cell_owners[i] is None and all_cells[i] == comp_cells[j]
           self.cell_owners[i] = comp_role if comp_own else self.cell_owners[i]
 
+    # Update attribute to print out board it-self
     self.print_out = ''
     for o in range(len(self.cell_owners)) :
       first_col = o % self.row == 0

@@ -127,5 +127,4 @@ class Game :
     -------------------------------------------
      Current Turn : {self.turn_mark} - {self.turn_name}
     ===========================================
-     Board : 
-    '''
+     Board : '''
