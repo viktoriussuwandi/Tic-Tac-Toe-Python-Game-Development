@@ -115,15 +115,15 @@ class Game :
       if is_player_selecting :
         for i in range(len(player_cells)) :
           for j in range(len(all_cells)) :
-            check_last_owner = all_cells[j] == None and player_cells[i] == all_cells[j]
-            cell_owners[j]   = player_role if check_last_owner else None
+            check_owner    = cell_owners[j] is None and player_cells[i] == all_cells[j]
+            cell_owners[j] = player_role if check_owner else cell_owners[j]
           
       is_comp_selecting = len(self.comp.cells_selected) > 0
       if is_comp_selecting :
         for i in range(len(comp_cells)) :
           for j in range(len(all_cells)) :
-            check_last_owner = all_cells[j] == None and comp_cells[i] == all_cells[j]
-            cell_owners[j] = comp_role if check_last_owner else None
+            check_owner    = cell_owners[j] is None and comp_cells[i] == all_cells[j]
+            cell_owners[j] = comp_role if check_owner else cell_owners[j]
       
       self.board_printed +=f'''
      cell_owners  : {cell_owners}
