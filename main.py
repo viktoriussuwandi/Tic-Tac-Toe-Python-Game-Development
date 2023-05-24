@@ -12,7 +12,6 @@ Bootstrap(app)
 ATTR = { "game_board"  : {}, "game_score"  : {}, "player_turn" : '', "game_over"   : False, 'game' : game }
 
 def update_attributes() :
-  
   ATTR['game_options'] = game.level_options
   ATTR['game_score']   = game.scores
   ATTR['player_turn']  = game.turn_mark
@@ -36,7 +35,10 @@ def home() :
     game.game_start == False and game.game_over == True) or (
     game.game_start == True and game.game_over == False
   )
-  if check_loop : game_loop()
+  if check_loop : 
+    print(game)
+    print(game.board)
+    game_loop()
   return render_template("index.html", attr = ATTR )
 
 
@@ -49,7 +51,6 @@ def home() :
 def select_level(selected_level = None) :
   game_level = selected_level.strip()
   game.select_game_level(level_selected = game_level)
-  redirect(url_for('home', attr = ATTR))
   return '/'
 
 # select user role (X or O)
@@ -57,7 +58,6 @@ def select_level(selected_level = None) :
 def select_role(selected_role = None) :
   user_role  = selected_role.strip()
   game.select_player_role(role_selected = user_role)
-  redirect(url_for('home', attr = ATTR))
   return '/'
 
 # Select square cells on game board
@@ -66,7 +66,6 @@ def select_cell(cells = None) :
   row = int(cells.split('-')[0])
   col = int(cells.split('-')[-1])
   game.select_cells(row, col)
-  redirect(url_for('home', attr = ATTR))
   return '/'
 
 # -------------------------------------------------------------------------------------------

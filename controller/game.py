@@ -31,9 +31,9 @@ class Game :
     self.update_turn()
     self.update_score()
     self.update_board()
-    if self.game_start == True and self.game_over == False : 
-      print(self)
-      print(self.board)
+    # if self.game_start == True and self.game_over == False : 
+    #   print(self)
+    #   print(self.board)
       
   def start_game(self) :
     check_level_and_role = (
