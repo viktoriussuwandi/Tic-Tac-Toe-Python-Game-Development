@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from controller.game import Game
-import json
 
 # -------------------------------------------------------------------------------------------
 # Initialization & additional functions
