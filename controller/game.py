@@ -1,4 +1,5 @@
 from controller.player import Player
+from controller.board  import Board
 import math
 
 class Game :
@@ -6,20 +7,19 @@ class Game :
     self.game_no       = 0
     self.game_start    = False
     self.game_over     = True
-    self.total_squares = 9
 
     self.role_options  = ['X', 'O']
     self.level_options = ["Easy", "Medium", "Impossible"]
     
     self.player        = Player()
     self.comp          = Player()
+    self.board         = Board(9)
     
     self.game_level    = None
     self.scores        = { "X" : 0, "O" : 0 }
     self.turn          = None
     self.turn_name     = None #Game role : Player or comp
     self.turn_mark     = None #Game mark : X or O
-    self.board_start   = {}
     self.board_current = {'current board updated'}
 
 # ----------------------------------------------------------------------------------
@@ -85,16 +85,10 @@ class Game :
       self.turn_mark = self.role_options[self.turn]
    
   def update_board(self) :
-    total_squares = self.total_squares
-    row = math.sqrt(total_squares)
-    col = row
-
     if self.game_start == False and self.game_over == True :
-      game_board       = { "row": int(row), "col" : int(col) }
-      self.board_start = game_board
-      self.board_current = self.board_current
+      self.board_current = self.board.starting_board 
     elif self.game_start == True and self.game_over == False :
-      self.board_current = self.board_current
+      self.board_current = self.board.update_board()
       
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
