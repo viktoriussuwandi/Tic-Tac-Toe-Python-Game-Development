@@ -32,7 +32,9 @@ class Game :
     self.update_turn()
     self.update_score()
     self.update_board()
-    if self.game_start == True and self.game_over == False : print(self)
+    if self.game_start == True and self.game_over == False : 
+      print(self)
+      print(self.board)
       
   def start_game(self) :
     check_level_and_role = (
@@ -104,10 +106,10 @@ class Game :
       )
   
       self.board_current = self.board.update_board()
-      self.board_printed = f'''
-     cell_owners  : {self.board.cell_owners}
-     '''
-
+     #  self.board_printed = f'''
+     # cell_owners  : {self.board.cell_owners}
+     # '''
+      
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
@@ -126,5 +128,4 @@ class Game :
      Current Turn : {self.turn_mark} - {self.turn_name}
     ===========================================
      Board : 
-     { self.board_printed }
     '''
