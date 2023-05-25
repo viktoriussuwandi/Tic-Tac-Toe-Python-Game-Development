@@ -10,10 +10,12 @@ app = Flask(__name__)
 Bootstrap(app)
 
 ATTR = {
-  "game_board": {},
-  "game_score": {},
-  "player_turn": '',
-  "game_over": False
+  "game_board"   : {},
+  "game_score"   : {},
+  "player_turn"  : '',
+  "player_cells" : [],
+  "player_cells" : [],
+  "game_over"    : False
 }
 
 def update_attributes():
@@ -21,6 +23,8 @@ def update_attributes():
   ATTR['game_options'] = game.level_options
   ATTR['game_score']   = game.scores
   ATTR['player_turn']  = game.turn_mark
+  ATTR['player_cells'] = game.player.cells_selected
+  ATTR['comp_cells']   = game.comp.cells_selected
   ATTR['game_board']   = game.board_current
   ATTR['game_over']    = game.game_over
 

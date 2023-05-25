@@ -13,8 +13,8 @@ class Game:
     self.level_options = ["Easy", "Medium", "Impossible"]
 
     self.player = Player()
-    self.comp = Player()
-    self.board = Board(9)
+    self.comp   = Player()
+    self.board  = Board(9)
 
     self.game_level = None
     self.scores = {"X": 0, "O": 0}
