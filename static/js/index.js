@@ -1,4 +1,34 @@
 // ----------------------------------------------------------------------------
+// GAME DATA
+// ----------------------------------------------------------------------------
+
+function getData() {
+
+    var deferredData = new jQuery.Deferred();
+
+    $.ajax({
+        type: "GET",
+        url: "/ajax",
+        dataType: "json",
+        success: function(data) { 
+            deferredData.resolve(data);
+            },
+        complete: function(xhr, textStatus) {
+            console.log("AJAX Request complete -> ", xhr, " -> ", textStatus);
+            }
+    });
+
+    return deferredData; // contains the passed data
+};
+
+let get_game_data = getData();
+
+$.when( get_game_data  ).done( function( data ) {
+  console.log("The data is: " + data);
+  return data
+});
+
+// ----------------------------------------------------------------------------
 // Game Level - Function to select level
 // ----------------------------------------------------------------------------
 
@@ -18,6 +48,8 @@ $(document).ready(function () {
     $(".level-btn").text($(this).text());
     $(".level-btn").val($(this).text());
     $(".level-btn").addClass('disabled');
+    console.log(get_game_data);
+    
   });
 
 });
@@ -43,6 +75,7 @@ $(document).ready(function () {
     
     //3.Disabled O button
     $(".btn-role-O").addClass('disabled');
+    console.log(get_game_data);
     
   });
 });
@@ -64,6 +97,8 @@ $(document).ready(function () {
     
     //3.Disabled O button
     $(".btn-role-X").addClass('disabled');
+
+    console.log(get_game_data);
     
   });
 });
@@ -86,39 +121,8 @@ $(document).ready(function () {
     
     //3.Change html button value of square cell, and make the square cell disable    
     $(this).addClass('disabled');
-    console.log($(this).attr('value'));
+    let get_game_data = getData();
+    console.log(get_game_data);
     
   });
-});
-
-// ----------------------------------------------------------------------------
-// GAME DATA
-// ----------------------------------------------------------------------------
-
-function getData() {
-
-    var deferredData = new jQuery.Deferred();
-
-    $.ajax({
-        type: "GET",
-        url: "/ajax",
-        dataType: "json",
-        success: function(data) { 
-            deferredData.resolve(data);
-            },
-        complete: function(xhr, textStatus) {
-            console.log("AJAX Request complete -> ", xhr, " -> ", textStatus);
-            }
-    });
-
-    return deferredData; // contains the passed data
-};
-
-
-// I used the Deferred structure below because I later added Deferred objects from other asynchronous functions to the `.when`
-
-var dataDeferred = getData();
-
-$.when( dataDeferred  ).done( function( data ) {
-    console.log("The data is: " + data);    
 });

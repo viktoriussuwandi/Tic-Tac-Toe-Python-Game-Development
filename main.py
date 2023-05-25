@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, Response, json
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
@@ -13,8 +13,7 @@ ATTR = {
   "game_board": {},
   "game_score": {},
   "player_turn": '',
-  "game_over": False,
-  'game': game
+  "game_over": False
 }
 
 def update_attributes():
@@ -79,6 +78,10 @@ def select_cell(cells=None):
   game.select_cells(row, col)
   return '/'
 
+@app.route('/ajax')
+def ajax() :
+    motifs = ATTR
+    return Response(json.dumps(motifs), mimetype='application/json')
 
 
 # -------------------------------------------------------------------------------------------
