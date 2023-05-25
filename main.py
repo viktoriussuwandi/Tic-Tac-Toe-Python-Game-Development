@@ -58,7 +58,6 @@ def home():
     
   return render_template("index.html", attr=ATTR)
 
-
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to index.js
 # -------------------------------------------------------------------------------------------
@@ -90,7 +89,6 @@ def send_data() :
   update_attributes()
   game_data = ATTR
   return Response(json.dumps(game_data), mimetype='application/json')
-
 
 # -------------------------------------------------------------------------------------------
 if __name__ == "__main__":

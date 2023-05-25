@@ -1,7 +1,6 @@
 from controller.player import Player
 from controller.board import Board
 
-
 class Game:
 
   def __init__(self):
@@ -117,7 +116,6 @@ class Game:
                               is_comp_selecting, player_cells, comp_cells)
 
       self.board_current = self.board.update_board()
-
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS

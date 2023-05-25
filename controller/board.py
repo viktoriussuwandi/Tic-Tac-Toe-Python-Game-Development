@@ -1,6 +1,5 @@
 import math
 
-
 class Board:
 
   def __init__(self, total_cells=None):
