@@ -39,10 +39,11 @@ $(document).ready(function () {
     
     //3.Get game data, & Change html button value of dropdown as selected, 
     //  and make the html button disable
+    $(".level-btn").text($(this).text());
+    $(".level-btn").val($(this).text());
+    
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
-      $(".level-btn").text($(this).text());
-      $(".level-btn").val($(this).text());
       $(".level-btn").addClass('disabled');
       console.log(game_data)
     });
@@ -70,7 +71,7 @@ $(document).ready(function () {
     request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
     
-    //3.Get data, & disabled X button
+    //3.Get data, & disabled O button
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(".btn-role-O").addClass('disabled');
@@ -95,7 +96,7 @@ $(document).ready(function () {
     request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
     
-    //3.Get data, & disabled O button
+    //3.Get data, & disabled X button
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(".btn-role-X").addClass('disabled');
@@ -122,9 +123,10 @@ $(document).ready(function () {
     request.send()
     
     //3Get data, change html button value of square cell, and make the square cell disable
+    $(this).addClass('disabled');
+    
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
-      $(this).addClass('disabled');
       console.log(game_data)
     });
     
