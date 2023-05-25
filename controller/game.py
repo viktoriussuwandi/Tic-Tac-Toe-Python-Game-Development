@@ -116,9 +116,6 @@ class Game:
                               is_comp_selecting, player_cells, comp_cells)
 
       self.board_current = self.board.update_board()
-    #  self.board_printed = f'''
-    # cell_owners  : {self.board.cell_owners}
-    # '''
 
 
 # ----------------------------------------------------------------------------------
