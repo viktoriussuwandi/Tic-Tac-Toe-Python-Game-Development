@@ -96,10 +96,11 @@ $(document).ready(function () {
     request.send();
     
     //3.Disabled O button
-    $(".btn-role-X").addClass('disabled');
+
     
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
+      $(".btn-role-X").addClass('disabled');
       console.log(game_data)
     });
     
@@ -122,11 +123,10 @@ $(document).ready(function () {
     request.open("POST", `/update_cells/${cell}`, false);
     request.send()
     
-    //3.Change html button value of square cell, and make the square cell disable    
-    $(this).addClass('disabled');
-    
+    //3.Change html button value of square cell, and make the square cell disable
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
+      $(this).addClass('disabled');
       console.log(game_data)
     });
     
