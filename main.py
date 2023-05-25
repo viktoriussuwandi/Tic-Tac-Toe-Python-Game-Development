@@ -14,6 +14,7 @@ ATTR = {
   "game_score"   : {},
   "game_level"   : '',
   "game_options" : [],
+  "game_start"   : False,
   "game_over"    : False,
   "game_roles"   : {},
   "player_turn"  : '',
@@ -27,6 +28,7 @@ def update_attributes():
   ATTR['game_score']   = game.scores
   ATTR['game_level']   = game.game_level_txt
   ATTR['game_options'] = game.level_options
+  ATTR['game_start']   = game.game_start
   ATTR['game_over']    = game.game_over
   ATTR['game_roles']   = game.game_roles
   ATTR['player_turn']  = game.turn_mark

@@ -14,7 +14,8 @@ function getData() {
             deferredData.resolve(data);
             },
         complete: function(xhr, textStatus) {
-            console.log("AJAX Request complete -> ", xhr, " -> ", textStatus);
+          // console.log("AJAX Request complete -> ", xhr, " -> ", textStatus);
+          console.log('Data Updated')
             }
     });
 
