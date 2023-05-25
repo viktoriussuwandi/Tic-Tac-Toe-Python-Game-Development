@@ -17,13 +17,12 @@ ATTR = {
   'game': game
 }
 
-
 def update_attributes():
   ATTR['game_options'] = game.level_options
-  ATTR['game_score'] = game.scores
-  ATTR['player_turn'] = game.turn_mark
-  ATTR['game_board'] = game.board_current
-  ATTR['game_over'] = game.game_over
+  ATTR['game_score']   = game.scores
+  ATTR['player_turn']  = game.turn_mark
+  ATTR['game_board']   = game.board_current
+  ATTR['game_over']    = game.game_over
 
 
 def game_loop():
@@ -79,6 +78,7 @@ def select_cell(cells=None):
   col = int(cells.split('-')[-1])
   game.select_cells(row, col)
   return '/'
+
 
 
 # -------------------------------------------------------------------------------------------
