@@ -1,6 +1,6 @@
 ## Tic Tac Toe Python Game Development
 
-#### This is a Tic Tac Toe python Web development website.
+#### This is a Full Stack Tic Tac Toe python Web development website.
 
 #### This project running on : [My Repl](https://replit.com/@ViktoriusSuwand/AppBrewery-python-Day-83-Tic-Tac-Toe)
 
