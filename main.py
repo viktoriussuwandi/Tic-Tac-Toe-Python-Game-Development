@@ -15,6 +15,7 @@ ATTR = {
   "game_level"   : '',
   "game_options" : [],
   "game_over"    : False,
+  "game_roles"   : {},
   "player_turn"  : '',
   "player_cells" : [],
   "comp_cells"   : [],
@@ -22,14 +23,15 @@ ATTR = {
 
 def update_attributes():
   game.game_update_attr()
-  ATTR['game_board']     = game.board_current
-  ATTR['game_score']     = game.scores
-  ATTR['game_level']     = game.game_level_txt
-  ATTR['game_options']   = game.level_options
-  ATTR['game_over']      = game.game_over
-  ATTR['player_turn']    = game.turn_mark
-  ATTR['player_cells']   = game.player.cells_selected
-  ATTR['comp_cells']     = game.comp.cells_selected
+  ATTR['game_board']   = game.board_current
+  ATTR['game_score']   = game.scores
+  ATTR['game_level']   = game.game_level_txt
+  ATTR['game_options'] = game.level_options
+  ATTR['game_over']    = game.game_over
+  ATTR['game_roles']   = game.game_roles
+  ATTR['player_turn']  = game.turn_mark
+  ATTR['player_cells'] = game.player.cells_selected
+  ATTR['comp_cells']   = game.comp.cells_selected
 
 def game_loop():
   update_attributes()

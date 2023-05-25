@@ -10,6 +10,7 @@ class Game:
     self.game_over = True
 
     self.role_options = ['X', 'O']
+    self.game_roles    = {'Player' : '', 'Comp' : ''}
     self.level_options = ["Easy", "Medium", "Impossible"]
 
     self.player = Player()
@@ -65,6 +66,8 @@ class Game:
       role_selected) if check_user_input else self.player.role
     check_player_is_X = check_user_input and self.player.role == 0
     self.comp.role = None if not check_user_input else 1 if check_player_is_X else 0
+    self.game_role['Player'] = self.role_options[ int(self.player.role) ]
+    self.game_role['Comp']   = self.role_options[ int(self.comp.role) ]
     self.game_update_attr()
 
   def select_cells(self, row=None, col=None):
@@ -123,12 +126,9 @@ class Game:
 # ----------------------------------------------------------------------------------
 
   def __repr__(self):
-    game_level  = None if self.game_level is None else self.level_options[ int(self.game_level) ]
-    player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-    comp_role   = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
     return f'''
     -----------------TIC TAC TOE GAME----------
-     Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
+     Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
