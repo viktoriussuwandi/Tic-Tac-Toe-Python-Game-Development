@@ -8,7 +8,7 @@ function getData() {
 
     $.ajax({
         type: "GET",
-        url: "/ajax",
+        url: "/get_ajax",
         dataType: "json",
         success: function(data) { 
             deferredData.resolve(data);

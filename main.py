@@ -87,8 +87,8 @@ def select_cell(cells=None):
   game.select_cells(row, col)
   return '/'
 
-@app.route('/ajax')
-def ajax() :
+@app.route('/get_ajax')
+def send_data() :
   update_attributes()
   game_data = ATTR
   return Response(json.dumps(game_data), mimetype='application/json')
