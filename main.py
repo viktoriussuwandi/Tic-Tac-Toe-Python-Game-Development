@@ -17,6 +17,7 @@ ATTR = {
   "game_start"   : False,
   "game_over"    : False,
   "game_roles"   : {},
+  "game_winner"  : {},
   "player_turn"  : '',
   "player_cells" : [],
   "comp_cells"   : [],
@@ -31,6 +32,7 @@ def update_attributes():
   ATTR['game_start']   = game.game_start
   ATTR['game_over']    = game.game_over
   ATTR['game_roles']   = game.game_roles
+  ATTR['game_winner']  = game.winner
   ATTR['player_turn']  = game.turn_mark
   ATTR['player_cells'] = game.player.cells_selected
   ATTR['comp_cells']   = game.comp.cells_selected

@@ -20,6 +20,7 @@ class Game:
     self.game_level     = None
     self.game_level_txt = ''
     self.scores = {"X": 0, "O": 0}
+    self.winner = {'Role' : '', 'Mark' : ''}
     self.turn = None
     self.turn_name = None  #Game role : Player or comp
     self.turn_mark = None  #Game mark : X or O
