@@ -12,22 +12,24 @@ Bootstrap(app)
 ATTR = {
   "game_board"   : {},
   "game_score"   : {},
+  "game_level"   : '',
+  "game_options" : [],
+  "game_over"    : False,
   "player_turn"  : '',
   "player_cells" : [],
-  "player_cells" : [],
-  "game_over"    : False
+  "comp_cells"   : [],
 }
 
 def update_attributes():
   game.game_update_attr()
-  ATTR['game_options'] = game.level_options
-  ATTR['game_score']   = game.scores
-  ATTR['player_turn']  = game.turn_mark
-  ATTR['player_cells'] = game.player.cells_selected
-  ATTR['comp_cells']   = game.comp.cells_selected
-  ATTR['game_board']   = game.board_current
-  ATTR['game_over']    = game.game_over
-
+  ATTR['game_board']     = game.board_current
+  ATTR['game_score']     = game.scores
+  ATTR['game_level']     = game.game_level_txt
+  ATTR['game_options']   = game.level_options
+  ATTR['game_over']      = game.game_over
+  ATTR['player_turn']    = game.turn_mark
+  ATTR['player_cells']   = game.player.cells_selected
+  ATTR['comp_cells']     = game.comp.cells_selected
 
 def game_loop():
   update_attributes()

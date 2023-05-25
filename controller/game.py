@@ -16,7 +16,8 @@ class Game:
     self.comp   = Player()
     self.board  = Board(9)
 
-    self.game_level = None
+    self.game_level     = None
+    self.game_level_txt = ''
     self.scores = {"X": 0, "O": 0}
     self.turn = None
     self.turn_name = None  #Game role : Player or comp
@@ -55,6 +56,7 @@ class Game:
     check_user_input = level_selected is not None and level_selected in self.level_options
     self.game_level = self.level_options.index(
       level_selected) if check_user_input else self.game_level
+    self.game_level_txt = level_selected
     self.game_update_attr()
 
   def select_player_role(self, role_selected=None):
@@ -121,9 +123,9 @@ class Game:
 # ----------------------------------------------------------------------------------
 
   def __repr__(self):
-    game_level = None if self.game_level is None else self.level_options[ int(self.game_level) ]
+    game_level  = None if self.game_level is None else self.level_options[ int(self.game_level) ]
     player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-    comp_role = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
+    comp_role   = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
     return f'''
     -----------------TIC TAC TOE GAME----------
      Level        : {game_level}; (Player : {player_role} ; Comp : {comp_role})
