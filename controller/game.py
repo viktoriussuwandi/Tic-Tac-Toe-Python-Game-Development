@@ -66,8 +66,8 @@ class Game:
       role_selected) if check_user_input else self.player.role
     check_player_is_X = check_user_input and self.player.role == 0
     self.comp.role = None if not check_user_input else 1 if check_player_is_X else 0
-    self.game_role['Player'] = self.role_options[ int(self.player.role) ]
-    self.game_role['Comp']   = self.role_options[ int(self.comp.role) ]
+    self.game_roles['Player'] = self.role_options[ int(self.player.role) ]
+    self.game_roles['Comp']   = self.role_options[ int(self.comp.role) ]
     self.game_update_attr()
 
   def select_cells(self, row=None, col=None):
