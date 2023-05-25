@@ -26,7 +26,6 @@ def update_attributes():
 
 
 def game_loop():
-  game.game_update_attr()
   update_attributes()
 
   while game.game_start == True and game.game_over == False:
@@ -59,8 +58,7 @@ def home():
 @app.route('/update_level/<string:selected_level>', methods=['POST'])
 def select_level(selected_level=None):
   game_level = selected_level.strip()
-  game.select_game_level(level_selected=game_level)
-  update_attributes()
+  game.select_game_level(level_selected=game_level)  
   return '/'
 
 
@@ -69,7 +67,6 @@ def select_level(selected_level=None):
 def select_role(selected_role=None):
   user_role = selected_role.strip()
   game.select_player_role(role_selected=user_role)
-  update_attributes()
   return '/'
 
 
@@ -79,13 +76,13 @@ def select_cell(cells=None):
   row = int(cells.split('-')[0])
   col = int(cells.split('-')[-1])
   game.select_cells(row, col)
-  update_attributes()
   return '/'
 
 @app.route('/ajax')
 def ajax() :
-    motifs = ATTR
-    return Response(json.dumps(motifs), mimetype='application/json')
+  update_attributes()
+  game_data = ATTR
+  return Response(json.dumps(game_data), mimetype='application/json')
 
 
 # -------------------------------------------------------------------------------------------
