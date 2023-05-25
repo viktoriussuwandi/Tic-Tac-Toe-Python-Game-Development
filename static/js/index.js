@@ -70,7 +70,7 @@ $(document).ready(function () {
     request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
     
-    //3.Get data, & disabled O button
+    //3.Get data, & disabled X button
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(".btn-role-O").addClass('disabled');
@@ -95,9 +95,7 @@ $(document).ready(function () {
     request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
     
-    //3.Disabled O button
-
-    
+    //3.Get data, & disabled O button
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(".btn-role-X").addClass('disabled');
@@ -123,7 +121,7 @@ $(document).ready(function () {
     request.open("POST", `/update_cells/${cell}`, false);
     request.send()
     
-    //3.Change html button value of square cell, and make the square cell disable
+    //3Get data, change html button value of square cell, and make the square cell disable
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(this).addClass('disabled');
