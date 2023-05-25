@@ -21,13 +21,6 @@ function getData() {
     return deferredData; // contains the passed data
 };
 
-let get_game_data = getData();
-
-$.when( get_game_data  ).done( function( data ) {
-  console.log("The data is: " + data);
-  return data
-});
-
 // ----------------------------------------------------------------------------
 // Game Level - Function to select level
 // ----------------------------------------------------------------------------
@@ -48,7 +41,12 @@ $(document).ready(function () {
     $(".level-btn").text($(this).text());
     $(".level-btn").val($(this).text());
     $(".level-btn").addClass('disabled');
-    console.log(get_game_data);
+
+    let get_game_data = getData();
+    $.when( get_game_data  ).done( function( game_data ) {
+      console.log("The data is: " + game_data);
+      console.log(game_data)
+    });
     
   });
 
@@ -75,7 +73,12 @@ $(document).ready(function () {
     
     //3.Disabled O button
     $(".btn-role-O").addClass('disabled');
-    console.log(get_game_data);
+    
+    let get_game_data = getData();
+    $.when( get_game_data  ).done( function( game_data ) {
+      console.log("The data is: " + game_data);
+      console.log(game_data)
+    });
     
   });
 });
@@ -97,8 +100,12 @@ $(document).ready(function () {
     
     //3.Disabled O button
     $(".btn-role-X").addClass('disabled');
-
-    console.log(get_game_data);
+    
+    let get_game_data = getData();
+    $.when( get_game_data  ).done( function( game_data ) {
+      console.log("The data is: " + game_data);
+      console.log(game_data)
+    });
     
   });
 });
@@ -121,8 +128,12 @@ $(document).ready(function () {
     
     //3.Change html button value of square cell, and make the square cell disable    
     $(this).addClass('disabled');
+    
     let get_game_data = getData();
-    console.log(get_game_data);
+    $.when( get_game_data  ).done( function( game_data ) {
+      console.log("The data is: " + game_data);
+      console.log(game_data)
+    });
     
   });
 });
