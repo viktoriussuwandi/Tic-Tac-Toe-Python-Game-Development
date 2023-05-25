@@ -54,8 +54,6 @@ def home():
                 and game.game_over == True) or (game.game_start == True
                                                 and game.game_over == False)
   if check_loop:
-    print(game)
-    print(game.board)
     game_loop()
     
   return render_template("index.html", attr=ATTR)
