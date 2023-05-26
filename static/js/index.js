@@ -39,19 +39,15 @@ $(document).ready(function () {
     
     //3.Get game data, & Change html button value of dropdown as selected, 
     //  and make the html button disable
-    let btn =  $(this)
-    // $(".level-btn").text($(this).text());
-    // $(".level-btn").val($(this).text());
-    // $(".level-btn").addClass('disabled');
+    let level_btn = $(".game-level .level-btn")
+    let item_btn  = $(this)
     
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( data ) {
-      btn.text(btn.text());
-      btn.val(btn.text());
-      btn.addClass('disabled');
-      console.log(btn)
+      level_btn.text(item_btn.text());
+      level_btn.val(item_btn.text());
+      level_btn.addClass('disabled');
       // GAME_DATA = data
-      // console.log(GAME_DATA)
     });
     
   });
@@ -79,13 +75,12 @@ $(document).ready(function () {
     //3.Get data, & disabled O button
     let btnX = $(this)
     let btnO = $(".btn-role-O")
+    
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( data ) {
       btnX.addClass('disabled-color');
       btnO.addClass('disabled');
-      console.log(btnX)
       // GAME_DATA = data
-      // console.log(GAME_DATA)
     });
     
   });
@@ -109,13 +104,13 @@ $(document).ready(function () {
     //3.Get data, & disabled X button
     let get_game_data = getData();
     let btnX = $(".btn-role-X")
+    
     let btnO = $(this)
     $.when( get_game_data  ).done( function( data ) {
       btnX.addClass('disabled');
       btnO.addClass('disabled-color');
-      console.log(btnO)
-      // GAME_DATA = data
-      // console.log(GAME_DATA)
+      GAME_DATA = data
+      
     });
     
   });
@@ -137,16 +132,14 @@ $(document).ready(function () {
     request.open("POST", `/update_cells/${cell}`, false);
     request.send()
     
-    //3Get data, change html button value of square cell, and make the square cell disable
-    // $(this).addClass('disabled');
+    //3.Get data, change html button value of square cell
+    //  make the square cell disable
     let btn = $(this)
     
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( data ) {
       btn.addClass('disabled');
-      console.log(btn)
       // GAME_DATA = data
-      // console.log(GAME_DATA)
     });
     
   });
