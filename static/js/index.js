@@ -72,11 +72,15 @@ $(document).ready(function () {
     request.send();
     
     //3.Get data, & disabled O button
+    let btnX = $(this)
+    let btnO = $(".btn-role-O")
     let get_game_data = getData();
-    $.when( get_game_data  ).done( function( game_data ) {
-      $(".btn-role-O").addClass('disabled');
-      GAME_DATA = data
-      console.log(GAME_DATA)
+    $.when( get_game_data  ).done( function( data ) {
+      btnX.addClass('disabled-color');
+      btnO.addClass('disabled');
+      console.log(btnX)
+      // GAME_DATA = data
+      // console.log(GAME_DATA)
     });
     
   });
@@ -99,10 +103,14 @@ $(document).ready(function () {
     
     //3.Get data, & disabled X button
     let get_game_data = getData();
-    $.when( get_game_data  ).done( function( game_data ) {
-      $(".btn-role-X").addClass('disabled');
-      GAME_DATA = data
-      console.log(GAME_DATA)
+    let btnX = $(".btn-role-X")
+    let btnO = $(this)
+    $.when( get_game_data  ).done( function( data ) {
+      btnX.addClass('disabled');
+      btnO.addClass('disabled-color');
+      console.log(btnO)
+      // GAME_DATA = data
+      // console.log(GAME_DATA)
     });
     
   });
@@ -128,7 +136,7 @@ $(document).ready(function () {
     $(this).addClass('disabled');
     
     let get_game_data = getData();
-    $.when( get_game_data  ).done( function( game_data ) {
+    $.when( get_game_data  ).done( function( data ) {
       GAME_DATA = data
       console.log(GAME_DATA)
     });

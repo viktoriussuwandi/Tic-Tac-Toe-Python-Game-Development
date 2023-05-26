@@ -59,6 +59,11 @@ html,body {
   border-bottom-width:2px !important;
 }
 
+.game-role .btn:focus, .game-role .btn.disabled-color {
+  border-bottom-color: rgb(20, 189, 172);
+  border-bottom-width:2px !important;
+}
+
 .game-role .btn {
   display:flex;
   flex-direction: row;
