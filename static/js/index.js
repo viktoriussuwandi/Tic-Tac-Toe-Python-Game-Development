@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------------
 // GAME DATA
 // ----------------------------------------------------------------------------
+let GAME_DATA
 
 function getData() {
     var deferredData = new jQuery.Deferred();
@@ -42,9 +43,10 @@ $(document).ready(function () {
     $(".level-btn").val($(this).text());
     
     let get_game_data = getData();
-    $.when( get_game_data  ).done( function( game_data ) {
+    $.when( get_game_data  ).done( function( data ) {
       $(".level-btn").addClass('disabled');
-      console.log(game_data)
+      GAME_DATA = data
+      console.log(GAME_DATA)
     });
     
   });
@@ -73,7 +75,8 @@ $(document).ready(function () {
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(".btn-role-O").addClass('disabled');
-      console.log(game_data)
+      GAME_DATA = data
+      console.log(GAME_DATA)
     });
     
   });
@@ -98,7 +101,8 @@ $(document).ready(function () {
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
       $(".btn-role-X").addClass('disabled');
-      console.log(game_data)
+      GAME_DATA = data
+      console.log(GAME_DATA)
     });
     
   });
@@ -125,7 +129,8 @@ $(document).ready(function () {
     
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( game_data ) {
-      console.log(game_data)
+      GAME_DATA = data
+      console.log(GAME_DATA)
     });
     
   });
