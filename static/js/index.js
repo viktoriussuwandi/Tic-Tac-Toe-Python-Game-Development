@@ -36,6 +36,11 @@ function update_game() {
   } else { text_turn_element.text("Start game or select player"); }
 
   //3.Disabled button restart game element
+  let btn_cell =  $('.game-board .squares .square')
+  if      (GAME_STATUS === "end") { btn_cell.addClass('disabled'); }
+  else if (GAME_STATUS === "start"){ btn_cell.removeClass('disabled'); }
+    
+  //4.Disabled button restart game element
   let btn_restart = $(".game-restart a.btn")
   if(GAME_STATUS === "start") {
     btn_restart.addClass('in_game');
@@ -168,7 +173,7 @@ $(document).ready(function () {
       cell_btn.text(GAME_DATA["player_turn"]);
       
       GAME_DATA = data
-      cell_btn.addClass('disabled');
+      cell_btn.addClass('disabled disable-color');
       update_game();
     });
     
