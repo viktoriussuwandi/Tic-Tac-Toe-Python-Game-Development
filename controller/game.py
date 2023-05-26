@@ -36,10 +36,10 @@ class Game:
 
   def game_update_attr(self):
     if self.game_start == False and self.game_over == True: self.start_game()
+    self.update_winner()
     self.update_turn()
     self.update_score()
     self.update_board()
-    self.update_winner()
     
     if self.game_start == True and self.game_over == False : 
       pass
@@ -130,12 +130,13 @@ class Game:
     is_winner_found = is_player_win or is_comp_win
     
     player_cells = self.player.cells_selected
-    player_rows  = [pr[0] for pr in player_cells ] if len(player_cells) > 2 else None
-    player_cols  = [pr[1] for pr in player_cells ] if len(player_cells) > 2 else None
+    player_cells_sum = 0
+    if len(player_cells) > 2 :
+      player_rows_sum    = sum([pr[0] for pr in player_cells ])
+      player_cols_sum    = sum([pr[1] for pr in player_cells ])
 
     clear_screen()
-    print(f'Player rows : {player_rows}')
-    print(f'Player cols : {player_cols}')
+    print(f'Player cells sum : {player_cells_sum}')
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
