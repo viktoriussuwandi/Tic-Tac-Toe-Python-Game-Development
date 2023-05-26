@@ -35,6 +35,12 @@ function update_game() {
     text_turn_element.text("Turn");
   } else { text_turn_element.text("Start game or select player"); }
 
+  //3.Disabled button restart game element
+  let btn_restart = $(".game-restart a.btn")
+  if(GAME_STATUS === "start") {
+    btn_restart.addClass('in_game');
+  }
+
 }
 
 // ----------------------------------------------------------------------------

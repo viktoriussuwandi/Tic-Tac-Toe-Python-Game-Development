@@ -161,10 +161,25 @@ html,body {
   justify-content: center;
 }
 
-.game-restart .btn, .game-restart .btn:focus, .game-restart .btn:hover{
+.game-restart .btn{
   width:99%;
   text-decoration: none;
   color:rgb(20, 189, 172);
   border-radius:15px;
-  overflow:hidden;
+}
+
+.game-restart .btn:focus, .game-restart .btn:hover{
+  width:99%;
+  text-decoration: none;
+  color:#039BE5;
+  border-color:#039BE5;
+  border-radius:15px;
+}
+
+.game-restart .btn.in_game{
+  width:99%;
+  text-decoration: none;
+  color: #039BE5;
+  border-color: rgb(20, 189, 172);
+  border-radius:15px;
 }
