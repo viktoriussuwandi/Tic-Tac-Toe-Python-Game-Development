@@ -30,10 +30,13 @@ function update_game() {
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
-  if(GAME_STATUS === "start") {
+  
+  if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } else { text_turn_element.text("Start game or select player"); }
+  } else if (GAME_STATUS === "end") { 
+    text_turn_element.text("Start game or select player");
+  }
 
   //3.Disabled button restart game element
   let btn_cell =  $('.game-board .squares .square')
@@ -45,7 +48,7 @@ function update_game() {
   if(GAME_STATUS === "start") {
     btn_restart.addClass('in_game');
   }
-
+  
 }
 
 // ----------------------------------------------------------------------------
@@ -170,11 +173,18 @@ $(document).ready(function () {
     let cell_btn         = $(this)
     
     $.when( update_game_data  ).done( function( data ) {
+      //a.Update cell text
       cell_btn.text(GAME_DATA["player_turn"]);
-      
-      GAME_DATA = data
       cell_btn.addClass('disabled disable-color');
       update_game();
+      
+      //b.Update data & change text of player turn
+      GAME_DATA = data
+      let text_turn_element = $('.game-turn .text-turn');
+      if (GAME_STATUS === "end" && GAME_DATA["game_winner"]["Role"] != "") { 
+          text_turn_element.text(`Winner : ${GAME_DATA["game_winner"]["Role"]}`);
+      }
+      
     });
     
   });
