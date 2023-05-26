@@ -6,44 +6,44 @@
             <div class="col-auto">
               {% if row == 0 and col == 0 %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-top-border no-left-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
 
              {% elif row == (attr['game_board']['row']-1) and col == 0 %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-bottom-border no-left-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
               {% elif row == 0 and col == (attr['game_board']['col']-1) %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-top-border no-right-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
               
               {% elif row == (attr['game_board']['row']-1) and col == (attr['game_board']['col']-1) %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-bottom-border no-right-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
               {% elif row == 0 %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-top-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
               {% elif col == 0 %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-left-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
 
               {% elif row == (attr['game_board']['row']-1) %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-bottom-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
 
               {% elif col == (attr['game_board']['col']-1)  %}
                 <div value="{{ attr['player_turn'] }}" class="btn square no-right-border" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
                   
               {% else %}
                 <div value="{{ attr['player_turn'] }}" class="btn square" href="#">
-                  
+                  {{row}}-{{col}}
                 </div>
               {% endif %}
             </div>

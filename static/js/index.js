@@ -168,7 +168,7 @@ $(document).ready(function () {
       cell_btn.text(GAME_DATA["player_turn"]);
       
       GAME_DATA = data
-      cell_btn.addClass('disabled-color disabled');
+      cell_btn.addClass('disabled');
       update_game();
     });
     
