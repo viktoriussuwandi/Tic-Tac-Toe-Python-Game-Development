@@ -1,6 +1,6 @@
   <div class="game game-role">
     
-    <a class="btn btn-role-X" href="#">
+    <div class="btn btn-role-X" href="#">
       <div class="char-player role-X">X</div>
       <div class="char-score">
         {% if attr['game_score']['X'] == 0 %}
@@ -9,9 +9,9 @@
         {{ attr['game_score']['X'] }}
         {% endif %}
       </div>
-    </a>
+    </div>
     
-    <a class="btn btn-role-O" href="#">
+    <div class="btn btn-role-O" href="#">
       <div class="char-player role-O">O</div>
       <div class="char-score">
         {% if attr['game_score']['O'] == 0 %}
@@ -20,6 +20,6 @@
         {{ attr['game_score']['O'] }}
         {% endif %}
       </div>
-    </a>
+    </div>
     
   </div>

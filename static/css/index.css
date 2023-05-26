@@ -59,11 +59,6 @@ html,body {
   border-bottom-width:2px !important;
 }
 
-.game-role .btn:focus, .game-role .btn.disabled-color {
-  border-bottom-color: rgb(20, 189, 172);
-  border-bottom-width:2px !important;
-}
-
 .game-role .btn {
   display:flex;
   flex-direction: row;
@@ -92,6 +87,21 @@ html,body {
   font-weight:600;
   color:#78909C; 
 }
+
+.game-role .btn:focus, .game-role .btn.disabled-color {
+  border-bottom-color: rgb(20, 189, 172);
+  border-bottom-width:2px !important;
+  cursor: not-allowed;
+}
+
+.game-role .btn:focus, .game-role .btn.disabled-color:focus, .game-role .btn:focus, .game-role .btn.disabled-color:hover{
+  text-decoration: none;
+  border-top-color: #E0E0E0;
+  border-left-color: #E0E0E0;
+  border-right-color: #E0E0E0;
+  border-bottom-color: rgb(20, 189, 172);
+}
+
 
 /* ---------------------------------------------------------------------------- */
 /* Game Turn */
@@ -160,7 +170,7 @@ html,body {
 }
 
 .game-board .square:hover{
-  color: rgb(20, 189, 172);  
+  color: rgb(20, 189, 172);
 }
 
 .game-board .square.disabled{
