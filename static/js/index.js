@@ -151,22 +151,22 @@ $(document).ready(function () {
     e.preventDefault();
     
     //1.Get selected html item value
-    cell = $(this).text().trim();
+    cell_value = $(this).text().trim();
     // let turn_mark = $(this).val();
     
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
-    request.open("POST", `/update_cells/${cell}`, false);
+    request.open("POST", `/update_cells/${cell_value}`, false);
     request.send()
     
     //3.Get data, change html button value of square cell
     //  make the square cell disable
     let update_game_data = get_Flask_Data();
-    let btn           = $(this)
+    let cell_btn         = $(this)
     
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data
-      btn.addClass('disabled');
+      cell_btn.addClass('disabled');
       update_game()
     });
     

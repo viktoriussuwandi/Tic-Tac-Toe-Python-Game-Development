@@ -45,11 +45,11 @@ class Board:
 
     # Update attribute to print out board it-self
     self.print_out = ''
-    for o in range(len(self.cell_owners)):
-      first_col = o % self.row == 0
-      if o == 0: self.print_out += f'     {str(self.cell_owners[o])}'
-      elif first_col: self.print_out += f'\n     {str(self.cell_owners[o])}'
-      else: self.print_out += f' {str(self.cell_owners[o])}'
+    for co in range(len(self.cell_owners)):
+      first_col = co % self.row == 0
+      if co == 0: self.print_out += f'     {str(self.cell_owners[co])}'
+      elif first_col: self.print_out += f'\n     {str(self.cell_owners[co])}'
+      else: self.print_out += f' {str(self.cell_owners[co])}'
 
   def __repr__(self):
     return self.print_out
