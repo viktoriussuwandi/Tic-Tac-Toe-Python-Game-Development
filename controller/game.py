@@ -41,10 +41,11 @@ class Game:
     self.update_board()
     self.update_winner()
     
-    if self.game_start == True and self.game_over == False :
-      clear_screen()
-      print(self)
-      print(self.board)
+    if self.game_start == True and self.game_over == False : 
+      pass
+      # clear_screen()
+      # print(self)
+      # print(self.board)
 
   def start_game(self):
     check_level_and_role = (self.game_level is not None
@@ -124,7 +125,17 @@ class Game:
       self.board_current = self.board.update_board()
 
   def update_winner(self):
-    pass
+    is_player_win   = False
+    is_comp_win     = False
+    is_winner_found = is_player_win or is_comp_win
+    
+    player_cells = self.player.cells_selected
+    player_rows  = [pr[0] for pr in player_cells ] if len(player_cells) > 2 else None
+    player_cols  = [pr[1] for pr in player_cells ] if len(player_cells) > 2 else None
+
+    clear_screen()
+    print(f'Player rows : {player_rows}')
+    print(f'Player cols : {player_cols}')
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
@@ -133,6 +144,7 @@ class Game:
   def __repr__(self):
     return f'''
     -----------------TIC TAC TOE GAME----------
+     Winner       : {self.winner}
      Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
