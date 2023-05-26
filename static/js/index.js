@@ -39,14 +39,19 @@ $(document).ready(function () {
     
     //3.Get game data, & Change html button value of dropdown as selected, 
     //  and make the html button disable
-    $(".level-btn").text($(this).text());
-    $(".level-btn").val($(this).text());
+    let btn =  $(this)
+    // $(".level-btn").text($(this).text());
+    // $(".level-btn").val($(this).text());
+    // $(".level-btn").addClass('disabled');
     
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( data ) {
-      $(".level-btn").addClass('disabled');
-      GAME_DATA = data
-      console.log(GAME_DATA)
+      btn.text(btn.text());
+      btn.val(btn.text());
+      btn.addClass('disabled');
+      console.log(btn)
+      // GAME_DATA = data
+      // console.log(GAME_DATA)
     });
     
   });
@@ -133,12 +138,15 @@ $(document).ready(function () {
     request.send()
     
     //3Get data, change html button value of square cell, and make the square cell disable
-    $(this).addClass('disabled');
+    // $(this).addClass('disabled');
+    let btn = $(this)
     
     let get_game_data = getData();
     $.when( get_game_data  ).done( function( data ) {
-      GAME_DATA = data
-      console.log(GAME_DATA)
+      btn.addClass('disabled');
+      console.log(btn)
+      // GAME_DATA = data
+      // console.log(GAME_DATA)
     });
     
   });
