@@ -39,6 +39,8 @@ class Game:
     self.update_turn()
     self.update_score()
     self.update_board()
+    self.update_winner()
+    
     if self.game_start == True and self.game_over == False :
       clear_screen()
       print(self)
@@ -121,6 +123,9 @@ class Game:
 
       self.board_current = self.board.update_board()
 
+  def update_winner(self):
+    pass
+    
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------

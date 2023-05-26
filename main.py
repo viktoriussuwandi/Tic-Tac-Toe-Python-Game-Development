@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, Response, json
+from flask import Flask, render_template, Response, json
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
@@ -37,23 +37,14 @@ def update_attributes():
   ATTR['player_cells'] = game.player.cells_selected
   ATTR['comp_cells']   = game.comp.cells_selected
 
-def game_loop():
-  update_attributes()
-
-  while game.game_start == True and game.game_over == False:
-    if game.game_over == True: break
-    else: redirect(url_for('home', attr=ATTR))
-
 # ----------------------------------------------------------------------------------------
 # Common Routes
 # ----------------------------------------------------------------------------------------
 @app.route("/")
 def home():
-  check_loop = (game.game_start == False
-                and game.game_over == True) or (game.game_start == True
-                                                and game.game_over == False)
-  if check_loop:
-    game_loop()
+  update_attributes()
+  while game.game_start == True and game.game_over == False:
+    if game.game_over == True: break;
     
   return render_template("index.html", attr=ATTR)
 
