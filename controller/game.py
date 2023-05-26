@@ -131,12 +131,14 @@ class Game:
     
     player_cells = self.player.cells_selected
     player_cells_sum = 0
-    if len(player_cells) > 2 :
+    if len(player_cells) >= 3 :
       player_rows_sum    = sum([pr[0] for pr in player_cells ])
       player_cols_sum    = sum([pr[1] for pr in player_cells ])
 
+      #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
+      
     clear_screen()
-    print(f'Player cells sum : {player_cells_sum}')
+    print(f'Player rows sum : {player_cells_sum}')
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
