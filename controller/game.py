@@ -1,6 +1,9 @@
 from controller.player import Player
 from controller.board import Board
 
+import os
+clear_screen = lambda: os.system('clear')
+
 class Game:
 
   def __init__(self):
@@ -37,6 +40,7 @@ class Game:
     self.update_score()
     self.update_board()
     if self.game_start == True and self.game_over == False :
+      clear_screen()
       print(self)
       print(self.board)
 
