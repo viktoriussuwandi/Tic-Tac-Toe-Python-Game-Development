@@ -125,16 +125,13 @@ class Game:
 
       self.board_current = self.board.update_board()
 
-  #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
   def update_winner(self):
-    is_comp_win     = False
     winner_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
     
     # Check if the winner is player
     is_player_win     = False
     player_cells      = self.player.cells_selected
-    player_cell_pairs = []
-    player_pair_sum   = []
+    player_cell_pairs = []; player_pair_sum   = []
 
     if self.winner_found == False and len(player_cells) >= 3 :
       player_cell_pairs = list( combinations(player_cells, 3) )
@@ -148,8 +145,7 @@ class Game:
     # Check if the winner is comp
     is_comp_win     = False
     comp_cells      = self.comp.cells_selected
-    comp_cell_pairs = []
-    comp_pair_sum   = []
+    comp_cell_pairs = []; comp_pair_sum   = []
     
     if self.winner_found == False and len(comp_cells) >= 3 :
       comp_cell_pairs = list( combinations(comp_cells, 3) )
