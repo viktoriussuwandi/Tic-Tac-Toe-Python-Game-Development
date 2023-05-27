@@ -42,8 +42,7 @@ class Game:
 
   def game_update_attr(self):
     if   self.game_start == False and self.game_over == True: self.start_game()
-    elif self.game_start == True  and self.game_over == False :
-      pass
+    elif self.game_start == True  and self.game_over == False : pass
       # clear_screen()
       # print(self)
       # print(self.board)
@@ -107,7 +106,7 @@ class Game:
       self.turn_mark = self.role_options[self.turn]
       
       # -----------------------------------------------------------------------------
-      if self.turn_name == 'Comp' : self.cell_choose_by_comp()
+      # if self.turn_name == 'Comp' : self.cell_choose_by_comp()
       # -----------------------------------------------------------------------------
 
   def update_score(self):
