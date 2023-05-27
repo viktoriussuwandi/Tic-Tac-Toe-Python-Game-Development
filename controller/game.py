@@ -48,11 +48,11 @@ class Game:
       # print(self)
       # print(self.board)
 
-    self.update_winner()
     self.update_turn()
+    self.update_winner()
     self.update_board()
     self.update_score()
-
+    
   def start_game(self):
     check_level_and_role = (self.game_level is not None
                             and self.player.role is not None

@@ -39,12 +39,12 @@ function update_game() {
 //-----------------------------------------------------------------------------------------------------
 
     //If current turn is comp => Click the cell automatically
-    console.log(`current turn : ${GAME_DATA["player_turn"]}; Comp role : ${GAME_DATA["game_roles"]["Comp"]}`);
-    if (GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
-      let temp_update_data = get_Flask_Data();
-      $.when( temp_update_data  ).done( function( temp_data ) {
-        console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
-      });
+    if (GAME_DATA["player_turn"].trim() === GAME_DATA["game_roles"]["Comp"].trim()) {
+      console.log(`current turn : ${GAME_DATA["player_turn"].trim()}; Comp role : ${GAME_DATA["game_roles"]["Comp"].trim()}`);
+      // let temp_update_data = get_Flask_Data();
+      // $.when( temp_update_data  ).done( function( temp_data ) {
+      //   console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
+      // });
     }
 
 //-----------------------------------------------------------------------------------------------------
@@ -54,11 +54,12 @@ function update_game() {
     text_turn_element.text("Start game or select player");
   }
 
-  //3.Disabled button restart game element
+  //3.Disabled cells before starting the game
   let btn_cell =  $('.game-board .squares .square')
   if      (GAME_STATUS === "end") { btn_cell.addClass('disabled'); }
   else if (GAME_STATUS === "start"){ btn_cell.removeClass('disabled'); }
-  
+
+  //3.Disabled button restart game element
   let btn_restart = $(".game-restart a.btn")
   if(GAME_STATUS === "start") {
     btn_restart.addClass('in_game');
