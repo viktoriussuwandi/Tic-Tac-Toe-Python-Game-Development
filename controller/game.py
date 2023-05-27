@@ -105,7 +105,10 @@ class Game:
       self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
+      
+      # -----------------------------------------------------------------------------
       if self.turn_name == 'Comp' : self.cell_choose_by_comp()
+      # -----------------------------------------------------------------------------
 
   def update_score(self):
     score_X     = self.player.score
@@ -167,13 +170,28 @@ class Game:
 # ----------------------------------------------------------------------------------
   
   def cell_choose_by_comp(self):
-    remaining_cells = [ i for i in self.board.all_cells if i not in self.player.cells_selected ]
+    remaining_cells = [ 
+       i for i in self.board.all_cells if 
+      (i   not in self.player.cells_selected) and
+      (i   not in self.comp.cells_selected)
+    ]
+    
     choosen_cell    = random.choice(remaining_cells)
     clear_screen()
-    print(f'remaining cells    : {remaining_cells}')
+    print(f'(before) remaining cells : {remaining_cells}')
+    print(f'(before) Comp cells      : {self.comp.cells_selected}')
+    print('------------------------------------------------------')
+
     self.select_cells(row = choosen_cell[0], col = choosen_cell[1])
-    print(f'Comp selected cell : {choosen_cell}')
-    print(f'Comp cells         : {self.comp.cells_selected}')
+    
+    remaining_cells = [ 
+       i for i in self.board.all_cells if 
+      (i   not in self.player.cells_selected) and
+      (i   not in self.comp.cells_selected)
+    ]
+    print(f'(after) remaining cells : {remaining_cells}')
+    print(f'Comp selected cell      : {choosen_cell}')
+    print(f'(after) Comp cells      : {self.comp.cells_selected}')
 
   def __repr__(self):
     return f'''
