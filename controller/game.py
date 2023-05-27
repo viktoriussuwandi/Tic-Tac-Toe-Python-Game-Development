@@ -2,8 +2,10 @@ from controller.player import Player
 from controller.board import Board
 from itertools import combinations
 
-import os, random
+import os
 clear_screen = lambda: os.system('clear')
+
+import random
 
 class Game:
 
@@ -42,10 +44,10 @@ class Game:
     if self.game_start == False and self.game_over == True: self.start_game()
       
     self.update_winner()
-    self.update_turn()
-    
-    self.update_score()
+    if self.turn == 'Comp' : self.cell_choose_by_comp()
+    else : self.update_turn()
     self.update_board()
+    self.update_score()
     
     if self.game_start == True and self.game_over == False : 
       pass
@@ -105,7 +107,6 @@ class Game:
       self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
-      if is_player_turn == False : self.cell_choose_by_comp()
 
   def update_score(self):
     score_X     = self.player.score
@@ -165,7 +166,7 @@ class Game:
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
-
+  
   def cell_choose_by_comp(self):
     clear_screen()
     remaining_cells = [ i for i in self.board.all_cells if i not in self.player.cells_selected ]
@@ -173,7 +174,7 @@ class Game:
     self.select_cells(row = choosen_cell[0], col = choosen_cell[1])
     print(f'remaining cells : {remaining_cells}')
     print(f'Comp cell : {choosen_cell}')
-    
+
   def __repr__(self):
     return f'''
     -----------------TIC TAC TOE GAME----------
@@ -186,3 +187,4 @@ class Game:
      Current Turn : {self.turn_mark} - {self.turn_name}
     ===========================================
      Board : '''
+    
