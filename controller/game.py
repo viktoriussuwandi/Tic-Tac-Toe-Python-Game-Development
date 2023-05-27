@@ -106,7 +106,7 @@ class Game:
       self.turn_mark = self.role_options[self.turn]
       
       # -----------------------------------------------------------------------------
-      # if self.turn_name == 'Comp' : self.cell_choose_by_comp()
+      if self.turn_name == 'Comp' : self.cell_choose_by_comp()
       # -----------------------------------------------------------------------------
 
   def update_score(self):

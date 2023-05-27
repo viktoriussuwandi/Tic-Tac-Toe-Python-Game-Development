@@ -40,13 +40,14 @@ function update_game() {
 
     //If current turn is comp => Click the cell automatically
     console.log(`current turn : ${GAME_DATA["player_turn"].trim()}; Comp role : ${GAME_DATA["game_roles"]["Comp"].trim()}`);
-    // if (GAME_DATA["player_turn"].trim() === GAME_DATA["game_roles"]["Comp"].trim()) {
-    //   console.log(`current turn : ${GAME_DATA["player_turn"].trim()}; Comp role : ${GAME_DATA["game_roles"]["Comp"].trim()}`);
+    if (GAME_DATA["player_turn"].trim() === GAME_DATA["game_roles"]["Comp"].trim()) {
+      console.log(`current turn : ${GAME_DATA["player_turn"].trim()}; Comp role : ${GAME_DATA["game_roles"]["Comp"].trim()}`);
+      console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
       // let temp_update_data = get_Flask_Data();
       // $.when( temp_update_data  ).done( function( temp_data ) {
       //   console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
       // });
-    // }
+    }
 
 //-----------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------
@@ -193,11 +194,10 @@ $(document).ready(function () {
       //a.Update cell text
       cell_btn.text(GAME_DATA["player_turn"]);
       cell_btn.addClass('disabled disable-color');
-      update_game();
       
       //b.Update data & change text of player turn
       GAME_DATA = data
-      let text_turn_element = $('.game-turn .text-turn');
+      update_game();
       if (GAME_STATUS === "end" && GAME_DATA["game_winner"]["Role"] != "") { 
           text_turn_element.text(`Winner : ${GAME_DATA["game_winner"]["Role"]}`);
       }
