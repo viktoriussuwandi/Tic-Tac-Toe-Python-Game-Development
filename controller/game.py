@@ -44,10 +44,9 @@ class Game:
     self.update_board()
     
     if self.game_start == True and self.game_over == False : 
-      pass
-      # clear_screen()
-      # print(self)
-      # print(self.board)
+      clear_screen()
+      print(self)
+      print(self.board)
 
   def start_game(self):
     check_level_and_role = (self.game_level is not None
@@ -137,7 +136,7 @@ class Game:
     player_cell_pairs = []
     player_pair_sum   = []
 
-    if len(player_cells) >= 3 :
+    if self.winner_found == False and len(player_cells) >= 3 :
       player_cell_pairs = list( combinations(player_cells, 3) )
       player_pair_sum = [
         [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
@@ -145,15 +144,21 @@ class Game:
       is_player_win = len([ i for i in winner_required if i in player_pair_sum ]) > 0
       self.winner_found = is_player_win
       if self.winner_found == True : self.winner = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
-
     
-    clear_screen()
-    print(f'Winner found      : {self.winner_found}')
-    print(f'Player role       : {self.game_roles["Player"]}')
-    print(f'Player cells      : {self.player.cells_selected}')
-    print(f'Player cell pairs : {player_cell_pairs}')
-    print(f'Player pairs sum  : {player_pair_sum}')
-    print(f'Check Player      : {is_player_win}')
+    # Check if the winner is comp
+    is_comp_win     = False
+    comp_cells      = self.comp.cells_selected
+    comp_cell_pairs = []
+    comp_pair_sum   = []
+    
+    if self.winner_found == False and len(comp_cells) >= 3 :
+      comp_cell_pairs = list( combinations(comp_cells, 3) )
+      comp_pair_sum = [
+        [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in comp_cell_pairs 
+      ]
+      is_comp_win = len([ i for i in winner_required if i in comp_pair_sum ]) > 0
+      self.winner_found = is_comp_win
+      self.winner = {'Role' : 'Comp', 'Mark' : self.game_roles['Comp']} if is_comp_win else self.winner
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
