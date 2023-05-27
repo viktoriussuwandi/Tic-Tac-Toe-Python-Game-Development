@@ -39,12 +39,12 @@ function update_game() {
 //-----------------------------------------------------------------------------------------------------
 
     //If current turn is comp => Click the cell automatically
-    console.log(GAME_DATA["player_turn"]);
+    console.log(`current turn : ${GAME_DATA["player_turn"]}; Comp role : ${GAME_DATA["game_roles"]["Comp"]}`);
     if (GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
-      console.log(`Cell selected by comp : ${GAME_DATA["comp_cells"]}`);
-      // let temp_update_data = get_Flask_Data();
-      // $.when( temp_update_data  ).done( function( temp_data ) {
-      // });
+      let temp_update_data = get_Flask_Data();
+      $.when( temp_update_data  ).done( function( temp_data ) {
+        console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
+      });
     }
 
 //-----------------------------------------------------------------------------------------------------

@@ -41,19 +41,17 @@ class Game:
 # ----------------------------------------------------------------------------------
 
   def game_update_attr(self):
-    if self.game_start == False and self.game_over == True: self.start_game()
-      
-    self.update_winner()
-    if self.turn == 'Comp' : self.cell_choose_by_comp()
-    else : self.update_turn()
-    self.update_board()
-    self.update_score()
-    
-    if self.game_start == True and self.game_over == False : 
+    if   self.game_start == False and self.game_over == True: self.start_game()
+    elif self.game_start == True  and self.game_over == False :
       pass
       # clear_screen()
       # print(self)
       # print(self.board)
+
+    self.update_winner()
+    self.update_turn()
+    self.update_board()
+    self.update_score()
 
   def start_game(self):
     check_level_and_role = (self.game_level is not None
@@ -107,6 +105,7 @@ class Game:
       self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
+      if self.turn_name == 'Comp' : self.cell_choose_by_comp()
 
   def update_score(self):
     score_X     = self.player.score
@@ -168,12 +167,13 @@ class Game:
 # ----------------------------------------------------------------------------------
   
   def cell_choose_by_comp(self):
-    clear_screen()
     remaining_cells = [ i for i in self.board.all_cells if i not in self.player.cells_selected ]
     choosen_cell    = random.choice(remaining_cells)
+    clear_screen()
+    print(f'remaining cells    : {remaining_cells}')
     self.select_cells(row = choosen_cell[0], col = choosen_cell[1])
-    print(f'remaining cells : {remaining_cells}')
-    print(f'Comp cell : {choosen_cell}')
+    print(f'Comp selected cell : {choosen_cell}')
+    print(f'Comp cells         : {self.comp.cells_selected}')
 
   def __repr__(self):
     return f'''

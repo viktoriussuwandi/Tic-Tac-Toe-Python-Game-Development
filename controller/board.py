@@ -16,17 +16,18 @@ class Board:
     if self.total_square is not None:
       self.row = int(math.sqrt(self.total_square))
       self.col = self.row
-      self.all_cells = [[row, col] for row in range(self.row)
-                        for col in range(self.col)]
+      self.all_cells = [
+        [row, col] for row in range(self.row) for col in range(self.col)
+      ]
       self.starting_board = {"row": self.row, "col": self.col}
 
   def update_board(self,
-                   player_role=None,
-                   comp_role=None,
-                   is_player_selecting=False,
-                   is_comp_selecting=False,
-                   player_cells=None,
-                   comp_cells=None):
+                   player_role = None,
+                   comp_role   = None,
+                   is_player_selecting = False,
+                   is_comp_selecting   = False,
+                   player_cells = None,
+                   comp_cells   = None):
 
     all_cells = self.all_cells
     # Checking cell's owner
