@@ -1,5 +1,6 @@
 from controller.player import Player
 from controller.board import Board
+from itertools import combinations
 
 import os
 clear_screen = lambda: os.system('clear')
@@ -124,26 +125,30 @@ class Game:
 
       self.board_current = self.board.update_board()
 
+  #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
   def update_winner(self):
     is_player_win   = False
     is_comp_win     = False
     is_winner_found = is_player_win or is_comp_win
-    
+
     player_cells = self.player.cells_selected
     player_cell_pairs = []
     player_pair_sum   = []
+
     if len(player_cells) >= 3 :
-      player_cell_pairs = [ (a, b) for idx, a in enumerate(player_cells) for b in player_cells[idx + 1:] ]
-      player_pair_sum   = [ ( sum(a[0], b[0]),sum(a[1], b[1]) )
-                             for (a,b) in player_cell_pairs ]
-      #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
-    
+      player_cell_pairs = list( combinations(player_cells, 2) )
+
+      player_pair_sum   = [ 
+        [sum(list((a[0], b[0]))), 
+         sum(list((a[1], b[1]))) 
+        ] for (a,b) in player_cell_pairs  ]
+
     clear_screen()
     print(f'Winner found      : {is_winner_found}')
     print(f'Player cells      : {self.player.cells_selected}')
     print(f'Player cell pairs : {player_cell_pairs}')
     print(f'Player pairs sum  : {player_pair_sum}')
-    
+
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
