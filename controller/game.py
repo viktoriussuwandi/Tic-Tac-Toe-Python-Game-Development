@@ -130,15 +130,19 @@ class Game:
     is_winner_found = is_player_win or is_comp_win
     
     player_cells = self.player.cells_selected
-    player_cells_sum = 0
+    player_cell_pairs = []
+    player_pair_sum   = []
     if len(player_cells) >= 3 :
-      player_rows_sum    = sum([pr[0] for pr in player_cells ])
-      player_cols_sum    = sum([pr[1] for pr in player_cells ])
-
+      player_cell_pairs = [ (a, b) for idx, a in enumerate(player_cells) for b in player_cells[idx + 1:] ]
+      player_pair_sum   = [ ( sum(a[0], b[0]),sum(a[1], b[1]) )
+                             for (a,b) in player_cell_pairs ]
       #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
-      
+    
     clear_screen()
-    print(f'Player rows sum : {player_cells_sum}')
+    print(f'Winner found      : {is_winner_found}')
+    print(f'Player cells      : {self.player.cells_selected}')
+    print(f'Player cell pairs : {player_cell_pairs}')
+    print(f'Player pairs sum  : {player_pair_sum}')
     
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
