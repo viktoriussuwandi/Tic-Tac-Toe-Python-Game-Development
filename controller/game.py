@@ -46,9 +46,10 @@ class Game:
     self.update_board()
     
     if self.game_start == True and self.game_over == False : 
-      clear_screen()
-      print(self)
-      print(self.board)
+      pass
+      # clear_screen()
+      # print(self)
+      # print(self.board)
 
   def start_game(self):
     check_level_and_role = (self.game_level is not None
@@ -95,17 +96,18 @@ class Game:
     if self.game_start == False and self.game_over == True :
       self.turn = None
     else :
-      player_cells = len(self.player.cells_selected)
-      comp_cells = len(self.comp.cells_selected)
-      is_player_turn = player_cells < comp_cells or (
-        self.player.role == 0 and player_cells == comp_cells)
-      self.turn = self.player.role if is_player_turn else self.comp.role
+      player_cells   = len(self.player.cells_selected)
+      comp_cells     = len(self.comp.cells_selected)
+      is_player_turn = player_cells < comp_cells or ( self.player.role == 0 and player_cells == comp_cells )
+      
+      self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
+      if is_player_turn == False : self.cell_choose_by_comp()
 
   def update_score(self):
-    score_X = self.player.score
-    score_O = self.comp.score
+    score_X     = self.player.score
+    score_O     = self.comp.score
     game_scores = {"X": score_X, "O": score_O}
     self.scores = game_scores
 
@@ -114,13 +116,13 @@ class Game:
       self.board_current = self.board.starting_board
     elif self.game_start == True and self.game_over == False:
       player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-      comp_role = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
+      comp_role   = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
 
       is_player_selecting = len(self.player.cells_selected) > 0
-      is_comp_selecting = len(self.comp.cells_selected) > 0
+      is_comp_selecting   = len(self.comp.cells_selected) > 0
 
       player_cells = self.player.cells_selected if is_player_selecting else []
-      comp_cells = self.comp.cells_selected if is_comp_selecting else []
+      comp_cells   = self.comp.cells_selected if is_comp_selecting else []
 
       self.board.update_board(player_role, comp_role, is_player_selecting,
                               is_comp_selecting, player_cells, comp_cells)
@@ -162,6 +164,12 @@ class Game:
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
 
+  def cell_choose_by_comp(self):
+    clear_screen()
+    all_cells = self.board.all_cells
+    print(f'All cells : {all_cells}')
+    print('Comp choose the cell')
+    
   def __repr__(self):
     return f'''
     -----------------TIC TAC TOE GAME----------
