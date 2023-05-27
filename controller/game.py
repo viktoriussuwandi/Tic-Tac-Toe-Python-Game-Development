@@ -12,7 +12,7 @@ class Game:
     self.game_start = False
     self.game_over  = True
 
-    self.role_options = ['X', 'O']
+    self.role_options  = ['X', 'O']
     self.game_roles    = {'Player' : '', 'Comp' : ''}
     self.level_options = ["Easy", "Medium", "Impossible"]
 

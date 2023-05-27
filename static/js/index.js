@@ -34,7 +34,13 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-    
+
+    //If current turn is comp => Click the cell automatically
+    console.log(GAME_DATA["player_turn"]);
+    console.log(`Cell selected by comp : ${GAME_DATA["comp_cells"]}`);
+    if (GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
+      console.log(`Cell selected by comp : ${GAME_DATA["comp_cells"]}`);
+    }
     
   } else if (GAME_STATUS === "end") { 
     text_turn_element.text("Start game or select player");
@@ -44,8 +50,7 @@ function update_game() {
   let btn_cell =  $('.game-board .squares .square')
   if      (GAME_STATUS === "end") { btn_cell.addClass('disabled'); }
   else if (GAME_STATUS === "start"){ btn_cell.removeClass('disabled'); }
-    
-  //4.Disabled button restart game element
+  
   let btn_restart = $(".game-restart a.btn")
   if(GAME_STATUS === "start") {
     btn_restart.addClass('in_game');
