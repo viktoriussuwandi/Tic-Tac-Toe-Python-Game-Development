@@ -127,22 +127,21 @@ class Game:
 
   #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
   def update_winner(self):
-    is_player_win   = False
     is_comp_win     = False
-    is_winner_found = is_player_win or is_comp_win
-
+    winner_required = [ [3,0], [0,3], [3,3], [3,6], [6,3]  ]
+    is_winner_found = None
+    
+    # Check if the winner is player
+    is_player_win = False
     player_cells = self.player.cells_selected
     player_cell_pairs = []
     player_pair_sum   = []
 
     if len(player_cells) >= 3 :
       player_cell_pairs = list( combinations(player_cells, 2) )
-
-      player_pair_sum   = [ 
-        [sum(list((a[0], b[0]))), 
-         sum(list((a[1], b[1]))) 
-        ] for (a,b) in player_cell_pairs  ]
-
+      player_pair_sum = [ [ sum(list((a[0], b[0]))), sum(list((a[1], b[1]))) ] for (a,b) in player_cell_pairs ]
+      
+    
     clear_screen()
     print(f'Winner found      : {is_winner_found}')
     print(f'Player cells      : {self.player.cells_selected}')
