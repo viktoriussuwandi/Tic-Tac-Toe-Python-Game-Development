@@ -8,9 +8,9 @@ clear_screen = lambda: os.system('clear')
 class Game:
 
   def __init__(self):
-    self.game_no = 0
+    self.game_no    = 0
     self.game_start = False
-    self.game_over = True
+    self.game_over  = True
 
     self.role_options = ['X', 'O']
     self.game_roles    = {'Player' : '', 'Comp' : ''}
@@ -22,14 +22,15 @@ class Game:
 
     self.game_level     = None
     self.game_level_txt = ''
-    self.scores = {"X": 0, "O": 0}
-    self.winner = {'Role' : '', 'Mark' : ''}
-    self.turn = None
-    self.turn_name = None  #Game role : Player or comp
-    self.turn_mark = None  #Game mark : X or O
+    self.scores         = {"X": 0, "O": 0}
+    self.winner         = {'Role' : '', 'Mark' : ''}
+    self.winner_found   = False
+    self.turn           = None
+    self.turn_name      = None  #Game role : Player or comp
+    self.turn_mark      = None  #Game mark : X or O
 
-    self.board_printed = ''
-    self.board_current = {}
+    self.board_printed  = ''
+    self.board_current  = {}
 
 # ----------------------------------------------------------------------------------
 # START THE GAME
@@ -128,25 +129,31 @@ class Game:
   #posibilities sum of win : 3 & 0, 0 & 3, 3 & 3, 3 & 6, 6 & 3
   def update_winner(self):
     is_comp_win     = False
-    winner_required = [ [3,0], [0,3], [3,3], [3,6], [6,3]  ]
-    is_winner_found = None
+    winner_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
     
     # Check if the winner is player
-    is_player_win = False
-    player_cells = self.player.cells_selected
+    is_player_win     = False
+    player_cells      = self.player.cells_selected
     player_cell_pairs = []
     player_pair_sum   = []
 
     if len(player_cells) >= 3 :
-      player_cell_pairs = list( combinations(player_cells, 2) )
-      player_pair_sum = [ [ sum(list((a[0], b[0]))), sum(list((a[1], b[1]))) ] for (a,b) in player_cell_pairs ]
-      
+      player_cell_pairs = list( combinations(player_cells, 3) )
+      player_pair_sum = [
+        [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
+      ]
+      is_player_win = len([ i for i in winner_required if i in player_pair_sum ]) > 0
+      self.winner_found = is_player_win
+      if self.winner_found == True : self.winner = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
+
     
     clear_screen()
-    print(f'Winner found      : {is_winner_found}')
+    print(f'Winner found      : {self.winner_found}')
+    print(f'Player role       : {self.game_roles["Player"]}')
     print(f'Player cells      : {self.player.cells_selected}')
     print(f'Player cell pairs : {player_cell_pairs}')
     print(f'Player pairs sum  : {player_pair_sum}')
+    print(f'Check Player      : {is_player_win}')
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
