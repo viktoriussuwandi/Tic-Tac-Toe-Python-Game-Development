@@ -2,7 +2,7 @@ from controller.player import Player
 from controller.board import Board
 from itertools import combinations
 
-import os
+import os, random
 clear_screen = lambda: os.system('clear')
 
 class Game:
@@ -40,8 +40,10 @@ class Game:
 
   def game_update_attr(self):
     if self.game_start == False and self.game_over == True: self.start_game()
+      
     self.update_winner()
     self.update_turn()
+    
     self.update_score()
     self.update_board()
     
@@ -166,9 +168,11 @@ class Game:
 
   def cell_choose_by_comp(self):
     clear_screen()
-    all_cells = self.board.all_cells
-    print(f'All cells : {all_cells}')
-    print('Comp choose the cell')
+    remaining_cells = [ i for i in self.board.all_cells if i not in self.player.cells_selected ]
+    choosen_cell    = random.choice(remaining_cells)
+    self.select_cells(row = choosen_cell[0], col = choosen_cell[1])
+    print(f'remaining cells : {remaining_cells}')
+    print(f'Comp cell : {choosen_cell}')
     
   def __repr__(self):
     return f'''

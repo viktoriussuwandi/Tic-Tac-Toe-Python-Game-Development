@@ -34,6 +34,8 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
+    
+    
   } else if (GAME_STATUS === "end") { 
     text_turn_element.text("Start game or select player");
   }
