@@ -214,3 +214,8 @@ html,body {
   border-color:#039BE5;
   border-radius:15px;
 }
+
+.game-restart .btn.in_game{
+  border: none;
+  cursor: not-allowed;  
+}

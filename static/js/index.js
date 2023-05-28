@@ -50,7 +50,10 @@ function update_game() {
   
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
-  if(GAME_STATUS === "start") { btn_restart.addClass('in_game'); }
+  if(GAME_STATUS === "start") { 
+    btn_restart.text('in game');
+    btn_restart.addClass('disable in_game'); 
+  }
   
 }
 
