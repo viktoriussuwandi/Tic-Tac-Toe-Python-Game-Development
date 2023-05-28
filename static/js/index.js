@@ -34,17 +34,16 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } else if (GAME_DATA["winner_found"]) { 
-    text_turn_element.text(`Winner : ${GAME_DATA["game_winner"]["Mark"]}`);
   } else if (GAME_STATUS === "end") { 
-    text_turn_element.text("Start game or select player");
+      text_turn_element.text("Start game or select player");
   }
 
   //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
   if (GAME_STATUS === "start"){ 
     btn_cell.removeClass('disabled');
-  } else if (GAME_STATUS === "end" || GAME_DATA["winner_found"]) {
+  } else if (GAME_STATUS === "end") { 
+    text_turn_element.text("Start game or select player");
     btn_cell.addClass('disabled');
   }
   
@@ -75,16 +74,15 @@ $(document).ready(function () {
     //3.Get game data, & Change html button value of dropdown as selected, 
     //  and make the html button disable
     let update_game_data = get_Flask_Data();
-    let level_btn     = $(".game-level .level-btn")
-    let item_btn      = $(this)
+    let level_btn = $(".game-level .level-btn")
+    let item_btn  = $(this)
     
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data
-      
+      update_game()
       level_btn.text(item_btn.text());
       level_btn.val(item_btn.text());
       level_btn.addClass('disabled');
-      update_game()
     });
     
   });
@@ -111,15 +109,16 @@ $(document).ready(function () {
     
     //3.Get data, & disabled O button
     let update_game_data = get_Flask_Data();
-    let btnX          = $(this)
-    let btnO          = $(".btn-role-O")
+    let btnX = $(this)
+    let btnO = $(".btn-role-O")
     
     $.when( update_game_data  ).done( function( data ) {
-      GAME_DATA = data
-
+      GAME_DATA = data;
+      update_game()
+      console.log(`Role : ${GAME_DATA["game_roles"]}`);
       btnX.addClass('disabled-color');
       btnO.addClass('disabled');
-      update_game()
+      
     });
 
   });
@@ -146,11 +145,11 @@ $(document).ready(function () {
     let btnO          = $(this)
     
     $.when( update_game_data  ).done( function( data ) {
-      GAME_DATA = data
-      
+      GAME_DATA = data;
+      update_game()
+      console.log(`Role : ${GAME_DATA["game_roles"]}`);
       btnX.addClass('disabled');
       btnO.addClass('disabled-color');
-      update_game()   
     });
     
   });

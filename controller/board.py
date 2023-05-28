@@ -6,7 +6,8 @@ class Board:
     self.total_square = total_cells if total_cells is not None else None
     self.row = None
     self.col = None
-    self.all_cells = []
+    self.all_cells  = []
+    self.open_cells = []
     self.starting_board = {}
     self.create_board()
     self.cell_owners = [None for i in self.all_cells]
@@ -27,9 +28,16 @@ class Board:
                    is_player_selecting = False,
                    is_comp_selecting   = False,
                    player_cells = None,
-                   comp_cells   = None):
+                   comp_cells   = None
+                  ):
 
     all_cells = self.all_cells
+
+    # Update open cells
+    self.open_cells = [ 
+      i for i in all_cells if (i not in player_cells) and (i not in comp_cells)
+    ] if (player_cells is not None and comp_cells is not None) else self.open_cells
+
     # Checking cell's owner
     for i in range(len(all_cells)):
       # Check if cell own by player

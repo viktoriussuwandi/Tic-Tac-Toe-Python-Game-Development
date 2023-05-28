@@ -150,7 +150,6 @@ class Game:
 
       player_cells = self.player.cells_selected if is_player_selecting else []
       comp_cells   = self.comp.cells_selected if is_comp_selecting else []
-
       self.board.update_board(player_role, comp_role, is_player_selecting,
                               is_comp_selecting, player_cells, comp_cells)
 
@@ -198,22 +197,10 @@ class Game:
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
 
-  def cell_choose_by_comp(self):
-    remaining_cells = [ 
-       i for i in self.board.all_cells if 
-      (i not in self.player.cells_selected) and
-      (i not in self.comp.cells_selected)
-    ]
-    choosen_cell    = random.choice(remaining_cells)
-    return choosen_cell
+  def cell_choose_by_comp(self): return random.choice(self.board.open_cells)
 
   def __repr__(self):
     print_board     = self.board.print_out
-    remaining_cells = [ 
-       i for i in self.board.all_cells if 
-      (i not in self.player.cells_selected) and
-      (i not in self.comp.cells_selected)
-    ]
     found_winner = f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
@@ -227,7 +214,7 @@ class Game:
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
      Open   cells : 
-     {remaining_cells}
+     {self.board.open_cells}
     ------------------------------------------- 
      Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
