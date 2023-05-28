@@ -56,14 +56,14 @@ def home():
 @app.route('/update_level/<string:selected_level>', methods=['POST'])
 def select_level(selected_level=None):
   game_level = selected_level.strip()
-  game.select_game_level(level_selected=game_level)  
+  game.select_game_level(level_selected = game_level)  
   return '/'
 
 # select user role (X or O)
 @app.route('/update_role/<string:selected_role>', methods=['POST'])
 def select_role(selected_role=None):
   user_role = selected_role.strip()
-  game.select_player_role(role_selected=user_role)
+  game.select_player_role(role_selected = user_role)
   return '/'
 
 # Select square cells on game board

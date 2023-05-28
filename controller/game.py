@@ -9,7 +9,33 @@ import random
 
 class Game:
 
-  def __init__(self): self.refresh_attr()
+  def __init__(self): 
+    self.game_no    = 0
+    self.game_start = False
+    self.game_over  = True
+
+    self.role_options  = ['X', 'O']
+    self.game_roles    = {'Player' : '', 'Comp' : ''}
+    self.level_options = ["Easy", "Medium", "Impossible"]
+
+    self.player = Player()
+    self.comp   = Player()
+    self.board  = Board(9)
+
+    self.game_level     = None
+    self.game_level_txt = ''
+    self.scores         = {"X": 0, "O": 0}
+    
+    self.winner         = {'Role' : '', 'Mark' : ''}
+    self.winner_found   = False
+    
+    self.turn           = None
+    self.turn_name      = None  #Game role : Player or comp
+    self.turn_mark      = None  #Game mark : X or O
+
+    self.board_printed  = ''
+    self.board_current  = {}
+    
   def refresh_attr(self) :
     self.game_no    = 0
     self.game_start = False
@@ -49,12 +75,10 @@ class Game:
     
   def game_update_attr(self):
     if   self.game_start == False and self.game_over == True: 
-      if self.winner_found == True : print(self)
-      else : 
-        self.refresh_attr()
-        self.start_game()
-    elif self.game_start == True and self.game_over == False :
-      self.game_loop()
+      if self.winner_found == True : 
+        print(self); self.refresh_attr()
+      else : self.start_game()
+    elif self.game_start == True and self.game_over == False : self.game_loop()
       
   def start_game(self):
     self.game_loop()
@@ -68,14 +92,14 @@ class Game:
 # USER INTERACTIONS
 # ----------------------------------------------------------------------------------
 
-  def select_game_level(self, level_selected=None):
+  def select_game_level(self, level_selected = None):
     check_user_input = level_selected is not None and level_selected in self.level_options
     self.game_level = self.level_options.index(
       level_selected) if check_user_input else self.game_level
     self.game_level_txt = level_selected
     self.game_update_attr()
 
-  def select_player_role(self, role_selected=None):
+  def select_player_role(self, role_selected = None):
     check_user_input = role_selected is not None and role_selected in self.role_options
     self.player.role = self.role_options.index(
       role_selected) if check_user_input else self.player.role
@@ -85,7 +109,7 @@ class Game:
     self.game_roles['Comp']   = self.role_options[ int(self.comp.role) ]
     self.game_update_attr()
 
-  def select_cells(self, row=None, col=None):
+  def select_cells(self, row = None, col = None):
     if self.turn_name == 'Player':
       self.player.cells_selected.append([row, col])
     elif self.turn_name == 'Comp':
@@ -177,7 +201,7 @@ class Game:
     return choosen_cell
 
   def __repr__(self):
-    print_board = print(self.board)
+    print_board = self.board.print_out
     clear_screen()
     return f'''
     -----------------TIC TAC TOE GAME----------
@@ -190,5 +214,5 @@ class Game:
     -------------------------------------------
      Current Turn : {self.turn_mark} - {self.turn_name}
     ===========================================
-     Board : {print_board}'''
+     Board :\n{print_board}'''
     
