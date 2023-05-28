@@ -172,7 +172,9 @@ class Game:
       ]
       arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
       check_player_pair_sum = len(arr_player_pair_sum) > 0
-      check_player_identic_rowCol = False
+      # ----------------------------------------------------------------------------------
+      check_player_identic_rowCol = True
+      # ----------------------------------------------------------------------------------
       is_player_win = check_player_pair_sum and check_player_identic_rowCol
       if is_player_win == True :
         self.winner_found = is_player_win
@@ -184,7 +186,7 @@ class Game:
     is_comp_win     = False
     comp_cells      = self.comp.cells_selected
     comp_cell_pairs = []; comp_pair_sum   = []
-    
+
     if self.winner_found == False and len(comp_cells) >= 3 :
       comp_cell_pairs = list( combinations(comp_cells, 3) )
       comp_pair_sum = [
@@ -192,7 +194,9 @@ class Game:
       ]
       arr_comp_pair_sum = [ i for i in winner_sum_required if i in comp_pair_sum ]
       check_comp_pair_sum = len(arr_comp_pair_sum) > 0
-      check_comp_identic_rowCol = False
+      # ----------------------------------------------------------------------------------
+      check_comp_identic_rowCol = True
+      # ----------------------------------------------------------------------------------
       is_comp_win = check_comp_pair_sum and check_comp_identic_rowCol
       if is_comp_win == True and self.winner_found == False :
         self.winner_found = is_comp_win
