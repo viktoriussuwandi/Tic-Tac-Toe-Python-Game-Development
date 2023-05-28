@@ -71,7 +71,7 @@ class Game:
     self.update_winner()
     self.update_board()
     self.update_score()
-    print(self)
+    # print(self)
     
   def game_update_attr(self):
     self.game_loop();
@@ -173,7 +173,11 @@ class Game:
       arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
       check_player_pair_sum = len(arr_player_pair_sum) > 0
       # ----------------------------------------------------------------------------------
-      check_player_identic_rowCol = True
+      check_player_identic_rowCol = [
+        ( (a[0] == b[0] == c[0]) or (a[1] == b[1] == c[1]) ) for (a,b,c) in player_cell_pairs
+      ] if arr_player_pair_sum == [3,3] else True
+      clear_screen()
+      print(player_cell_pairs)
       # ----------------------------------------------------------------------------------
       is_player_win = check_player_pair_sum and check_player_identic_rowCol
       if is_player_win == True :
