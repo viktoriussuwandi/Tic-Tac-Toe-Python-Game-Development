@@ -26,15 +26,15 @@ class Game:
     self.game_level_txt = ''
     self.scores         = {"X": 0, "O": 0}
     
-    self.winner         = {'Role' : '', 'Mark' : ''}
-    self.winner_found   = False
+    self.winner       = {'Role' : '', 'Mark' : ''}
+    self.winner_found = False
     
-    self.turn           = None
-    self.turn_name      = None  #Game role : Player or comp
-    self.turn_mark      = None  #Game mark : X or O
+    self.turn      = None
+    self.turn_name = None  #Game role : Player or comp
+    self.turn_mark = None  #Game mark : X or O
 
-    self.board_printed  = ''
-    self.board_current  = {}
+    self.board_printed    = ''
+    self.board_dimmension = {}
     
   def refresh_attr(self) :
     self.game_no    = 0
@@ -53,15 +53,15 @@ class Game:
     self.game_level_txt = ''
     self.scores         = {"X": 0, "O": 0}
     
-    self.winner         = {'Role' : '', 'Mark' : ''}
-    self.winner_found   = False
+    self.winner       = {'Role' : '', 'Mark' : ''}
+    self.winner_found = False
     
-    self.turn           = None
-    self.turn_name      = None  #Game role : Player or comp
-    self.turn_mark      = None  #Game mark : X or O
+    self.turn      = None
+    self.turn_name = None  #Game role : Player or comp
+    self.turn_mark = None  #Game mark : X or O
 
-    self.board_printed  = ''
-    self.board_current  = {}
+    self.board_printed    = ''
+    self.board_dimmension = {}
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
@@ -72,19 +72,20 @@ class Game:
     self.update_board()
     self.update_score()
     print(self)
-
+    
   def game_update_attr(self):
-    if   self.game_start == False and self.game_over == True: 
-      if self.winner_found == True : 
-        print(self); self.refresh_attr()
-      else : self.start_game()
+    if self.game_start == False and self.game_over == True :
+      self.game_loop()
+      if   self.winner_found == True  : self.refresh_attr()
+      elif self.winner_found == False : self.start_game()
     elif self.game_start == True and self.game_over == False : self.game_loop()
-      
+
   def start_game(self):
-    self.game_loop()
-    check_level_and_role = (self.game_level is not None
-                            and self.player.role is not None
-                            and self.comp.role is not None)
+    check_level_and_role = (
+      self.game_level  is not None and 
+      self.player.role is not None and 
+      self.comp.role   is not None
+    )
     self.game_start   = check_level_and_role
     self.game_over    = not check_level_and_role
 
@@ -140,20 +141,25 @@ class Game:
 
   def update_board(self):
     if self.game_start == False and self.game_over == True:
-      self.board_current = self.board.starting_board
+      self.board_dimmension = self.board.board_dimmension
     elif self.game_start == True and self.game_over == False:
       player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
       comp_role   = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
 
       is_player_selecting = len(self.player.cells_selected) > 0
-      is_comp_selecting   = len(self.comp.cells_selected) > 0
+      is_comp_selecting   = len(self.comp.cells_selected)   > 0
 
       player_cells = self.player.cells_selected if is_player_selecting else []
-      comp_cells   = self.comp.cells_selected if is_comp_selecting else []
-      self.board.update_board(player_role, comp_role, is_player_selecting,
-                              is_comp_selecting, player_cells, comp_cells)
-
-      self.board_current = self.board.update_board()
+      comp_cells   = self.comp.cells_selected   if is_comp_selecting   else []
+      
+      self.board.update_board(
+        player_role  = player_role, 
+        comp_role    = comp_role,
+        player_cells = player_cells,
+        comp_cells   = comp_cells,
+        is_player_selecting = is_player_selecting,
+        is_comp_selecting   = is_comp_selecting
+      )
 
   def update_winner(self):
     winner_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
@@ -213,7 +219,7 @@ class Game:
     not_found_winner = f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
-     Open   cells : 
+     Open cells   : 
      {self.board.open_cells}
     ------------------------------------------- 
      Level        : {self.game_level_txt}; {self.game_roles})
@@ -226,4 +232,5 @@ class Game:
      Board :\n{print_board}'''
     
     clear_screen()
-    return found_winner if self.winner_found == True else not_found_winner
+    # return found_winner if self.winner_found == True else not_found_winner
+    return not_found_winner

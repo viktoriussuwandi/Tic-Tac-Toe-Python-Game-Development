@@ -7,8 +7,8 @@ class Board:
     self.row = None
     self.col = None
     self.all_cells  = []
-    self.open_cells = []
-    self.starting_board = {}
+    self.open_cells = self.all_cells
+    self.board_dimmension = {}
     self.create_board()
     self.cell_owners = [None for i in self.all_cells]
     self.print_out = ''
@@ -20,23 +20,24 @@ class Board:
       self.all_cells = [
         [row, col] for row in range(self.row) for col in range(self.col)
       ]
-      self.starting_board = {"row": self.row, "col": self.col}
+      self.board_dimmension = {"row": self.row, "col": self.col}
 
-  def update_board(self,
-                   player_role = None,
-                   comp_role   = None,
-                   is_player_selecting = False,
-                   is_comp_selecting   = False,
-                   player_cells = None,
-                   comp_cells   = None
-                  ):
+  def update_board(
+    self,
+    player_role  = None,
+    comp_role    = None,
+    player_cells = None,
+    comp_cells   = None,
+    is_player_selecting = False,
+    is_comp_selecting   = False
+  ):
 
     all_cells = self.all_cells
 
     # Update open cells
     self.open_cells = [ 
       i for i in all_cells if (i not in player_cells) and (i not in comp_cells)
-    ] if (player_cells is not None and comp_cells is not None) else self.open_cells
+    ] if ( is_player_selecting == True and is_comp_selecting == True) else self.all_cells
 
     # Checking cell's owner
     for i in range(len(all_cells)):

@@ -26,7 +26,7 @@ ATTR = {
 
 def update_attributes():
   game.game_update_attr()
-  ATTR['game_board']   = game.board_current
+  ATTR['game_board']   = game.board_dimmension
   ATTR['game_score']   = game.scores
   ATTR['game_level']   = game.game_level_txt
   ATTR['game_options'] = game.level_options
@@ -45,8 +45,8 @@ def update_attributes():
 @app.route("/")
 def home():
   update_attributes()
-  while game.game_start == True and game.game_over == False:
-    if game.game_over == True: break;
+  # while game.game_start == True and game.game_over == False:
+  #   if game.game_over == True: break;
     
   return render_template("index.html", attr=ATTR)
 
