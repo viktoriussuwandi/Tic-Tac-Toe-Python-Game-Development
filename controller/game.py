@@ -172,7 +172,7 @@ class Game:
       ]
       check_player_pair_sum = len([ i for i in winner_sum_required if i in player_pair_sum ]) > 0
       check_player_identic_rowCol = False
-      is_player_win = check_player_pair_sum and check_identic_row_col
+      is_player_win = check_player_pair_sum and check_player_identic_rowCol
       if is_player_win == True :
         self.winner_found = is_player_win
         self.game_over    = True
