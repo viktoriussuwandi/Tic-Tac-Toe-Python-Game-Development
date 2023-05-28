@@ -201,11 +201,17 @@ class Game:
     return choosen_cell
 
   def __repr__(self):
-    print_board = self.board.print_out
+    print_board     = self.board.print_out
+    remaining_cells = [ 
+       i for i in self.board.all_cells if 
+      (i not in self.player.cells_selected) and
+      (i not in self.comp.cells_selected)
+    ]
     clear_screen()
     return f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
+     Open   cells : {remaining_cells}
     ------------------------------------------- 
      Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
