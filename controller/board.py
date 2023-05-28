@@ -34,11 +34,6 @@ class Board:
 
     all_cells = self.all_cells
 
-    # Update open cells
-    self.open_cells = [ 
-      i for i in all_cells if (i not in player_cells) and (i not in comp_cells)
-    ] if ( is_player_selecting and is_comp_selecting ) else self.all_cells
-
     # Checking cell's owner
     for i in range(len(all_cells)):
       # Check if cell own by player
@@ -53,6 +48,11 @@ class Board:
           comp_own = self.cell_owners[i] is None and all_cells[i] == comp_cells[j]
           self.cell_owners[i] = comp_role if comp_own else self.cell_owners[i]
 
+    # Update open cells
+    self.open_cells = [ 
+      i for i in all_cells if (i not in player_cells) and (i not in comp_cells)
+    ] if ( is_player_selecting and is_comp_selecting ) else self.all_cells
+    
     # Update attribute to print out board it-self
     self.print_out = ''
     for co in range(len(self.cell_owners)):

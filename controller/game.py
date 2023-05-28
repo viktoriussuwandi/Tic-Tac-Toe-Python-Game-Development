@@ -74,19 +74,20 @@ class Game:
     print(self)
     
   def game_update_attr(self):
-    self.game_loop()
-    if self.game_start == False and self.game_over == True :
-      if   self.winner_found == False : self.start_game()
-      elif self.winner_found == True  : self.refresh_attr()
-  
+    self.game_loop();
+    is_in_game = self.game_start == True and self.game_over == False
+    if not is_in_game : self.start_game()
+    elif (is_in_game and self.winner_found == True) : self.refresh_attr();
+    
+    
   def start_game(self):
     check_level_and_role = (
       self.game_level  is not None and 
       self.player.role is not None and 
       self.comp.role   is not None
     )
-    self.game_start   = check_level_and_role
-    self.game_over    = not check_level_and_role
+    self.game_start = check_level_and_role
+    self.game_over  = not check_level_and_role
 
 # ----------------------------------------------------------------------------------
 # USER INTERACTIONS
@@ -136,19 +137,17 @@ class Game:
     self.scores = game_scores
 
   def update_board(self):
-    if self.game_start == False and self.game_over == True:
-      self.board_dimmension = self.board.board_dimmension
-    
-    elif self.game_start == True and self.game_over == False:
+    is_in_game = self.game_start == True and self.game_over == False
+    if not is_in_game : self.board_dimmension = self.board.board_dimmension
+    else :
       player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-      comp_role   = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
-
+      comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
+  
       is_player_selecting = len(self.player.cells_selected) > 0
       is_comp_selecting   = len(self.comp.cells_selected)   > 0
       
       player_cells = self.player.cells_selected
       comp_cells   = self.comp.cells_selected
-      
       self.board.update_board(
         player_role  = player_role, 
         comp_role    = comp_role,
