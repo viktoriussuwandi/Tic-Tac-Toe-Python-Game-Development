@@ -14,7 +14,7 @@ function get_Flask_Data() {
         complete : function(xhr, textStatus) { 
           // console.log("AJAX Request complete -> ", xhr, " -> ", textStatus);
           // console.log('Data Updated')
-            }
+        }
     });
 
     return deferredData; // contains the passed data
@@ -53,6 +53,11 @@ function update_game() {
   if(GAME_STATUS === "start") { 
     btn_restart.text('in game');
     btn_restart.addClass('disable in_game'); 
+  } else if (
+    GAME_STATUS === "end" ||
+    ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
+  ) { btn_restart.text('Restart Game');
+      btn_restart.removeClass('disable in_game'); 
   }
   
 }
