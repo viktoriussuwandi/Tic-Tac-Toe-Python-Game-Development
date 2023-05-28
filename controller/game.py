@@ -173,6 +173,10 @@ class Game:
       arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
       check_player_pair_sum = len(arr_player_pair_sum) > 0
       # ----------------------------------------------------------------------------------
+      
+      # find the pair cells
+      # check of all cells has identic row or cols
+      
       check_player_identic_rowCol = [
         ( (a[0] == b[0] == c[0]) or (a[1] == b[1] == c[1]) ) for (a,b,c) in player_cell_pairs
       ] if arr_player_pair_sum == [3,3] else True
