@@ -34,8 +34,9 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } else if (GAME_STATUS === "end") { 
-      text_turn_element.text("Start game or select player");
+  } else if (GAME_STATUS === "end") {
+    player_turn_element.text('')
+    text_turn_element.text("Start game or select player");
   }
 
   //3.Update board cells element
@@ -43,15 +44,12 @@ function update_game() {
   if (GAME_STATUS === "start"){ 
     btn_cell.removeClass('disabled');
   } else if (GAME_STATUS === "end") { 
-    text_turn_element.text("Start game or select player");
     btn_cell.addClass('disabled');
   }
   
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
-  if(GAME_STATUS === "start") {
-    btn_restart.addClass('in_game');
-  }
+  if(GAME_STATUS === "start") { btn_restart.addClass('in_game'); }
   
 }
 
@@ -79,10 +77,10 @@ $(document).ready(function () {
     
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data
-      update_game()
       level_btn.text(item_btn.text());
       level_btn.val(item_btn.text());
       level_btn.addClass('disabled');
+      update_game();
     });
     
   });
@@ -114,11 +112,10 @@ $(document).ready(function () {
     
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data;
-      update_game()
       console.log(`Role : ${GAME_DATA["game_roles"]}`);
       btnX.addClass('disabled-color');
       btnO.addClass('disabled');
-      
+      update_game();
     });
 
   });
@@ -146,10 +143,10 @@ $(document).ready(function () {
     
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data;
-      update_game()
       console.log(`Role : ${GAME_DATA["game_roles"]}`);
       btnX.addClass('disabled');
       btnO.addClass('disabled-color');
+      update_game();
     });
     
   });
