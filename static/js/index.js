@@ -34,17 +34,19 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } 
-  else if (GAME_STATUS === "end") { 
+  } else if (GAME_STATUS === "end") { 
     text_turn_element.text("Start game or select player");
   }
 
-  //3.Disabled cells before starting the game
+  //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
-  if      (GAME_STATUS === "end") { btn_cell.addClass('disabled'); }
-  else if (GAME_STATUS === "start"){ btn_cell.removeClass('disabled'); }
-
-  //3.Disabled button restart game element
+  if      (GAME_STATUS === "start"){ 
+    btn_cell.removeClass('disabled');
+  } else if (GAME_STATUS === "end") { 
+    btn_cell.addClass('disabled'); 
+  }
+  
+  //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
   if(GAME_STATUS === "start") {
     btn_restart.addClass('in_game');
