@@ -9,7 +9,8 @@ import random
 
 class Game:
 
-  def __init__(self):
+  def __init__(self): self.refresh_attr()
+  def refresh_attr(self) :
     self.game_no    = 0
     self.game_start = False
     self.game_over  = True
@@ -35,31 +36,33 @@ class Game:
 
     self.board_printed  = ''
     self.board_current  = {}
-
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
-
-  def game_update_attr(self):
-    if   self.game_start == False and self.game_over == True: self.start_game()
-    elif self.game_start == True  and self.game_over == False : pass
-      # clear_screen()
-      # print(self)
-      # print(self.board)
-
+  
+  def game_loop(self) :
     self.update_turn()
     self.update_winner()
     self.update_board()
     self.update_score()
+    print(self)
     
+  def game_update_attr(self):
+    if   self.game_start == False and self.game_over == True: 
+      if self.winner_found == True : print(self)
+      else : 
+        self.refresh_attr()
+        self.start_game()
+    elif self.game_start == True and self.game_over == False :
+      self.game_loop()
+      
   def start_game(self):
+    self.game_loop()
     check_level_and_role = (self.game_level is not None
                             and self.player.role is not None
                             and self.comp.role is not None)
-    self.player.score = 0
-    self.comp.score = 0
-    self.game_start = check_level_and_role
-    self.game_over = not check_level_and_role
+    self.game_start   = check_level_and_role
+    self.game_over    = not check_level_and_role
 
 # ----------------------------------------------------------------------------------
 # USER INTERACTIONS
@@ -104,10 +107,6 @@ class Game:
       self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
-      
-      # -----------------------------------------------------------------------------
-      if self.turn_name == 'Comp' : self.cell_choose_by_comp()
-      # -----------------------------------------------------------------------------
 
   def update_score(self):
     score_X     = self.player.score
@@ -167,35 +166,23 @@ class Game:
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
-  
+
   def cell_choose_by_comp(self):
     remaining_cells = [ 
        i for i in self.board.all_cells if 
-      (i   not in self.player.cells_selected) and
-      (i   not in self.comp.cells_selected)
+      (i not in self.player.cells_selected) and
+      (i not in self.comp.cells_selected)
     ]
-    
     choosen_cell    = random.choice(remaining_cells)
-    clear_screen()
-    print(f'(before) remaining cells : {remaining_cells}')
-    print(f'(before) Comp cells      : {self.comp.cells_selected}')
-    print('------------------------------------------------------')
-
-    self.select_cells(row = choosen_cell[0], col = choosen_cell[1])
-    
-    remaining_cells = [ 
-       i for i in self.board.all_cells if 
-      (i   not in self.player.cells_selected) and
-      (i   not in self.comp.cells_selected)
-    ]
-    print(f'(after) remaining cells : {remaining_cells}')
-    print(f'Comp selected cell      : {choosen_cell}')
-    print(f'(after) Comp cells      : {self.comp.cells_selected}')
+    return choosen_cell
 
   def __repr__(self):
+    print_board = print(self.board)
+    clear_screen()
     return f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
+    ------------------------------------------- 
      Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
@@ -203,5 +190,5 @@ class Game:
     -------------------------------------------
      Current Turn : {self.turn_mark} - {self.turn_name}
     ===========================================
-     Board : '''
+     Board : {print_board}'''
     

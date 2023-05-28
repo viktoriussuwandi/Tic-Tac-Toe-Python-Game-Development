@@ -34,25 +34,8 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-
-//-----------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------
-
-    //If current turn is comp => Click the cell automatically
-    console.log(`current turn : ${GAME_DATA["player_turn"].trim()}; Comp role : ${GAME_DATA["game_roles"]["Comp"].trim()}`);
-    if (GAME_DATA["player_turn"].trim() === GAME_DATA["game_roles"]["Comp"].trim()) {
-      console.log(`current turn : ${GAME_DATA["player_turn"].trim()}; Comp role : ${GAME_DATA["game_roles"]["Comp"].trim()}`);
-      console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
-      // let temp_update_data = get_Flask_Data();
-      // $.when( temp_update_data  ).done( function( temp_data ) {
-      //   console.log(`Cell selected by comp : ${temp_data["comp_cells"]}`);
-      // });
-    }
-
-//-----------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------
-    
-  } else if (GAME_STATUS === "end") { 
+  } 
+  else if (GAME_STATUS === "end") { 
     text_turn_element.text("Start game or select player");
   }
 
