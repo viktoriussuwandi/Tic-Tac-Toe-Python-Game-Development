@@ -34,16 +34,18 @@ function update_game() {
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
+  } else if (GAME_DATA["winner_found"]) { 
+    text_turn_element.text(`Winner : ${GAME_DATA["game_winner"]["Mark"]}`);
   } else if (GAME_STATUS === "end") { 
     text_turn_element.text("Start game or select player");
   }
 
   //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
-  if      (GAME_STATUS === "start"){ 
+  if (GAME_STATUS === "start"){ 
     btn_cell.removeClass('disabled');
-  } else if (GAME_STATUS === "end") { 
-    btn_cell.addClass('disabled'); 
+  } else if (GAME_STATUS === "end" || GAME_DATA["winner_found"]) {
+    btn_cell.addClass('disabled');
   }
   
   //4.Update game start button
@@ -183,10 +185,6 @@ $(document).ready(function () {
       //b.Update data & change text of player turn
       GAME_DATA = data
       update_game();
-      if (GAME_STATUS === "end" && GAME_DATA["game_winner"]["Role"] != "") { 
-          text_turn_element.text(`Winner : ${GAME_DATA["game_winner"]["Role"]}`);
-      }
-      
     });
     
   });

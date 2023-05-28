@@ -170,8 +170,11 @@ class Game:
         [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
       ]
       is_player_win = len([ i for i in winner_required if i in player_pair_sum ]) > 0
-      self.winner_found = is_player_win
-      if self.winner_found == True : self.winner = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
+      if is_player_win == True :
+        self.winner_found = is_player_win
+        self.game_over    = True
+        self.game_start   = False
+        self.winner       = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
     
     # Check if the winner is comp
     is_comp_win     = False
@@ -183,9 +186,13 @@ class Game:
       comp_pair_sum = [
         [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in comp_cell_pairs 
       ]
+      
       is_comp_win = len([ i for i in winner_required if i in comp_pair_sum ]) > 0
-      self.winner_found = is_comp_win
-      self.winner = {'Role' : 'Comp', 'Mark' : self.game_roles['Comp']} if is_comp_win else self.winner
+      if is_comp_win == True and self.winner_found == False :
+        self.winner_found = is_comp_win
+        self.game_over    = True
+        self.game_start   = False
+        self.winner       = {'Role' : 'Comp', 'Mark' : self.game_roles['Comp']}
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
@@ -207,7 +214,7 @@ class Game:
       (i not in self.player.cells_selected) and
       (i not in self.comp.cells_selected)
     ]
-    winner = f'''
+    found_winner = f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
     ------------------------------------------- 
@@ -216,10 +223,11 @@ class Game:
     ===========================================
      Board :\n{print_board}'''
     
-    non_winner = f'''
+    not_found_winner = f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
-     Open   cells : {remaining_cells}
+     Open   cells : 
+     {remaining_cells}
     ------------------------------------------- 
      Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
@@ -231,4 +239,4 @@ class Game:
      Board :\n{print_board}'''
     
     clear_screen()
-    return winner if self.winner_found == True else non_winner
+    return found_winner if self.winner_found == True else not_found_winner
