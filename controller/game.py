@@ -170,7 +170,8 @@ class Game:
       player_pair_sum = [
         [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
       ]
-      check_player_pair_sum = len([ i for i in winner_sum_required if i in player_pair_sum ]) > 0
+      arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
+      check_player_pair_sum = len(arr_player_pair_sum) > 0
       check_player_identic_rowCol = False
       is_player_win = check_player_pair_sum and check_player_identic_rowCol
       if is_player_win == True :
@@ -189,7 +190,8 @@ class Game:
       comp_pair_sum = [
         [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in comp_cell_pairs 
       ]
-      check_comp_pair_sum = len([ i for i in winner_sum_required if i in comp_pair_sum ]) > 0
+      arr_comp_pair_sum = [ i for i in winner_sum_required if i in comp_pair_sum ]
+      check_comp_pair_sum = len(arr_comp_pair_sum) > 0
       check_comp_identic_rowCol = False
       is_comp_win = check_comp_pair_sum and check_comp_identic_rowCol
       if is_comp_win == True and self.winner_found == False :
