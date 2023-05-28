@@ -35,7 +35,7 @@ class Game:
 
     self.board_printed    = ''
     self.board_dimmension = {}
-    
+
   def refresh_attr(self) :
     self.game_no    = 0
     self.game_start = False
@@ -74,12 +74,11 @@ class Game:
     print(self)
     
   def game_update_attr(self):
+    self.game_loop()
     if self.game_start == False and self.game_over == True :
-      self.game_loop()
-      if   self.winner_found == True  : self.refresh_attr()
-      elif self.winner_found == False : self.start_game()
-    elif self.game_start == True and self.game_over == False : self.game_loop()
-
+      if   self.winner_found == False : self.start_game()
+      elif self.winner_found == True  : self.refresh_attr()
+  
   def start_game(self):
     check_level_and_role = (
       self.game_level  is not None and 
@@ -111,10 +110,8 @@ class Game:
     self.game_update_attr()
 
   def select_cells(self, row = None, col = None):
-    if self.turn_name == 'Player':
-      self.player.cells_selected.append([row, col])
-    elif self.turn_name == 'Comp':
-      self.comp.cells_selected.append([row, col])
+    if self.turn_name   == 'Player': self.player.cells_selected.append([row, col])
+    elif self.turn_name == 'Comp'  : self.comp.cells_selected.append([row, col])
     self.game_update_attr()
 
 # ----------------------------------------------------------------------------------
@@ -122,8 +119,7 @@ class Game:
 # ----------------------------------------------------------------------------------
 
   def update_turn(self):
-    if self.game_start == False and self.game_over == True :
-      self.turn = None
+    if self.game_start == False and self.game_over == True : self.turn = None
     else :
       player_cells   = len(self.player.cells_selected)
       comp_cells     = len(self.comp.cells_selected)
@@ -142,15 +138,16 @@ class Game:
   def update_board(self):
     if self.game_start == False and self.game_over == True:
       self.board_dimmension = self.board.board_dimmension
+    
     elif self.game_start == True and self.game_over == False:
       player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
       comp_role   = None if self.comp.role is None else self.role_options[ int(self.comp.role) ]
 
       is_player_selecting = len(self.player.cells_selected) > 0
       is_comp_selecting   = len(self.comp.cells_selected)   > 0
-
-      player_cells = self.player.cells_selected if is_player_selecting else []
-      comp_cells   = self.comp.cells_selected   if is_comp_selecting   else []
+      
+      player_cells = self.player.cells_selected
+      comp_cells   = self.comp.cells_selected
       
       self.board.update_board(
         player_role  = player_role, 

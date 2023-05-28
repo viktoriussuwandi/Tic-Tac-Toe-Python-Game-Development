@@ -37,7 +37,7 @@ class Board:
     # Update open cells
     self.open_cells = [ 
       i for i in all_cells if (i not in player_cells) and (i not in comp_cells)
-    ] if ( is_player_selecting == True and is_comp_selecting == True) else self.all_cells
+    ] if ( is_player_selecting and is_comp_selecting ) else self.all_cells
 
     # Checking cell's owner
     for i in range(len(all_cells)):
