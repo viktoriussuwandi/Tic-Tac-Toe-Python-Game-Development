@@ -65,14 +65,14 @@ class Game:
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
-  
+
   def game_loop(self) :
     self.update_turn()
     self.update_winner()
     self.update_board()
     self.update_score()
     print(self)
-    
+
   def game_update_attr(self):
     if   self.game_start == False and self.game_over == True: 
       if self.winner_found == True : 
@@ -207,8 +207,16 @@ class Game:
       (i not in self.player.cells_selected) and
       (i not in self.comp.cells_selected)
     ]
-    clear_screen()
-    return f'''
+    winner = f'''
+    -----------------TIC TAC TOE GAME----------
+     Winner       : {self.winner}
+    ------------------------------------------- 
+     Level        : {self.game_level_txt}; {self.game_roles})
+    -------------------------------------------
+    ===========================================
+     Board :\n{print_board}'''
+    
+    non_winner = f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
      Open   cells : {remaining_cells}
@@ -222,3 +230,5 @@ class Game:
     ===========================================
      Board :\n{print_board}'''
     
+    clear_screen()
+    return winner if self.winner_found == True else non_winner
