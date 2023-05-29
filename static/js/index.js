@@ -189,6 +189,19 @@ $(document).ready(function () {
   });
 });
 
+// ----------------------------------------------------------------------------
+// Restart Game
+// ----------------------------------------------------------------------------
+$(document).ready(function () {
+  $('.game-restart a.btn').on('click', function (e) {
+    e.preventDefault();
+    console.log("Restart game");
+  });
+});
+
+// ----------------------------------------------------------------------------
+// OTHERS
+// ----------------------------------------------------------------------------
 if (GAME_IS_ON === false && GAME_DATA.length === undefined) {
   let update_game_data = get_Flask_Data();
   $.when( update_game_data ).done( function( data ) {
