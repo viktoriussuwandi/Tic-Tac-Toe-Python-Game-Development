@@ -67,10 +67,11 @@ class Game:
 # ----------------------------------------------------------------------------------
 
   def game_loop(self) :
-    self.update_turn()    
-    self.update_board()
     self.update_score()
     self.update_winner()
+    self.update_turn()
+    self.update_board()
+
     print(self)
     
   def game_update_attr(self):

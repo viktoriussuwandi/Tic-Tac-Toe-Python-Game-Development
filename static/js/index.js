@@ -1,8 +1,10 @@
 // ----------------------------------------------------------------------------
 // Game Data
 // ----------------------------------------------------------------------------
-let GAME_DATA   = {}
-let GAME_STATUS = 'end'
+let GAME_DATA  = {};
+let GAME_START = false;
+let GAME_OVER  = true;
+let GAME_IS_ON = false;
 
 function get_Flask_Data() {
   
@@ -23,42 +25,39 @@ function get_Flask_Data() {
 function update_game() {
 
   //1.Get game data & update game status
-  let start = GAME_DATA["game_start"];
-  let over  = GAME_DATA["game_over"];
-  console.log(`Game start : ${start} ; Game over : ${over}`);
-  GAME_STATUS = ( start === true && over === false ) ? 'start' : 'end';
+  GAME_START = GAME_DATA["game_start"];
+  GAME_OVER  = GAME_DATA["game_over"];
+  console.log(`Game start : ${GAME_START} ; Game over : ${GAME_OVER}`);
+  GAME_IS_ON = (GAME_START === true && GAME_OVER === false);
 
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
 
-  if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
+  if (GAME_IS_ON && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } else if (GAME_STATUS === "end") {
+  } else if (!GAME_IS_ON) {
     player_turn_element.text('');
     text_turn_element.text("Start game or select player");
   }
 
   //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
-  if (GAME_STATUS === "start"){ 
-    btn_cell.removeClass('disabled');
-  } else if (
-    GAME_STATUS === "end"
-    // ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
-  ) { btn_cell.addClass('disabled'); }
+  if      (!GAME_IS_ON) { btn_cell.addClass('disabled'); }
+  else if (GAME_IS_ON) { btn_cell.removeClass('disabled'); }
 
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
-  if(GAME_STATUS === "start") {
+  if(GAME_IS_ON) {
     btn_restart.text('in game');
-    btn_restart.addClass('disable in_game');
+    btn_restart.addClass('disabled in_game');
   } else if (
-    GAME_STATUS === "end" ||
+    !GAME_IS_ON ||
     ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
-  ) { btn_restart.text('Restart Game');
-      btn_restart.removeClass('disable in_game');
+  ) {
+    btn_restart.text('Restart Game');
+    btn_restart.removeClass('disabled in_game');
   }
 
 }
@@ -193,3 +192,5 @@ $(document).ready(function () {
 
   });
 });
+
+update_game();
