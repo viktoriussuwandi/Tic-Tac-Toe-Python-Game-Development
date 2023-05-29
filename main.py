@@ -58,7 +58,7 @@ def home():
 @app.route('/update_level/<string:selected_level>', methods=['POST'])
 def select_level(selected_level=None):
   game_level = selected_level.strip()
-  game.select_game_level(level_selected = game_level)  
+  game.select_game_level(level_selected = game_level)
   return '/'
 
 # select user role (X or O)

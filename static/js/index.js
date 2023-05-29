@@ -23,14 +23,15 @@ function get_Flask_Data() {
 function update_game() {
 
   //1.Get game data & update game status
-  let start = GAME_DATA["game_start"]
-  let over  = GAME_DATA["game_over"]
+  let start = GAME_DATA["game_start"];
+  let over  = GAME_DATA["game_over"];
+  console.log(`Game start : ${start} ; Game over : ${over}`);
   GAME_STATUS = ( start === true && over === false ) ? 'start' : 'end';
 
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
-  
+
   if (GAME_STATUS === "start" && GAME_DATA["player_turn"] != null) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
@@ -44,22 +45,22 @@ function update_game() {
   if (GAME_STATUS === "start"){ 
     btn_cell.removeClass('disabled');
   } else if (
-    GAME_STATUS === "end" ||
-    ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
+    GAME_STATUS === "end"
+    // ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
   ) { btn_cell.addClass('disabled'); }
-  
+
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
-  if(GAME_STATUS === "start") { 
+  if(GAME_STATUS === "start") {
     btn_restart.text('in game');
-    btn_restart.addClass('disable in_game'); 
+    btn_restart.addClass('disable in_game');
   } else if (
     GAME_STATUS === "end" ||
     ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
   ) { btn_restart.text('Restart Game');
-      btn_restart.removeClass('disable in_game'); 
+      btn_restart.removeClass('disable in_game');
   }
-  
+
 }
 
 // ----------------------------------------------------------------------------
@@ -69,21 +70,21 @@ function update_game() {
 $(document).ready(function () {
   $('.game-level .menu-level .item-level').one('click', function (e) {
     e.preventDefault();
-    
+
     //1.Get selected html item value
     let level_selected = $(this).text().trim();
-    
+
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
     request.open("POST", `/update_level/${level_selected}`, false);
     request.send();
-    
-    //3.Get game data, & Change html button value of dropdown as selected, 
+
+    //3.Get game data, & Change html button value of dropdown as selected,
     //  and make the html button disable
     let update_game_data = get_Flask_Data();
     let level_btn = $(".game-level .level-btn")
     let item_btn  = $(this)
-    
+
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data
       level_btn.text(item_btn.text());
@@ -91,7 +92,7 @@ $(document).ready(function () {
       level_btn.addClass('disabled');
       update_game();
     });
-    
+
   });
 });
 
@@ -105,7 +106,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.game-role .btn-role-X').one('click', function (e) {
     e.preventDefault();
-    
+
     //1.Get selected html item value
     let role_selected = $('.role-X').text();
 
@@ -113,15 +114,14 @@ $(document).ready(function () {
     let request = new XMLHttpRequest();
     request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
-    
+
     //3.Get data, & disabled O button
     let update_game_data = get_Flask_Data();
     let btnX = $(this)
     let btnO = $(".btn-role-O")
-    
+
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data;
-      console.log(`Role : ${GAME_DATA["game_roles"]}`);
       btnX.addClass('disabled-color');
       btnO.addClass('disabled');
       update_game();
@@ -136,7 +136,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.game-role .btn-role-O').one('click', function (e) {
     e.preventDefault();
-    
+
     //1.Get selected html item value
     let role_selected = $('.role-O').text();
 
@@ -144,20 +144,19 @@ $(document).ready(function () {
     let request = new XMLHttpRequest();
     request.open("POST", `/update_role/${role_selected}`, false);
     request.send();
-    
+
     //3.Get data, & disabled X button
     let update_game_data = get_Flask_Data();
     let btnX          = $(".btn-role-X")
     let btnO          = $(this)
-    
+
     $.when( update_game_data  ).done( function( data ) {
       GAME_DATA = data;
-      console.log(`Role : ${GAME_DATA["game_roles"]}`);
       btnX.addClass('disabled');
       btnO.addClass('disabled-color');
       update_game();
     });
-    
+
   });
 });
 
@@ -167,32 +166,30 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.game-board .squares .square').one('click', function (e) {
     e.preventDefault();
-    
+
     //1.Get selected html item value
     cell_value = $(this).text().trim();
     // let turn_mark = $(this).val();
-    
+
     //2.Send variable to flask function
     let request = new XMLHttpRequest();
     request.open("POST", `/update_cells/${cell_value}`, false);
-    request.send()
-    
+    request.send();
+
     //3.Get data, change html button value of square cell
     //  make the square cell disable
     let update_game_data = get_Flask_Data();
     let cell_btn         = $(this)
-    
-    $.when( update_game_data  ).done( function( data ) {
+
+    $.when( update_game_data ).done( function( data ) {
       //a.Update cell text
       cell_btn.text(GAME_DATA["player_turn"]);
       cell_btn.addClass('disabled disable-color');
-      
+
       //b.Update data & change text of player turn
       GAME_DATA = data
       update_game();
     });
-    
+
   });
 });
-
-update_game()
