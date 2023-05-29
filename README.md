@@ -25,8 +25,5 @@
    [Google Tic Tac Toe game](https://www.google.com/search?q=google+tic+tac+toe&rlz=1C1CHBD_enID945ID945&oq=google+tic&aqs=chrome.0.69i59j0i131i433i512j69i57j0i512l7.2550j0j9&sourceid=chrome&ie=UTF-8) for the inspiration.
 
 6. BUGS :
-- open cells not update when click cell on the first time
-  ![first time cell clicked](first%20time%20cell%20clicked.jpg)
-  
 - Winner found when the combination is [3,3], although the cells pick is incorect :
   ![incorrect winner found](incorrect%20winner%20found.jpg)
