@@ -28,7 +28,10 @@ function update_game() {
   GAME_START = GAME_DATA["game_start"];
   GAME_OVER  = GAME_DATA["game_over"];
   console.log(`Game start : ${GAME_START} ; Game over : ${GAME_OVER}`);
-  GAME_IS_ON = (GAME_START === true && GAME_OVER === false);
+  GAME_IS_ON = (
+    GAME_START === true && GAME_OVER === false || 
+    (GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === false)
+  );
 
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
@@ -44,8 +47,8 @@ function update_game() {
 
   //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
-  if      (!GAME_IS_ON) { btn_cell.addClass('disabled'); }
-  else if (GAME_IS_ON) { btn_cell.removeClass('disabled'); }
+  if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
+  else if (GAME_IS_ON === true) { btn_cell.removeClass('disabled'); }
 
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
@@ -193,4 +196,12 @@ $(document).ready(function () {
   });
 });
 
-update_game();
+if (GAME_DATA === {}) {
+  update_game();
+} else {
+  let update_game_data = get_Flask_Data();
+  $.when( update_game_data ).done( function( data ) {
+    GAME_DATA = data
+    update_game();
+  }
+}
