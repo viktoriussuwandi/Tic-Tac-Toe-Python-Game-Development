@@ -7,7 +7,7 @@ class Board:
     self.row = None
     self.col = None
     self.all_cells  = []
-    self.open_cells = self.all_cells
+    self.open_cells = []
     self.board_dimmension = {}
     self.create_board()
     self.cell_owners = [None for i in self.all_cells]
@@ -34,9 +34,9 @@ class Board:
     all_cells = self.all_cells
     
     # Update open cells
-    self.open_cells = [ 
-      i for i in all_cells if ( (i not in player_cells) and (i not in comp_cells) )
-    ] if ( is_player_selecting and is_comp_selecting ) else self.all_cells
+    selected_cells  = player_cells + comp_cells
+    list_open_cells = [ cell for cell in all_cells if cell not in selected_cells]
+    self.open_cells = all_cells if len(selected_cells) == 0 else list_open_cells 
     
     # Checking cell's owner
     for i in range(len(all_cells)):

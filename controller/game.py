@@ -67,18 +67,17 @@ class Game:
 # ----------------------------------------------------------------------------------
 
   def game_loop(self) :
-    self.update_turn()
+    self.update_turn()    
     self.update_board()
     self.update_score()
     self.update_winner()
-    # print(self)
+    print(self)
     
   def game_update_attr(self):
-    self.game_loop();
     is_in_game = self.game_start == True and self.game_over == False
-    if not is_in_game : self.start_game(); self.game_loop()
+    if not is_in_game : self.start_game()
     elif (is_in_game and self.winner_found == True) : self.refresh_attr();
-    
+    self.game_loop()
     
   def start_game(self):
     check_level_and_role = (
@@ -111,7 +110,7 @@ class Game:
     self.game_update_attr()
 
   def select_cells(self, row = None, col = None):
-    if self.turn_name   == 'Player': self.player.cells_selected.append([row, col])
+    if   self.turn_name == 'Player': self.player.cells_selected.append([row, col])
     elif self.turn_name == 'Comp'  : self.comp.cells_selected.append([row, col])
     self.game_update_attr()
 
@@ -125,7 +124,7 @@ class Game:
       player_cells   = len(self.player.cells_selected)
       comp_cells     = len(self.comp.cells_selected)
       is_player_turn = player_cells < comp_cells or ( self.player.role == 0 and player_cells == comp_cells )
-      
+ 
       self.turn      = self.player.role if is_player_turn else self.comp.role
       self.turn_name = 'Player' if is_player_turn else 'Comp'
       self.turn_mark = self.role_options[self.turn]
@@ -138,25 +137,42 @@ class Game:
 
   def update_board(self):
     is_in_game = self.game_start == True and self.game_over == False
-    if not is_in_game : self.board_dimmension = self.board.board_dimmension
+    if is_in_game == False : self.board_dimmension = self.board.board_dimmension
     else :
-      player_role = None if self.player.role is None else self.role_options[ int(self.player.role) ]
-      comp_role   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
+      player_role_select = None if self.player.role is None else self.role_options[ int(self.player.role) ]
+      comp_role_select   = None if self.comp.role   is None else self.role_options[ int(self.comp.role) ]
   
-      is_player_selecting = len(self.player.cells_selected) > 0
-      is_comp_selecting   = len(self.comp.cells_selected)   > 0
+      is_player_select = len(self.player.cells_selected) > 0
+      is_comp_select   = len(self.comp.cells_selected)   > 0
       
-      player_cells = self.player.cells_selected
-      comp_cells   = self.comp.cells_selected
+      player_cells_select = self.player.cells_selected
+      comp_cells_select   = self.comp.cells_selected
+    
       self.board.update_board(
-        player_role  = player_role, 
-        comp_role    = comp_role,
-        player_cells = player_cells,
-        comp_cells   = comp_cells,
-        is_player_selecting = is_player_selecting,
-        is_comp_selecting   = is_comp_selecting
-      )
-
+        player_role  = player_role_select, 
+        comp_role    = comp_role_select,
+        
+        player_cells = player_cells_select,
+        comp_cells   = comp_cells_select,
+        
+        is_player_selecting = is_player_select,
+        is_comp_selecting   = is_comp_select
+    )
+      # self.game_update_attr()
+      
+    #--------------------------------------------------------------------------------------------------
+    # CHEKING
+    #--------------------------------------------------------------------------------------------------
+    # test = f'''
+    # Winner       : {self.winner}
+    # Open cells   : {self.board.open_cells}
+    # Player cells : {self.player.cells_selected }
+    # Comp   cells : {self.comp.cells_selected }
+    # '''  
+    # clear_screen()
+    # print(test)
+    #--------------------------------------------------------------------------------------------------
+  
   def update_winner(self):
     winner_sum_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
     
@@ -210,19 +226,6 @@ class Game:
         self.game_start   = False
         self.winner       = {'Role' : 'Comp', 'Mark' : self.game_roles['Comp']}
 
-    #--------------------------------------------------------------------------------------------------
-    # CHEKING
-    #--------------------------------------------------------------------------------------------------
-    test = f'''
-    Winner       : {self.winner}
-    Open cells   : {self.board.open_cells}
-    Player cells : {self.player.cells_selected }
-    Comp   cells : {self.comp.cells_selected }
-    '''
-    clear_screen()
-    print(test)
-       
-    #--------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
