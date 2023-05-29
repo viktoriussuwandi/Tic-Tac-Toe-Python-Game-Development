@@ -27,7 +27,7 @@ function update_game() {
   //1.Get game data & update game status
   GAME_START = GAME_DATA["game_start"];
   GAME_OVER  = GAME_DATA["game_over"];
-  GAME_IS_ON = (GAME_START === true && GAME_OVER === false);
+  GAME_IS_ON = (GAME_START === true && GAME_OVER === false && !GAME_DATA["winner_found"]);
 
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
@@ -44,13 +44,7 @@ function update_game() {
   //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
   if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
-  else if (GAME_IS_ON === true)  { 
-    if      (!GAME_DATA["winner_found"]) { btn_cell.removeClass('disabled'); }
-    else if (GAME_DATA["winner_found"])  { btn_cell.addClass('disabled'); }
-    // console.log(`Winner found : ${GAME_DATA["winner_found"]}`);
-    // console.log(`Winner found : ${JSON.stringify(GAME_DATA["game_winner"])}`);
-    
-  }
+  else if (GAME_IS_ON === true)  { btn_cell.removeClass('disabled'); }
 
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
