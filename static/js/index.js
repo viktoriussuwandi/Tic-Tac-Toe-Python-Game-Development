@@ -34,7 +34,7 @@ function update_game() {
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
 
-  if (GAME_IS_ON && GAME_DATA["player_turn"] != null) {
+  if (GAME_IS_ON) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
   } else if (!GAME_IS_ON) {
@@ -45,17 +45,14 @@ function update_game() {
   //3.Update board cells element
   let btn_cell =  $('.game-board .squares .square')
   if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
-  else if (GAME_IS_ON === true) { btn_cell.removeClass('disabled'); }
+  else if (GAME_IS_ON === true)  { btn_cell.removeClass('disabled'); }
 
   //4.Update game start button
   let btn_restart = $(".game-restart a.btn")
   if(GAME_IS_ON) {
     btn_restart.text('in game');
     btn_restart.addClass('disabled in_game');
-  } else if (
-    !GAME_IS_ON ||
-    ( GAME_DATA["winner_found"] != null && GAME_DATA["winner_found"] === true)
-  ) {
+  } else if (!GAME_IS_ON) {
     btn_restart.text('Restart Game');
     btn_restart.removeClass('disabled in_game');
   }
