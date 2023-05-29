@@ -5,6 +5,7 @@ let GAME_DATA   = {}
 let GAME_STATUS = 'end'
 
 function get_Flask_Data() {
+  
     let deferredData = new jQuery.Deferred();
     $.ajax({
         type     : "GET",
@@ -16,7 +17,6 @@ function get_Flask_Data() {
           // console.log('Data Updated')
         }
     });
-
     return deferredData; // contains the passed data
 };
 

@@ -220,7 +220,7 @@ class Game:
       check_comp_identic_rowCol = True
       # ----------------------------------------------------------------------------------
       is_comp_win = check_comp_pair_sum and check_comp_identic_rowCol
-      if self.winner_found == False and is_comp_win == True :
+      if is_comp_win == True :
         self.winner_found = is_comp_win
         self.game_over    = True
         self.game_start   = False
