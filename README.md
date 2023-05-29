@@ -27,5 +27,6 @@
 6. BUGS :
 - open cells not update when click cell on the first time
   ![first time cell clicked](first%20time%20cell%20clicked.jpg)
+  
 - Winner found when the combination is [3,3], although the cells pick is incorect :
   ![incorrect winner found](incorrect%20winner%20found.jpg)

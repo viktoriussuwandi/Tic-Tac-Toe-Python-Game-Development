@@ -68,15 +68,15 @@ class Game:
 
   def game_loop(self) :
     self.update_turn()
-    self.update_winner()
     self.update_board()
     self.update_score()
+    self.update_winner()
     # print(self)
     
   def game_update_attr(self):
     self.game_loop();
     is_in_game = self.game_start == True and self.game_over == False
-    if not is_in_game : self.start_game()
+    if not is_in_game : self.start_game(); self.game_loop()
     elif (is_in_game and self.winner_found == True) : self.refresh_attr();
     
     
@@ -180,8 +180,6 @@ class Game:
       check_player_identic_rowCol = [
         ( (a[0] == b[0] == c[0]) or (a[1] == b[1] == c[1]) ) for (a,b,c) in player_cell_pairs
       ] if arr_player_pair_sum == [3,3] else True
-      clear_screen()
-      print(player_cell_pairs)
       # ----------------------------------------------------------------------------------
       is_player_win = check_player_pair_sum and check_player_identic_rowCol
       if is_player_win == True :
@@ -206,12 +204,25 @@ class Game:
       check_comp_identic_rowCol = True
       # ----------------------------------------------------------------------------------
       is_comp_win = check_comp_pair_sum and check_comp_identic_rowCol
-      if is_comp_win == True and self.winner_found == False :
+      if self.winner_found == False and is_comp_win == True :
         self.winner_found = is_comp_win
         self.game_over    = True
         self.game_start   = False
         self.winner       = {'Role' : 'Comp', 'Mark' : self.game_roles['Comp']}
 
+    #--------------------------------------------------------------------------------------------------
+    # CHEKING
+    #--------------------------------------------------------------------------------------------------
+    test = f'''
+    Winner       : {self.winner}
+    Open cells   : {self.board.open_cells}
+    Player cells : {self.player.cells_selected }
+    Comp   cells : {self.comp.cells_selected }
+    '''
+    clear_screen()
+    print(test)
+       
+    #--------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
