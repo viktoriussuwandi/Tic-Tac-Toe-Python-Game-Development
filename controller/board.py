@@ -17,11 +17,10 @@ class Board:
 
   def check_if_win(self, select_cells = None) :
     cells = select_cells if (
-     select_cells is not None and 
-     len(select_cells) >= self.row and 
-     len(select_cells) >= self.col
+     select_cells is not None and len(select_cells) >= self.row and len(select_cells) >= self.col
     ) else []
-    if len(cells) == 0 : return None
+    
+    if len(cells) == 0 : return False
     else :
       # Find all combination of cells selected
       cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
@@ -30,10 +29,10 @@ class Board:
       winner_pair = [ 
         [a,b,c] for [a,b,c] in cell_pairs if [ 
           sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) 
-        ] in self.sum_winner          
+        ] in self.sum_winner        
       ]
       
-      # If winner_pair is [3,3] -> 
+      # If [sum of row, sum of col] in winner_pair is [board_row,board_col] : 
       
       
       return f'\n{ winner_pair }'
