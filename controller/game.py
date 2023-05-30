@@ -159,20 +159,6 @@ class Game:
         is_player_selecting = is_player_select,
         is_comp_selecting   = is_comp_select
     )
-      # self.game_update_attr()
-      
-    #--------------------------------------------------------------------------------------------------
-    # CHEKING
-    #--------------------------------------------------------------------------------------------------
-    # test = f'''
-    # Winner       : {self.winner}
-    # Open cells   : {self.board.open_cells}
-    # Player cells : {self.player.cells_selected }
-    # Comp   cells : {self.comp.cells_selected }
-    # '''  
-    # clear_screen()
-    # print(test)
-    #--------------------------------------------------------------------------------------------------
   
   def update_winner(self):
     winner_sum_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
