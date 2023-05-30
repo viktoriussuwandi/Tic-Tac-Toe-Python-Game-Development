@@ -64,14 +64,21 @@ class Game:
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
-
+  def update_winner(self, cells = None):
+    cells_check = [] if cells is None else cells
+    if self.winner_found == False and len(cells_check) >= 3 :
+      clear_screen()
+      winner = self.board.check_if_win(cells_check)
+      print(f'Roles : {self.game_roles}')
+      print(f'Player cells : {self.player.cells_selected }')
+      print(f'Comp   cells : {self.comp.cells_selected }')
+      print(winner)
+      
   def game_loop(self) :
     self.update_score()
-    self.update_winner()
     self.update_turn()
     self.update_board()
-
-    print(self)
+    # print(self)
     
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
@@ -110,8 +117,12 @@ class Game:
     self.game_update_attr()
 
   def select_cells(self, row = None, col = None):
-    if   self.turn_name == 'Player': self.player.cells_selected.append([row, col])
-    elif self.turn_name == 'Comp'  : self.comp.cells_selected.append([row, col])
+    if   self.turn_name == 'Player': 
+      self.player.cells_selected.append([row, col])
+      self.update_winner(self.player.cells_selected)
+    elif self.turn_name == 'Comp'  : 
+      self.comp.cells_selected.append([row, col])
+      self.update_winner(self.comp.cells_selected)
     self.game_update_attr()
 
 # ----------------------------------------------------------------------------------
@@ -158,9 +169,6 @@ class Game:
         is_player_selecting = is_player_select,
         is_comp_selecting   = is_comp_select
     )
-  
-  def update_winner(self):
-    self.board.update_winner()
 
 
 # ----------------------------------------------------------------------------------

@@ -15,37 +15,10 @@ class Board:
     self.cell_owners = [None for i in self.all_cells]
     self.print_out = ''
 
-  def update_winner(self) :
-    winner_sum_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
-    
-    # Check if the winner is player
-    is_player_win     = False
-    player_cells      = self.player.cells_selected
-    player_cell_pairs = []; player_pair_sum   = []
-
-    if self.winner_found == False and len(player_cells) >= 3 :
-      player_cell_pairs = list( combinations(player_cells, 3) )
-      player_pair_sum = [
-        [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
-      ]
-      arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
-      check_player_pair_sum = len(arr_player_pair_sum) > 0
-      # ----------------------------------------------------------------------------------
-      
-      # find the pair cells
-      # check of all cells has identic row or cols
-      
-      check_player_identic_rowCol = [
-        ( (a[0] == b[0] == c[0]) or (a[1] == b[1] == c[1]) ) for (a,b,c) in player_cell_pairs
-      ] if arr_player_pair_sum == [3,3] else True
-      # ----------------------------------------------------------------------------------
-      is_player_win = check_player_pair_sum and check_player_identic_rowCol
-      if is_player_win == True :
-        self.winner_found = is_player_win
-        self.game_over    = True
-        self.game_start   = False
-        self.winner       = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
-        
+  def check_if_win(self, select_cells = None) :
+    cells = [] if select_cells is None else select_cells
+    return cells
+         
   def create_board(self):
     if self.total_square is not None:
       self.row = int(math.sqrt(self.total_square))
@@ -95,3 +68,36 @@ class Board:
 
   def __repr__(self):
     return self.print_out
+
+# ----------------------------------------------------------------------------------
+    # winner_sum_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
+    
+    # Check if the winner is player
+    # is_player_win     = False
+    # player_cells      = self.player.cells_selected
+    # player_cell_pairs = []; player_pair_sum   = []
+
+    # if self.winner_found == False and len(player_cells) >= 3 :
+    #   player_cell_pairs = list( combinations(player_cells, 3) )
+    #   player_pair_sum = [
+    #     [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
+    #   ]
+    #   arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
+    #   check_player_pair_sum = len(arr_player_pair_sum) > 0
+
+# ----------------------------------------------------------------------------------
+      
+      # find the pair cells
+      # check of all cells has identic row or cols
+      
+      # check_player_identic_rowCol = [
+      #   ( (a[0] == b[0] == c[0]) or (a[1] == b[1] == c[1]) ) for (a,b,c) in player_cell_pairs
+      # ] if arr_player_pair_sum == [3,3] else True
+
+      # ----------------------------------------------------------------------------------
+      # is_player_win = check_player_pair_sum and check_player_identic_rowCol
+      # if is_player_win == True :
+      #   self.winner_found = is_player_win
+      #   self.game_over    = True
+      #   self.game_start   = False
+      #   self.winner       = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
