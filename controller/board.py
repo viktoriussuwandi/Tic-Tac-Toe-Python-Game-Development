@@ -16,9 +16,30 @@ class Board:
     self.print_out = ''
 
   def check_if_win(self, select_cells = None) :
-    cells = [] if select_cells is None else select_cells
-    return cells
-         
+    cells = select_cells if select_cells is not None and len(select_cells) >= 3 else None
+    cell_pairs = list( combinations(cells, 3) )
+    # cell_pair_sum = [
+    #     [ {list(a,b,c) : sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1])))} ]  
+    #   ]
+    pairs = []
+    for (a,b,c) in cell_pairs :
+      pairs.append(
+        {
+          [ 
+            [ a[0], a[1] ],
+            [ b[0], b[1] ],
+            [ c[0], c[1] ]
+          ] :
+          [ sum( list( (a[0], b[0], c[0]) ) ), sum( list( (a[1], b[1], c[1]) ) ) ]          
+        }
+
+      )
+      
+    return pairs
+
+#----------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------
+  
   def create_board(self):
     if self.total_square is not None:
       self.row = int(math.sqrt(self.total_square))

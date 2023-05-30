@@ -69,10 +69,12 @@ class Game:
     if self.winner_found == False and len(cells_check) >= 3 :
       clear_screen()
       winner = self.board.check_if_win(cells_check)
-      print(f'Roles : {self.game_roles}')
+      print(f'Winner       : {self.winner}')
+      print(f'Roles        : {self.game_roles}')
       print(f'Player cells : {self.player.cells_selected }')
       print(f'Comp   cells : {self.comp.cells_selected }')
-      print(winner)
+      print('--------------------------------------------')
+      print(f'Output       : {winner}')
       
   def game_loop(self) :
     self.update_score()
