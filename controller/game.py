@@ -1,6 +1,5 @@
 from controller.player import Player
 from controller.board import Board
-from itertools import combinations
 
 import os
 clear_screen = lambda: os.system('clear')
@@ -161,57 +160,8 @@ class Game:
     )
   
   def update_winner(self):
-    winner_sum_required = [ [3,0], [0,3], [3,3], [3,6], [6,3] ]
-    
-    # Check if the winner is player
-    is_player_win     = False
-    player_cells      = self.player.cells_selected
-    player_cell_pairs = []; player_pair_sum   = []
+    self.board.update_winner()
 
-    if self.winner_found == False and len(player_cells) >= 3 :
-      player_cell_pairs = list( combinations(player_cells, 3) )
-      player_pair_sum = [
-        [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in player_cell_pairs 
-      ]
-      arr_player_pair_sum = [ i for i in winner_sum_required if i in player_pair_sum ]
-      check_player_pair_sum = len(arr_player_pair_sum) > 0
-      # ----------------------------------------------------------------------------------
-      
-      # find the pair cells
-      # check of all cells has identic row or cols
-      
-      check_player_identic_rowCol = [
-        ( (a[0] == b[0] == c[0]) or (a[1] == b[1] == c[1]) ) for (a,b,c) in player_cell_pairs
-      ] if arr_player_pair_sum == [3,3] else True
-      # ----------------------------------------------------------------------------------
-      is_player_win = check_player_pair_sum and check_player_identic_rowCol
-      if is_player_win == True :
-        self.winner_found = is_player_win
-        self.game_over    = True
-        self.game_start   = False
-        self.winner       = {'Role' : 'Player', 'Mark' : self.game_roles['Player']}
-    
-    # Check if the winner is comp
-    is_comp_win     = False
-    comp_cells      = self.comp.cells_selected
-    comp_cell_pairs = []; comp_pair_sum   = []
-
-    if self.winner_found == False and len(comp_cells) >= 3 :
-      comp_cell_pairs = list( combinations(comp_cells, 3) )
-      comp_pair_sum = [
-        [ sum(list((a[0], b[0], c[0]))), sum(list((a[1], b[1], c[1]))) ] for (a,b,c) in comp_cell_pairs 
-      ]
-      arr_comp_pair_sum = [ i for i in winner_sum_required if i in comp_pair_sum ]
-      check_comp_pair_sum = len(arr_comp_pair_sum) > 0
-      # ----------------------------------------------------------------------------------
-      check_comp_identic_rowCol = True
-      # ----------------------------------------------------------------------------------
-      is_comp_win = check_comp_pair_sum and check_comp_identic_rowCol
-      if is_comp_win == True :
-        self.winner_found = is_comp_win
-        self.game_over    = True
-        self.game_start   = False
-        self.winner       = {'Role' : 'Comp', 'Mark' : self.game_roles['Comp']}
 
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
