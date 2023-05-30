@@ -34,7 +34,7 @@ class Board:
 
       if len(winner_pair) > 0:
         # Winner_found is True if :
-        # 1. index of all winner_pair cells are odd  and 
+        # 1. index of all winner_pair cells are odd and 
         #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]] 
         # 2. index of all winner_pair cells are even and 
         #    (cells has identical row or has identical col)
@@ -47,6 +47,7 @@ class Board:
         is_diagonal = is_even == True and is_odd == False
         
         #b.Check if [sum of cells_row, sum of cells_col] in winner_pair is [3,3]]
+
         
         #c.Check if (cells has identical row or cells has identical col)
         
