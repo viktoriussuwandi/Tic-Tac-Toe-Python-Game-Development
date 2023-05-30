@@ -32,7 +32,18 @@ class Board:
         ] in self.sum_winner        
       ]
       
-      # If [sum of row, sum of col] in winner_pair is [board_row,board_col] : 
+      # Winner_found is True if :
+      # 1. index of all cells selected are odd  and 
+      #    [sum of cells_row, sum of cells_col] in winner_pair is [3,3]] 
+      # 2. index of all cells selected are even and 
+      #    (cells has identical row or cells has identical col)
+      
+      #a.Check if all cells selected are odd or all cells is even
+      
+      #b.Check if [sum of cells_row, sum of cells_col] in winner_pair is [3,3]]
+      
+      #c.Check if (cells has identical row or cells has identical col)
+      
       
       
       return f'\n{ winner_pair }'
