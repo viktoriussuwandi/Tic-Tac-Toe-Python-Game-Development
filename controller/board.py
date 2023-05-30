@@ -17,10 +17,14 @@ class Board:
 
   def check_if_win(self, select_cells = None) :
     cells = select_cells if select_cells is not None and len(select_cells) >= 3 else None
-    cell_pairs     = list( combinations(cells, 3) )
-    # cell_sum_pairs = [  ]
-      
-    return cell_pairs
+    
+    cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
+    cell_sum_pairs = [ [ sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) ] for [a,b,c] in cell_pairs ]
+    pairs_dict     = [ 
+      { str( [a,b,c] ) : [ sum( [ a[0], b[0], c[0] ] ), sum( [ a[1], b[1], c[1] ] ) ] } for [a,b,c] in cell_pairs
+    ]
+    
+    return f'\n{cell_pairs}\n{cell_sum_pairs}\n{pairs_dict}'
 
 #----------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------
