@@ -20,19 +20,20 @@ class Board:
      select_cells is not None and 
       len(select_cells) >= self.row and 
       len(select_cells) >= self.col
-    ) else None
-
-    # Find cell_pairs of cells selected, and sum that pairs
-    cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
-    cell_sum_pairs = [ [ sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) ] for [a,b,c] in cell_pairs ]
-    pairs_dict     = [ 
-      { str( [a,b,c] ) : [ sum( [ a[0], b[0], c[0] ] ), sum( [ a[1], b[1], c[1] ] ) ] } for [a,b,c] in cell_pairs
-    ]
-    
-    # Identify if cell_sum_pairs is in the list of sum_winner
-    
-    
-    return f'\n{cell_pairs}\n{cell_sum_pairs}\n{pairs_dict}'
+    ) else []
+    if len(cells) == 0 : return None
+    else :
+      # Find cell_pairs of cells selected, and sum that pairs
+      cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
+      cell_sum_pairs = [ [ sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) ] for [a,b,c] in cell_pairs ]
+      pairs_dict     = [ 
+        { str( [a,b,c] ) : [ sum( [ a[0], b[0], c[0] ] ), sum( [ a[1], b[1], c[1] ] ) ] } for [a,b,c] in cell_pairs
+      ]
+      
+      # Identify if cell_sum_pairs is in the list of sum_winner
+      
+      
+      return f'\n{cell_pairs}\n{cell_sum_pairs}\n{pairs_dict}'
 
 #----------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------
