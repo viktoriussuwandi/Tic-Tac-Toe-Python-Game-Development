@@ -20,7 +20,7 @@ class Board:
      select_cells is not None and len(select_cells) >= self.row and len(select_cells) >= self.col
     ) else []
     
-    if len(cells) == 0 : return False
+    if len(cells) <= 0 : return False
     else :
       # Find all combination of cells selected
       cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
@@ -40,17 +40,18 @@ class Board:
         #    (cells has identical row or has identical col)
         
         #a.Check if index of all winner_pair cells are odd or even -> diagonal is even
-        is_odd  = len([ self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if 
-                    self.all_cells.index(cell) % 2 == 1]) == 3
-        is_even = len([ self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if
-                    self.all_cells.index(cell) % 2 == 0]) == 3
+        is_odd      = len([ self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if 
+                      self.all_cells.index(cell) % 2 == 1]) == 3
+        is_even     = len([ self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if
+                       self.all_cells.index(cell) % 2 == 0]) == 3
+        is_diagonal = is_even == True and is_odd == False
         
         #b.Check if [sum of cells_row, sum of cells_col] in winner_pair is [3,3]]
         
         #c.Check if (cells has identical row or cells has identical col)
         
         
-        return f'\n{ winner_pair }\n{is_odd}\n{is_even}'
+        return f'\n{ winner_pair }\n{is_odd}\n{is_even}\n{is_diagonal}'
 
 
 #----------------------------------------------------------------------------------------------------------
