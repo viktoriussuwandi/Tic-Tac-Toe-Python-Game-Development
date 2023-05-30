@@ -23,18 +23,19 @@ class Board:
     ) else []
     if len(cells) == 0 : return None
     else :
-      # Find cell_pairs of cells selected, and sum that pairs
+      # Find all combination of cells selected
       cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
-      cell_sum_pairs = [ [ sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) ] for [a,b,c] in cell_pairs ]
 
-      
-      # Identify if cell_sum_pairs is in the list of sum_winner
-      winner_pair = []
-      for [a,b,c] in cell_pairs :
-        winner_pair = [a,b,c] if [ 
+      # Identify if any sum of combination [sum of row, sum of col] is match with any of sum_winner
+      winner_pair = [ 
+        [a,b,c] for [a,b,c] in cell_pairs if [ 
           sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) 
-        ] in self.sum_winner else winner_pair
-        
+        ] in self.sum_winner          
+      ]
+      
+      # If winner_pair is [3,3] -> 
+      
+      
       return f'\n{ winner_pair }'
 
 #----------------------------------------------------------------------------------------------------------
