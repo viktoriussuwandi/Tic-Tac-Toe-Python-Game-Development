@@ -30,23 +30,26 @@ class Board:
         [a,b,c] for [a,b,c] in cell_pairs if [ 
           sum([a[0],b[0],c[0]]), sum( [a[1],b[1],c[1]]) 
         ] in self.sum_winner        
-      ]
-      
-      # Winner_found is True if :
-      # 1. index of all cells selected are odd  and 
-      #    [sum of cells_row, sum of cells_col] in winner_pair is [3,3]] 
-      # 2. index of all cells selected are even and 
-      #    (cells has identical row or cells has identical col)
-      
-      #a.Check if all cells selected are odd or all cells is even
-      
-      #b.Check if [sum of cells_row, sum of cells_col] in winner_pair is [3,3]]
-      
-      #c.Check if (cells has identical row or cells has identical col)
-      
-      
-      
-      return f'\n{ winner_pair }'
+      ][0]
+
+      if len(winner_pair) > 0:
+        # Winner_found is True if :
+        # 1. index of all winner_pair cells are odd  and 
+        #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]] 
+        # 2. index of all winner_pair cells are even and 
+        #    (cells has identical row or has identical col)
+        
+        #a.Check if index of all winner_pair cells are odd or even
+        is_odd  = [ i%2 == 1 for i in winner_pair ][0]
+        is_even = [ i%2 == 0 for i in winner_pair ][0]
+        
+        #b.Check if [sum of cells_row, sum of cells_col] in winner_pair is [3,3]]
+        
+        #c.Check if (cells has identical row or cells has identical col)
+        
+        
+        return f'\n{ winner_pair }\n{is_odd}\n{is_even}'
+
 
 #----------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------
