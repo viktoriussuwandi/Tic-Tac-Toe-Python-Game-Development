@@ -16,7 +16,11 @@ class Board:
     self.print_out = ''
 
   def check_if_win(self, select_cells = None) :
-    cells = select_cells if select_cells is not None and len(select_cells) >= 3 else None
+    cells = select_cells if (
+     select_cells is not None and 
+      len(select_cells) >= self.row and 
+      len(select_cells) >= self.col
+    ) else None
 
     # Find cell_pairs of cells selected, and sum that pairs
     cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
@@ -26,6 +30,7 @@ class Board:
     ]
     
     # Identify if cell_sum_pairs is in the list of sum_winner
+    
     
     return f'\n{cell_pairs}\n{cell_sum_pairs}\n{pairs_dict}'
 

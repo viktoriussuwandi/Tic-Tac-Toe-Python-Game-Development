@@ -65,7 +65,12 @@ class Game:
 # START THE GAME
 # ----------------------------------------------------------------------------------
   def update_winner(self, cells = None):
-    cells_check = [] if cells is None else cells
+    cells_check = cells if (
+     cells is not None and 
+      len(cells) >= self.board.row and 
+      len(cells) >= self.board.col
+    ) else []
+    
     if self.winner_found == False and len(cells_check) >= 3 :
       clear_screen()
       winner = self.board.check_if_win(cells_check)
