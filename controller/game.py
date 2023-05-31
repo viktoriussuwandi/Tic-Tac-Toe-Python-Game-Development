@@ -61,24 +61,23 @@ class Game:
 
     self.board_printed    = ''
     self.board_dimmension = {}
+    self.game_update_attr()
+    
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
-      
+
   def game_loop(self) :
     self.update_score()
     self.update_turn()
     self.update_board()
     print(self)
-    
+
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
     if not is_in_game : self.start_game()
-    elif (is_in_game and self.winner_found == True) : 
-      pass
-      # self.refresh_attr();
     self.game_loop()
-    
+
   def start_game(self):
     check_level_and_role = (
       self.game_level  is not None and 

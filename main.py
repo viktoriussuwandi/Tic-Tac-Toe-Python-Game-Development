@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, json
+from flask import Flask, render_template, Response, json, redirect, url_for
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
@@ -45,11 +45,13 @@ def update_attributes():
 @app.route("/")
 def home():
   update_attributes()
-  # while game.game_start == True and game.game_over == False:
-  #   if game.game_over == True: break;
-    
   return render_template("index.html", attr=ATTR)
 
+@app.route("/restart_game")
+def refresh_game() :
+  game.refresh_attr()
+  update_attributes()
+  
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to index.js
 # -------------------------------------------------------------------------------------------

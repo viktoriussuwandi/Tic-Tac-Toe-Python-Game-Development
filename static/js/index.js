@@ -199,15 +199,12 @@ $(document).ready(function () {
       
       //2.Send variable to flask function
       let request = new XMLHttpRequest();
-      request.open("POST", `/restart_game/`, false);
-      request.send();
-      
-      let update_game_data = get_Flask_Data();
-      $.when( update_game_data ).done( function( data ) { 
-        //Update data & Restart the game
-        GAME_DATA = data
-        update_game();
-      });
+      request.open("GET", `/restart_game`, false);
+      GAME_DATA  = {};
+      GAME_START = false;
+      GAME_OVER  = true;
+      GAME_IS_ON = false;
+      windows.reload('/')
     }
   });
 });
