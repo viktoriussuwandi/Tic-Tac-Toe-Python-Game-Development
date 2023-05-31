@@ -7,7 +7,7 @@ let GAME_OVER  = true;
 let GAME_IS_ON = false;
 
 function get_Flask_Data() {
-  
+
     let deferredData = new jQuery.Deferred();
     $.ajax({
         type     : "GET",
@@ -46,7 +46,7 @@ function update_game() {
   if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
   else if (GAME_IS_ON === true)  { btn_cell.removeClass('disabled'); }
 
-  //4.Update game start button
+  //4.Update game re-start button
   let btn_restart = $(".game-restart a.btn")
   if(GAME_IS_ON) {
     btn_restart.text('in game');
@@ -195,7 +195,20 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.game-restart a.btn').on('click', function (e) {
     e.preventDefault();
-    console.log("Restart game");
+    if(!GAME_IS_ON) {
+      
+      //2.Send variable to flask function
+      let request = new XMLHttpRequest();
+      request.open("POST", `/restart_game/`, false);
+      request.send();
+      
+      let update_game_data = get_Flask_Data();
+      $.when( update_game_data ).done( function( data ) { 
+        //Update data & Restart the game
+        GAME_DATA = data
+        update_game();
+      });
+    }
   });
 });
 
