@@ -73,7 +73,7 @@ class Game:
     
     if self.winner_found == False and len(cells_check) >= 3 :
       clear_screen()
-      winner = self.board.check_if_win(cells_check)
+      winner = self.board.identify_cells(cells_check)
       print(f'Winner       : {self.winner}')
       print(f'Roles        : {self.game_roles}')
       print(f'Player cells : {self.player.cells_selected }')

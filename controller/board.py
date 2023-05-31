@@ -15,7 +15,7 @@ class Board:
     self.cell_owners = [None for i in self.all_cells]
     self.print_out = ''
 
-  def check_if_win(self, select_cells = None) :
+  def identify_cells(self, select_cells = None) :
     cells = select_cells if (
      select_cells is not None and len(select_cells) >= self.row and len(select_cells) >= self.col
     ) else []
@@ -23,10 +23,9 @@ class Board:
     if len(cells) < self.row or len(cells) < self.col : return False
     else :
       # Find all combination of cells selected
-      cell_pairs     = [ list(a) for a in list( combinations(cells, 3) ) ]
+      cell_pairs = [ list(a) for a in list( combinations(cells, 3) ) ]
 
       # Identify if any sum of combination [sum of row, sum of col] is match with any of sum_winner
-
       find_winner_pair = [
         [a,b,c] for [a,b,c] in cell_pairs if
         [ sum( [a[0],b[0],c[0]] ), sum( [a[1],b[1],c[1]] ) ] in self.sum_winner
@@ -37,21 +36,13 @@ class Board:
       ) else []
 
       if len(winner_pair) > 0:
-        # Winner_found is True if :
-        # 1. win Diagonally : 
-        #    index of all winner_pair cells are even and
-        #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]]
-        # 2. win Horizontally or Vertically :
-        #    index of all winner_pair cells are odd and
-        #    (cells has identical row or has identical col)
-
         #a.Check if index of all winner_pair cells are odd or even
         odd_index_winner_cell = [
           self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if self.all_cells.index(cell) % 2 == 1 ]
         even_index_winner_cell = [
           self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if self.all_cells.index(cell) % 2 == 0 ]
-        cells_are_odd  = ( len(odd_index_winner_cell)  == self.row and len(odd_index_winner_cell) )  == self.col
-        cells_are_even = ( len(even_index_winner_cell) == self.row and len(even_index_winner_cell) ) == self.col
+        are_cells_odd  = ( len(odd_index_winner_cell)  == self.row and len(odd_index_winner_cell) )  == self.col
+        are_cells_even = ( len(even_index_winner_cell) == self.row and len(even_index_winner_cell) ) == self.col
 
         #b.Check if sum of cells_row, sum of cells_col] in winner_pair is [3,3]
         is_twin = [
@@ -62,24 +53,33 @@ class Board:
         #c.Check if (cells has identical row or cells has identical col)
         row_winner_cells = [ cell[0] for cell in winner_pair ]
         col_winner_cells = [ cell[1] for cell in winner_pair ]
-        
-        is_horizontal_align = len([ c == row_winner_cells[0] for c in row_winner_cells if 
+        is_horizontal_align = len([ c == row_winner_cells[0] for c in row_winner_cells if
                               row_winner_cells.index(c) != 0 and c == row_winner_cells[0]] ) > 0
-        is_vertical_align   = len([ c == col_winner_cells[0] for c in col_winner_cells if 
+        is_vertical_align   = len([ c == col_winner_cells[0] for c in col_winner_cells if
                               col_winner_cells.index(c) != 0 and c == col_winner_cells[0]] ) > 0
-
-        # is_vertical   = [ ( cell[0][0] == cell[1][1] == cell[2][2] ) for cell in winner_pair ]
 
         return f'''
         Winner pair         : { winner_pair }
-        is Odd              : { cells_are_odd }
-        is Even             : { cells_are_even }
+        is Odd              : { are_cells_odd }
+        is Even             : { are_cells_even }
         Twin                : { is_twin }
         is Horizontal align : {is_horizontal_align}
         is Vertical align   : {is_vertical_align}
         '''
-
-        # is Vertical   : {is_vertical}
+  def winner_checking(
+    self,
+    
+  ):
+    # Winner_found is True if :
+    # 1. win Diagonally : 
+    #    index of all winner_pair cells are even and
+    #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]]
+    
+    # 2. win Horizontally or Vertically :
+    #    index of all winner_pair cells are odd and
+    #    (cells has identical row or has identical col)
+    
+    pass
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
   
