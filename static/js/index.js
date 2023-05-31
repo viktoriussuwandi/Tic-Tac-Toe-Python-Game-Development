@@ -199,7 +199,7 @@ $(document).ready(function () {
       
       //Refresh the game, and reload home page
       let request = new XMLHttpRequest();
-      request.open("POST", `/restart_game`, true);
+      request.open("POST", `/restart_game`, false);
       request.send();
       location.reload();
     }

@@ -194,8 +194,8 @@ class Game:
     print_board     = self.board.print_out
     found_winner = f'''
     -----------------CONGRATULATIONS !!--------
-     Winner       : {self.winner}
-    ------------------------------------------- 
+     Winner       : {self.winner['Mark']} ( {self.winner['Role']} )
+    -------------------------------------------
      Level        : {self.game_level_txt}
     -------------------------------------------
     ===========================================
