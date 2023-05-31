@@ -47,10 +47,10 @@ def home():
   update_attributes()
   return render_template("index.html", attr=ATTR)
 
-@app.route("/restart_game")
+@app.route("/restart_game", methods=['POST'])
 def refresh_game() :
   game.refresh_attr()
-  update_attributes()
+  return redirect(url_for('home'))
   
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to index.js
