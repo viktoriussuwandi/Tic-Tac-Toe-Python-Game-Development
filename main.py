@@ -47,15 +47,15 @@ def home():
   game.refresh_attr()
   update_attributes()
   return render_template("index.html", attr=ATTR)
-
-@app.route("/restart_game", methods=['POST'])
-def refresh_game() :
-  return redirect(url_for('/home'))
   
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to index.js
 # -------------------------------------------------------------------------------------------
 
+# Restart the game
+@app.route("/restart_game", methods=['POST'])
+def refresh_game() : return redirect(url_for('home'))
+  
 # select game difficulties (easy, medium, impossible)
 @app.route('/update_level/<string:selected_level>', methods=['POST'])
 def select_level(selected_level=None):

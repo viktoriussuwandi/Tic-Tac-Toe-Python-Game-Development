@@ -193,21 +193,17 @@ $(document).ready(function () {
 // Restart Game
 // ----------------------------------------------------------------------------
 $(document).ready(function () {
-  $('.game-restart a.btn').on('click', function (e) {
+  $('.game-restart a.btn').one('click', function (e) {
     e.preventDefault();
     if(!GAME_IS_ON) {
       
-      //2.Send variable to flask function
+      //Refresh the game, and reload home page
       let request = new XMLHttpRequest();
-      request.open("POST", `/restart_game`, false);
+      request.open("POST", `/restart_game`, true);
       request.send();
-      
-      GAME_DATA  = {};
-      GAME_START = false;
-      GAME_OVER  = true;
-      GAME_IS_ON = false;
-      update_game();
+      location.reload();
     }
+    
   });
 });
 
