@@ -33,24 +33,25 @@ class Board:
       ]
 
       winner_pair = find_winner_pair[0] if (
-        find_winner_pair is not None and 
-        len(find_winner_pair) > 0
+        find_winner_pair is not None and len(find_winner_pair) > 0
       ) else []
 
       if len(winner_pair) > 0:
         # Winner_found is True if :
-        # 1. index of all winner_pair cells are even and 
-        #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]] 
-        # 2. index of all winner_pair cells are odd and
+        # 1. win Diagonally : 
+        #    index of all winner_pair cells are even and
+        #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]]
+        # 2. win Horizontally or Vertically :
+        #    index of all winner_pair cells are odd and
         #    (cells has identical row or has identical col)
 
         #a.Check if index of all winner_pair cells are odd or even
-        odd_index_selected = [ self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if
-                              self.all_cells.index(cell) % 2 == 1 ]
-        even_index_selected = [ self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if
-                               self.all_cells.index(cell) % 2 == 0 ]
-        cells_are_odd  = len(odd_index_selected)  == self.row and len(odd_index_selected)  == self.col
-        cells_are_even = len(even_index_selected) == self.row and len(even_index_selected) == self.col
+        odd_index_winner_cell = [
+          self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if self.all_cells.index(cell) % 2 == 1 ]
+        even_index_winner_cell = [
+          self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if self.all_cells.index(cell) % 2 == 0 ]
+        cells_are_odd  = ( len(odd_index_winner_cell)  == self.row and len(odd_index_winner_cell) )  == self.col
+        cells_are_even = ( len(even_index_winner_cell) == self.row and len(even_index_winner_cell) ) == self.col
 
         #b.Check if sum of cells_row, sum of cells_col] in winner_pair is [3,3]
         is_twin = [
@@ -59,14 +60,26 @@ class Board:
         ] == [3,3]
 
         #c.Check if (cells has identical row or cells has identical col)
+        row_winner_cells = [ cell[0] for cell in winner_pair ]
+        col_winner_cells = [ cell[1] for cell in winner_pair ]
+        
+        is_horizontal_align = len([ c == row_winner_cells[0] for c in row_winner_cells if 
+                              row_winner_cells.index(c) != 0 and c == row_winner_cells[0]] ) > 0
+        is_vertical_align   = len([ c == col_winner_cells[0] for c in col_winner_cells if 
+                              col_winner_cells.index(c) != 0 and c == col_winner_cells[0]] ) > 0
+
+        # is_vertical   = [ ( cell[0][0] == cell[1][1] == cell[2][2] ) for cell in winner_pair ]
 
         return f'''
-        Winner pair : { winner_pair }
-        is Odd      : { cells_are_odd }
-        is Even     : { cells_are_even }
-        Twin        : { is_twin }
+        Winner pair         : { winner_pair }
+        is Odd              : { cells_are_odd }
+        is Even             : { cells_are_even }
+        Twin                : { is_twin }
+        is Horizontal align : {is_horizontal_align}
+        is Vertical align   : {is_vertical_align}
         '''
 
+        # is Vertical   : {is_vertical}
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
   
