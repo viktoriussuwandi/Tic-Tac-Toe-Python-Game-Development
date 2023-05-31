@@ -18,7 +18,7 @@ class Board:
 #----------------------------------------------------------------------------------------------------
 # CREATE AND UPDATE BOARD
 #----------------------------------------------------------------------------------------------------
-  
+
   def create_board(self):
     if self.total_square is not None:
       self.row = int(math.sqrt(self.total_square))
@@ -65,6 +65,7 @@ class Board:
       if co == 0: self.print_out += f'     {str(self.cell_owners[co])}'
       elif first_col: self.print_out += f'\n     {str(self.cell_owners[co])}'
       else: self.print_out += f' {str(self.cell_owners[co])}'
+
 #----------------------------------------------------------------------------------------------------
 # WINNER CHECKING
 #----------------------------------------------------------------------------------------------------
@@ -108,6 +109,17 @@ class Board:
         col_winner_cells = [ cell[1] for cell in winner_pair ]
         is_horizontal_align = len([ c for c in row_winner_cells[1:] if c == row_winner_cells[0] ]) > 0
         is_vertical_align   = len([ c for c in col_winner_cells[1:] if c == col_winner_cells[0] ]) > 0
+
+        # print(f'''
+        # winner_pair         : {winner_pair}
+        # are_cells_odd       : {are_cells_odd}
+        # are_cells_even      : {are_cells_even}
+        # is_twin             : {is_twin}
+        # row_winner_cells    : {row_winner_cells}
+        # col_winner_cells    : {col_winner_cells}
+        # is_horizontal_align : {is_horizontal_align}
+        # is_vertical_align   : {is_vertical_align}
+        # ''')
         
         return self.winner_checking(
           identify_odd  = are_cells_odd, 
@@ -130,7 +142,7 @@ class Board:
     #    cells have identical row or has identical col
     win_not_diagonally = ( identify_horizontal == True or identify_vertical == True )
     
-    winner_is_found = win_diagonally or win_not_diagonally
+    winner_is_found = True if (win_diagonally == True or win_not_diagonally == True) else False
     return winner_is_found
     
 #----------------------------------------------------------------------------------------------------

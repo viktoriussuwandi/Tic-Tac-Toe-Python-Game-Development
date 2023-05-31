@@ -73,13 +73,18 @@ class Game:
     
     if self.winner_found == False and len(cells_check) >= 3 :
       clear_screen()
-      winner = self.board.identify_cells(cells_check)
-      print(f'Winner       : {self.winner}')
-      print(f'Roles        : {self.game_roles}')
-      print(f'Player cells : {self.player.cells_selected }')
-      print(f'Comp   cells : {self.comp.cells_selected }')
-      print('--------------------------------------------')
-      print(f'Output       : {winner}')
+      is_winner_found = self.board.identify_cells(cells_check)
+      if is_winner_found == True :
+        self.winner_found   = is_winner_found
+        self.winner['Role'] = self.turn_name
+        self.winner['Mark'] = self.turn_mark
+        
+      # print(f'Winner       : {self.winner}')
+      # print(f'Roles        : {self.game_roles}')
+      # print(f'Player cells : {self.player.cells_selected }')
+      # print(f'Comp   cells : {self.comp.cells_selected }')
+      # print('--------------------------------------------')
+      # print(f'Output       : {is_winner_found}')
       
   def game_loop(self) :
     self.update_score()
