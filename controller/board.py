@@ -19,7 +19,7 @@ class Board:
     cells = select_cells if (
      select_cells is not None and len(select_cells) >= self.row and len(select_cells) >= self.col
     ) else []
-    
+
     if len(cells) < self.row or len(cells) < self.col : return False
     else :
       # Find all combination of cells selected
@@ -41,18 +41,17 @@ class Board:
         # Winner_found is True if :
         # 1. index of all winner_pair cells are even and 
         #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]] 
-        # 2. index of all winner_pair cells are odd and 
+        # 2. index of all winner_pair cells are odd and
         #    (cells has identical row or has identical col)
-        
-        #a.Check if index of all winner_pair cells are odd or even -> diagonal is even
-        is_odd      = set( [ self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if 
-                      self.all_cells.index(cell) % 2 == 1] )
-        
-        is_even     = set( [ self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if
-                      self.all_cells.index(cell) % 2 == 0] )
-        
-        is_diagonal = is_even == True and is_odd == False
-        
+
+        #a.Check if index of all winner_pair cells are odd or even
+        odd_index_selected = [ self.all_cells.index(cell) % 2 == 1 for cell in winner_pair if
+                              self.all_cells.index(cell) % 2 == 1 ]
+        even_index_selected = [ self.all_cells.index(cell) % 2 == 0 for cell in winner_pair if
+                               self.all_cells.index(cell) % 2 == 0 ]
+        cells_are_odd  = len(odd_index_selected)  == self.row and len(odd_index_selected)  == self.col
+        cells_are_even = len(even_index_selected) == self.row and len(even_index_selected) == self.col
+
         #b.Check if sum of cells_row, sum of cells_col] in winner_pair is [3,3]
         is_twin = [
           sum( [ cell[0] for cell in winner_pair ] ),
@@ -62,16 +61,14 @@ class Board:
         #c.Check if (cells has identical row or cells has identical col)
 
         return f'''
-        Cell pair   : {cell_pairs}
-        Odd         : {is_odd},
-        Even        : {is_even},
-        Winner pair : {winner_pair}
-        Diagonal    : {is_diagonal}
-        Twin        : {is_twin}
+        Winner pair : { winner_pair }
+        is Odd      : { cells_are_odd }
+        is Even     : { cells_are_even }
+        Twin        : { is_twin }
         '''
 
-#------------------------------------------------------------------------------------------------------
-#------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------
   
   def create_board(self):
     if self.total_square is not None:
@@ -92,12 +89,12 @@ class Board:
     is_comp_selecting   = False
   ):
     all_cells = self.all_cells
-    
+
     # Update open cells
     selected_cells  = player_cells + comp_cells
     list_open_cells = [ cell for cell in all_cells if cell not in selected_cells]
     self.open_cells = all_cells if len(selected_cells) == 0 else list_open_cells 
-    
+
     # Checking cell's owner
     for i in range(len(all_cells)):
       # Check if cell own by player
@@ -111,7 +108,7 @@ class Board:
         for j in range(len(comp_cells)):
           comp_own = self.cell_owners[i] is None and all_cells[i] == comp_cells[j]
           self.cell_owners[i] = comp_role if comp_own else self.cell_owners[i]
-    
+
     # Update attribute to print out board it-self
     self.print_out = ''
     for co in range(len(self.cell_owners)):
