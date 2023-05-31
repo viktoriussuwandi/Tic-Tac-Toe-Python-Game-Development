@@ -64,38 +64,19 @@ class Game:
 # ----------------------------------------------------------------------------------
 # START THE GAME
 # ----------------------------------------------------------------------------------
-  def update_winner(self, cells = None):
-    cells_check = cells if (
-     cells is not None and 
-      len(cells) >= self.board.row and 
-      len(cells) >= self.board.col
-    ) else []
-    
-    if self.winner_found == False and len(cells_check) >= 3 :
-      clear_screen()
-      is_winner_found = self.board.identify_cells(cells_check)
-      if is_winner_found == True :
-        self.winner_found   = is_winner_found
-        self.winner['Role'] = self.turn_name
-        self.winner['Mark'] = self.turn_mark
-        
-      # print(f'Winner       : {self.winner}')
-      # print(f'Roles        : {self.game_roles}')
-      # print(f'Player cells : {self.player.cells_selected }')
-      # print(f'Comp   cells : {self.comp.cells_selected }')
-      # print('--------------------------------------------')
-      # print(f'Output       : {is_winner_found}')
       
   def game_loop(self) :
     self.update_score()
     self.update_turn()
     self.update_board()
-    # print(self)
+    print(self)
     
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
     if not is_in_game : self.start_game()
-    elif (is_in_game and self.winner_found == True) : self.refresh_attr();
+    elif (is_in_game and self.winner_found == True) : 
+      pass
+      # self.refresh_attr();
     self.game_loop()
     
   def start_game(self):
@@ -182,7 +163,28 @@ class Game:
         is_comp_selecting   = is_comp_select
     )
 
-
+  def update_winner(self, cells = None):
+    cells_check = cells if (
+     cells is not None and 
+      len(cells) >= self.board.row and 
+      len(cells) >= self.board.col
+    ) else []
+    
+    if self.winner_found == False and len(cells_check) >= 3 :
+      # clear_screen()
+      is_winner_found = self.board.identify_cells(cells_check)
+      if is_winner_found == True :
+        self.winner_found   = is_winner_found
+        self.winner['Role'] = self.turn_name
+        self.winner['Mark'] = self.turn_mark
+        
+      # print(f'Winner       : {self.winner}')
+      # print(f'Roles        : {self.game_roles}')
+      # print(f'Player cells : {self.player.cells_selected }')
+      # print(f'Comp   cells : {self.comp.cells_selected }')
+      # print('--------------------------------------------')
+      # print(f'Output       : {is_winner_found}')
+  
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
