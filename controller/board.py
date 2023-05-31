@@ -53,33 +53,44 @@ class Board:
         #c.Check if (cells has identical row or cells has identical col)
         row_winner_cells = [ cell[0] for cell in winner_pair ]
         col_winner_cells = [ cell[1] for cell in winner_pair ]
-        is_horizontal_align = len([ c == row_winner_cells[0] for c in row_winner_cells if
-                              row_winner_cells.index(c) != 0 and c == row_winner_cells[0]] ) > 0
-        is_vertical_align   = len([ c == col_winner_cells[0] for c in col_winner_cells if
-                              col_winner_cells.index(c) != 0 and c == col_winner_cells[0]] ) > 0
-
-        return f'''
+        is_horizontal_align = len([ c for c in row_winner_cells[1:] if c == row_winner_cells[0] ]) > 0
+        is_vertical_align   = len([ c for c in col_winner_cells[1:] if c == col_winner_cells[0] ]) > 0
+        
+        print( f'''
         Winner pair         : { winner_pair }
         is Odd              : { are_cells_odd }
         is Even             : { are_cells_even }
         Twin                : { is_twin }
-        is Horizontal align : {is_horizontal_align}
-        is Vertical align   : {is_vertical_align}
-        '''
-  def winner_checking(
-    self,
-    
-  ):
+        Row winner cells    : { row_winner_cells }
+        Col winner cells    : { col_winner_cells }
+        is Horizontal align : { is_horizontal_align }
+        is Vertical align   : { is_vertical_align }
+        ''')
+        
+        return self.winner_checking(
+          identify_odd  = are_cells_odd, 
+          identify_even = are_cells_even, 
+          identify_twin = is_twin, 
+          identify_horizontal = is_horizontal_align, 
+          identify_vertical = is_vertical_align
+        )
+
+
+  def winner_checking( self, identify_odd, identify_even, identify_twin, identify_horizontal, identify_vertical ):
     # Winner_found is True if :
     # 1. win Diagonally : 
     #    index of all winner_pair cells are even and
-    #    [sum of winner_pair_row, sum of winner_pair_col] in winner_pair is [3,3]]
+    #    has twin conbination of [sum of winner_pair_row, sum of winner_pair_col] in winner_pair, example : [3,3]]
+    win_diagonally = ( identify_odd == False and identify_even == True and 
+                       identify_twin == True and identify_horizontal == False and identify_vertical == False )
     
     # 2. win Horizontally or Vertically :
-    #    index of all winner_pair cells are odd and
-    #    (cells has identical row or has identical col)
+    #    (cells have identical row or has identical col)
+    win_not_diagonally = ( identify_horizontal == True or identify_vertical == True )
     
-    pass
+    winner_is_found = win_diagonally or win_not_diagonally
+    return winner_is_found
+
 #----------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------
   
