@@ -197,7 +197,7 @@ class Game:
     -----------------CONGRATULATIONS !!--------
      Winner       : {self.winner}
     ------------------------------------------- 
-     Level        : {self.game_level_txt}; {self.game_roles})
+     Level        : {self.game_level_txt}
     -------------------------------------------
     ===========================================
      Board :\n{print_board}'''
@@ -218,5 +218,5 @@ class Game:
      Board :\n{print_board}'''
     
     clear_screen()
-    # return found_winner if self.winner_found == True else not_found_winner
-    return not_found_winner
+    return found_winner if self.winner_found == True else not_found_winner
+    # return not_found_winner
