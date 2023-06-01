@@ -2,46 +2,53 @@ from flask import Flask, render_template, Response, json, redirect, url_for
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
+import os
+clear_screen = lambda: os.system('clear')
+
 # ----------------------------------------------------------------------------------------
 # Initialization & additional functions
 # ----------------------------------------------------------------------------------------
+
 game = Game()
 app = Flask(__name__)
 Bootstrap(app)
 
 ATTR = {
-  "game_board"   : {},
-  "game_score"   : {},
-  "game_level"   : '',
-  "game_options" : [],
-  "game_start"   : False,
-  "game_over"    : False,
-  "game_roles"   : {},
-  "winner_found" : False,
-  "game_winner"  : {},
-  "player_turn"  : '',
-  "player_cells" : [],
-  "comp_cells"   : [],
+  "game_board"    : {},
+  "game_score"    : {},
+  "game_level"    : '',
+  "game_options"  : [],
+  "game_start"    : False,
+  "game_over"     : False,
+  "game_roles"    : {},
+  "winner_found"  : False,
+  "game_winner"   : {},
+  "player_turn"   : '',
+  "player_cells"  : [],
+  "comp_cells"    : [],
+  "comp_autoCell" : None
 }
 
 def update_attributes():
   game.game_update_attr()
-  ATTR['game_board']   = game.board_dimmension
-  ATTR['game_score']   = game.scores
-  ATTR['game_level']   = game.game_level_txt
-  ATTR['game_options'] = game.level_options
-  ATTR['game_start']   = game.game_start
-  ATTR['game_over']    = game.game_over
-  ATTR['game_roles']   = game.game_roles
-  ATTR['winner_found'] = game.winner_found
-  ATTR['game_winner']  = game.winner
-  ATTR['player_turn']  = game.turn_mark
-  ATTR['player_cells'] = game.player.cells_selected
-  ATTR['comp_cells']   = game.comp.cells_selected
+  ATTR['game_board']    = game.board_dimmension
+  ATTR['game_score']    = game.scores
+  ATTR['game_level']    = game.game_level_txt
+  ATTR['game_options']  = game.level_options
+  ATTR['game_start']    = game.game_start
+  ATTR['game_over']     = game.game_over
+  ATTR['game_roles']    = game.game_roles
+  ATTR['winner_found']  = game.winner_found
+  ATTR['game_winner']   = game.winner
+  ATTR['player_turn']   = game.turn_mark
+  ATTR['player_cells']  = game.player.cells_selected
+  ATTR['comp_cells']    = game.comp.cells_selected
+  ATTR['comp_autoCell'] = game.comp_autoCell
 
 # ----------------------------------------------------------------------------------------
 # Common Routes
 # ----------------------------------------------------------------------------------------
+
 @app.route("/")
 def home():
   game.refresh_attr()
@@ -85,5 +92,6 @@ def send_data() :
   return Response(json.dumps(game_data), mimetype='application/json')
 
 # -------------------------------------------------------------------------------------------
+
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=2000)

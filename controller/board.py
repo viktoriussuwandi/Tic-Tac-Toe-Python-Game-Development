@@ -109,17 +109,6 @@ class Board:
         col_winner_cells = [ cell[1] for cell in winner_pair ]
         is_horizontal_align = len([ c for c in row_winner_cells[1:] if c == row_winner_cells[0] ]) > 0
         is_vertical_align   = len([ c for c in col_winner_cells[1:] if c == col_winner_cells[0] ]) > 0
-
-        # print(f'''
-        # winner_pair         : {winner_pair}
-        # are_cells_odd       : {are_cells_odd}
-        # are_cells_even      : {are_cells_even}
-        # is_twin             : {is_twin}
-        # row_winner_cells    : {row_winner_cells}
-        # col_winner_cells    : {col_winner_cells}
-        # is_horizontal_align : {is_horizontal_align}
-        # is_vertical_align   : {is_vertical_align}
-        # ''')
         
         return self.winner_checking(
           identify_odd  = are_cells_odd, 

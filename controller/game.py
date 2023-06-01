@@ -20,6 +20,8 @@ class Game:
     self.player = Player()
     self.comp   = Player()
     self.board  = Board(9)
+    
+    self.comp_autoCell  = None
 
     self.game_level     = None
     self.game_level_txt = ''
@@ -48,6 +50,8 @@ class Game:
     self.comp   = Player()
     self.board  = Board(9)
 
+    self.comp_autoCell  = None
+
     self.game_level     = None
     self.game_level_txt = ''
     self.scores         = {"X": 0, "O": 0}
@@ -71,7 +75,8 @@ class Game:
     self.update_score()
     self.update_turn()
     self.update_board()
-    print(self)
+    if ( self.turn == self.comp.role and self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
+    # print(self)
 
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
@@ -176,19 +181,16 @@ class Game:
         self.winner_found   = is_winner_found
         self.winner['Role'] = self.turn_name
         self.winner['Mark'] = self.turn_mark
-        
-      # print(f'Winner       : {self.winner}')
-      # print(f'Roles        : {self.game_roles}')
-      # print(f'Player cells : {self.player.cells_selected }')
-      # print(f'Comp   cells : {self.comp.cells_selected }')
-      # print('--------------------------------------------')
-      # print(f'Output       : {is_winner_found}')
-  
+
 # ----------------------------------------------------------------------------------
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
 
-  def cell_choose_by_comp(self): return random.choice(self.board.open_cells)
+  def cell_choose_by_comp(self): 
+    cell_choosen = random.choice(self.board.open_cells)
+    clear_screen()
+    print('Computer Turn')
+    print(f'Cell choosen : {cell_choosen}')
 
   def __repr__(self):
     print_board     = self.board.print_out
@@ -218,4 +220,3 @@ class Game:
     
     clear_screen()
     return found_winner if self.winner_found == True else not_found_winner
-    # return not_found_winner
