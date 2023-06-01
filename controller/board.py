@@ -24,11 +24,16 @@ class Board:
 
   def update_printOut(self):
     self.print_out = ''
-    for co in range(len(self.cell_owners)):
-      first_col = co % self.row == 0
-      if co == 0: self.print_out += f'     {str(self.cell_owners[co])}'
-      elif first_col: self.print_out += f'\n     {str(self.cell_owners[co])}'
-      else: self.print_out += f' {str(self.cell_owners[co])}'
+    for i in range(self.col) :
+      for j in range(self.row) :
+        char = (i*j)+j
+        self.print_out += f'     { str(self.cell_owners[char]) } '
+      self.print_out +='\n'
+      
+      # first_col = co % self.row == 0
+      # if co == 0: self.print_out += f'     {str(self.cell_owners[co])}'
+      # elif first_col: self.print_out += f'\n     {str(self.cell_owners[co])}'
+      # else: self.print_out += f' {str(self.cell_owners[co])}'
     
   def create_board(self):
     if self.total_square is not None:
