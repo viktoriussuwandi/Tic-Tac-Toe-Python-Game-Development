@@ -9,10 +9,11 @@ class Board:
     self.col = None
     self.all_cells  = []
     self.open_cells = []
-    
+
+    #Winner combination of [ sum(row), sum(col) ]
     self.sum_winner = [ 
       [3,0], [0,3], [3,3], [3,6], [6,3] 
-    ] #Winner combination of [ sum(row), sum(col) ]
+    ] 
     
     self.board_dimmension = {}
     self.create_board()
