@@ -21,7 +21,7 @@ class Game:
     self.comp   = Player()
     self.board  = Board(9)
     
-    self.comp_autoCell  = None
+    self.comp_autoCell  = {'cell': [], 'index': None}
 
     self.game_level     = None
     self.game_level_txt = ''
@@ -50,7 +50,7 @@ class Game:
     self.comp   = Player()
     self.board  = Board(9)
 
-    self.comp_autoCell  = None
+    self.comp_autoCell  = {'cell': [], 'index': None}
 
     self.game_level     = None
     self.game_level_txt = ''
@@ -190,10 +190,12 @@ class Game:
 
   def cell_choose_by_comp(self): 
     cell_choosen = random.choice(self.board.open_cells)
-    self.comp_autoCell = cell_choosen
+    cell_index = self.board.all_cells.index(cell_choosen)
+    self.comp_autoCell["cell"]  = cell_choosen
+    self.comp_autoCell["index"] = cell_index
     clear_screen()
     print('Computer Turn')
-    print(f'Cell choosen : {cell_choosen}')
+    print(f'Cell choosen : {self.comp_autoCell}')
 
   def __repr__(self):
     print_board     = self.board.print_out

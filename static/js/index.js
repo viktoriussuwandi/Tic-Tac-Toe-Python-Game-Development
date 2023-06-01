@@ -23,9 +23,18 @@ function get_Flask_Data() {
 };
 
 function check_turn() {
+  
   if(GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
-    console.log(`Computer turn : ${GAME_DATA["comp_autoCell"]}`)
+    let comp_cell = GAME_DATA["comp_autoCell"]["cell"]
+    let comp_cell_index = GAME_DATA["comp_autoCell"]["index"]
+    console.log(`
+    Comp cell  :${ comp_cell }; 
+    cell index :${ comp_cell_index }
+    `)
+
+    
   }
+
 }
 
 function update_game() {

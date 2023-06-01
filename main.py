@@ -26,7 +26,7 @@ ATTR = {
   "player_turn"   : '',
   "player_cells"  : [],
   "comp_cells"    : [],
-  "comp_autoCell" : None
+  "comp_autoCell" : {}
 }
 
 def update_attributes():
