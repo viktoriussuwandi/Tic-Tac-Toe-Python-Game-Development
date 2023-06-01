@@ -75,8 +75,8 @@ class Game:
     self.update_score()
     self.update_turn()
     self.update_board()
-    if ( self.winner_found == False and self.turn == self.comp.role and self.turn_name == 'Comp' ) :
-      self.cell_choose_by_comp()
+    if ( self.winner_found == False and self.turn == self.comp.role and 
+         self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
     print(self)
 
   def game_update_attr(self):
@@ -204,7 +204,6 @@ class Game:
      Winner       : {self.winner['Mark']} ( {self.winner['Role']} )
     -------------------------------------------
      Level        : {self.game_level_txt}
-    -------------------------------------------
     ===========================================
      Board :\n{print_board}'''
     
@@ -212,6 +211,9 @@ class Game:
     #-------------------------------------------------------------------
     not_found_winner = f'''
     -----------------TIC TAC TOE GAME----------
+     Current Turn : {self.turn_mark} - {self.turn_name}
+     Board :\n{print_board}
+    ===========================================
      Winner       : {self.winner}
      Open cells   : 
      {open_cells}
@@ -220,10 +222,8 @@ class Game:
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
-    -------------------------------------------
-     Current Turn : {self.turn_mark} - {self.turn_name}
-    ===========================================
-     Board :\n{print_board}'''
+    -------------------------------------------'''
+
     
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------

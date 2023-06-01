@@ -2,9 +2,6 @@ from flask import Flask, render_template, Response, json, redirect, url_for
 from flask_bootstrap import Bootstrap
 from controller.game import Game
 
-import os
-clear_screen = lambda: os.system('clear')
-
 # ----------------------------------------------------------------------------------------
 # Initialization & additional functions
 # ----------------------------------------------------------------------------------------
