@@ -1,9 +1,6 @@
 import math
 from itertools import combinations
 
-import os
-clear_screen = lambda: os.system('clear')
-
 class Board:
 
   def __init__(self, total_cells=None):

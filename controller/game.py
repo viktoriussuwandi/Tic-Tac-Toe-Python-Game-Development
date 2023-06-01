@@ -1,10 +1,8 @@
 from controller.player import Player
 from controller.board import Board
-
+import random
 import os
 clear_screen = lambda: os.system('clear')
-
-import random
 
 class Game:
 
