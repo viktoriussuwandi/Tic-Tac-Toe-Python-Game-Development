@@ -60,6 +60,11 @@ function update_game() {
   if (GAME_IS_ON) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
+  } else if (!GAME_IS_ON && GAME_DATA["winner_found"]) {
+    let win_mark = GAME_DATA["game_winner"].Mark
+    let win_role = GAME_DATA["game_winner"].Role
+    player_turn_element.text('');
+    text_turn_element.text(`Congratulations : ${win_mark} (${win_role})`);
   } else if (!GAME_IS_ON) {
     player_turn_element.text('');
     text_turn_element.text("Start game or select player");

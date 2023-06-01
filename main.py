@@ -54,7 +54,7 @@ def home():
   game.refresh_attr()
   update_attributes()
   return render_template("index.html", attr=ATTR)
-  
+
 # -------------------------------------------------------------------------------------------
 # Routes for data transfer from/to index.js
 # -------------------------------------------------------------------------------------------
