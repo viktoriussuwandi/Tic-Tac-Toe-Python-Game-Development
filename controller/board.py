@@ -12,7 +12,11 @@ class Board:
     self.col = None
     self.all_cells  = []
     self.open_cells = []
-    self.sum_winner = [ [3,0], [0,3], [3,3], [3,6], [6,3] ] #Winner combination of [ sum(row), sum(col) ]
+    
+    self.sum_winner = [ 
+      [3,0], [0,3], [3,3], [3,6], [6,3] 
+    ] #Winner combination of [ sum(row), sum(col) ]
+    
     self.board_dimmension = {}
     self.create_board()
     self.cell_owners = [None for i in self.all_cells]
@@ -24,16 +28,12 @@ class Board:
 
   def update_printOut(self):
     self.print_out = ''
-    for i in range(self.col) :
-      for j in range(self.row) :
-        char = (i*j)+j
-        self.print_out += f'     { str(self.cell_owners[char]) } '
+    char = 0
+    for i in range(self.row) :
+      for j in range(self.col) :
+        char = (self.row*i) + j
+        self.print_out += f'     {self.cell_owners[char]} '
       self.print_out +='\n'
-      
-      # first_col = co % self.row == 0
-      # if co == 0: self.print_out += f'     {str(self.cell_owners[co])}'
-      # elif first_col: self.print_out += f'\n     {str(self.cell_owners[co])}'
-      # else: self.print_out += f' {str(self.cell_owners[co])}'
     
   def create_board(self):
     if self.total_square is not None:

@@ -187,8 +187,14 @@ class Game:
 # OTHER FUNCTIONS
 # ----------------------------------------------------------------------------------
 
-  def cell_choose_by_comp(self): 
-    cell_choosen = random.choice(self.board.open_cells)
+  def cell_choose_by_comp(self):
+    cell_choosen = []
+    cell_index   = None
+    open_cells = self.board.open_cells
+    if len(open_cells) == 1 : 
+      cell_choosen = self.board.open_cells[0]
+    else : cell_choosen = random.choice(open_cells)
+      
     cell_index = self.board.all_cells.index(cell_choosen)
     self.comp_autoCell["cell"]  = cell_choosen
     self.comp_autoCell["index"] = cell_index
