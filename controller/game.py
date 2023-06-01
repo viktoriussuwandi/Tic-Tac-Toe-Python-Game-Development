@@ -75,7 +75,9 @@ class Game:
     self.update_score()
     self.update_turn()
     self.update_board()
-    if ( self.turn == self.comp.role and self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
+    if ( self.turn == self.comp.role and self.turn_name == 'Comp' ) :
+      self.cell_choose_by_comp()
+      
     # print(self)
 
   def game_update_attr(self):
@@ -188,6 +190,7 @@ class Game:
 
   def cell_choose_by_comp(self): 
     cell_choosen = random.choice(self.board.open_cells)
+    self.comp_autoCell = cell_choosen
     clear_screen()
     print('Computer Turn')
     print(f'Cell choosen : {cell_choosen}')

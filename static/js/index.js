@@ -22,6 +22,12 @@ function get_Flask_Data() {
     return deferredData; // contains the passed data
 };
 
+function check_turn() {
+  if(GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
+    console.log(`Computer turn : ${GAME_DATA["comp_autoCell"]}`)
+  }
+}
+
 function update_game() {
 
   //1.Get game data & update game status
@@ -45,7 +51,7 @@ function update_game() {
   let btn_cell =  $('.game-board .squares .square')
   if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
   else if (GAME_IS_ON === true)  { btn_cell.removeClass('disabled'); }
-
+  
   //4.Update game re-start button
   let btn_restart = $(".game-restart a.btn")
   if(GAME_IS_ON) {
@@ -56,6 +62,9 @@ function update_game() {
     btn_restart.removeClass('disabled in_game');
   }
 
+  //5.Check turn for Comp -> auto selected cell
+  check_turn()
+  
 }
 
 // ----------------------------------------------------------------------------
@@ -184,6 +193,7 @@ $(document).ready(function () {
       //b.Update data & change text of player turn
       GAME_DATA = data
       update_game();
+
     });
 
   });
