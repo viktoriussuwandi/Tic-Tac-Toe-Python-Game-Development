@@ -75,10 +75,9 @@ class Game:
     self.update_score()
     self.update_turn()
     self.update_board()
-    if ( self.turn == self.comp.role and self.turn_name == 'Comp' ) :
+    if ( self.winner_found == False and self.turn == self.comp.role and self.turn_name == 'Comp' ) :
       self.cell_choose_by_comp()
-      
-    # print(self)
+    print(self)
 
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
@@ -193,12 +192,13 @@ class Game:
     cell_index = self.board.all_cells.index(cell_choosen)
     self.comp_autoCell["cell"]  = cell_choosen
     self.comp_autoCell["index"] = cell_index
-    clear_screen()
-    print('Computer Turn')
-    print(f'Cell choosen : {self.comp_autoCell}')
 
   def __repr__(self):
-    print_board     = self.board.print_out
+    print_board = self.board.print_out
+    open_cells  = self.board.open_cells
+    
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
     found_winner = f'''
     -----------------CONGRATULATIONS !!--------
      Winner       : {self.winner['Mark']} ( {self.winner['Role']} )
@@ -208,11 +208,13 @@ class Game:
     ===========================================
      Board :\n{print_board}'''
     
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
     not_found_winner = f'''
     -----------------TIC TAC TOE GAME----------
      Winner       : {self.winner}
      Open cells   : 
-     {self.board.open_cells}
+     {open_cells}
     ------------------------------------------- 
      Level        : {self.game_level_txt}; {self.game_roles})
     (Game start   : {self.game_start}) ; (Game over : {self.game_over})
@@ -223,5 +225,7 @@ class Game:
     ===========================================
      Board :\n{print_board}'''
     
+    #-------------------------------------------------------------------
+    #-------------------------------------------------------------------
     clear_screen()
     return found_winner if self.winner_found == True else not_found_winner

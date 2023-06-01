@@ -25,18 +25,22 @@ function get_Flask_Data() {
 function check_turn() {
   
   if(GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
-    
-    //1.Get auto selected comp cell
+
+    //1.Avoid player click any cell -> disable all buttons
+    let btn_cell =  $('.game-board .squares .square')
+    btn_cell.addClass('disabled');
+   
+    //2.Get auto selected comp cell
     let comp_cell = GAME_DATA["comp_autoCell"]["cell"]
     let comp_cell_index = GAME_DATA["comp_autoCell"]["index"]
 
-    //2.Choose html cell which match with auto selected comp cell
+    //3.Choose html cell which match with auto selected comp cell
     let open_cells = $('.game-board .squares .square').map( 
       function() { return $(this); } 
     );
     let html_cell  = open_cells[comp_cell_index];
 
-    //3.Trigger click event of the html cell
+    //4.Trigger click event of the html cell
     html_cell.trigger( "click" );
   }
 
