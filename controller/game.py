@@ -85,11 +85,12 @@ class Game:
     self.game_loop()
     
     #Trigger to run function for comp auto cell selected
-    if ( self.winner_found == False and self.turn == self.comp.role and 
-         self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
+    check_is_comp_turn = (
+      self.turn == self.comp.role and self.turn_name == 'Comp' and 
+      self.winner_found == False  and self.board_open_cells > 0
+    )
+    if check_is_comp_turn : self.cell_choose_by_comp()
            
-    
-
   def start_game(self):
     check_level_and_role = (
       self.game_level  is not None and 
@@ -172,7 +173,7 @@ class Game:
         is_comp_selecting   = is_comp_select
       )
       #Update board open cells attribute
-      self.board_open_cells = len(self.board.open_cells)      
+      self.board_open_cells = len(self.board.open_cells)
 
   def update_winner(self, cells = None):
     cells_check = cells if (
