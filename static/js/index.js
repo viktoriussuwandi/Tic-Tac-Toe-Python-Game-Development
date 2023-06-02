@@ -5,94 +5,6 @@ let GAME_DATA    = {};
 let WINNER_FOUND = false;
 let GAME_IS_ON   = false;
 
-function get_Flask_Data() {
-
-    let deferredData = new jQuery.Deferred();
-    $.ajax({
-        type     : "GET",
-        url      : "/get_ajax",
-        dataType : "json",
-        success  : function(data) { deferredData.resolve(data); },
-        complete : function(xhr, textStatus) {
-          // console.log("AJAX Request complete -> ", xhr, " -> ", textStatus); console.log('Data Updated') 
-        }
-    });
-    return deferredData; // contains the passed data
-};
-
-function check_game_status() {
-  /*Game is start if : game difficulties is selected, and player's role (X or O) is selected
-    Game is over  if : The winner is found, or all cells are selected*/
-  
-  //.Get game data & update game status
-  let start = GAME_DATA["game_start"], over = GAME_DATA["game_over"]
-  let total_cells      = GAME_DATA["game_board"]["row"] * GAME_DATA["game_board"]["col"];
-  GAME_IS_ON = ( start === true && over  === false && 
-                 GAME_DATA["open_cells"] > 0 && GAME_DATA["winner_found"] == false );
-  update_attr();
-  check_turn();
-}
-
-function check_turn() {
-  
-  if(GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
-
-    //1.Avoid player click any cell -> disable all buttons
-    let btn_cell =  $('.game-board .squares .square')
-    btn_cell.addClass('disabled');
-   
-    //2.Get auto selected comp cell
-    let comp_cell = GAME_DATA["comp_autoCell"]["cell"]
-    let comp_cell_index = GAME_DATA["comp_autoCell"]["index"]
-
-    //3.Choose html cell which match with auto selected comp cell
-    let open_cells = $('.game-board .squares .square').map( 
-      function() { return $(this); } 
-    );
-    let html_cell  = open_cells[comp_cell_index];
-
-    //4.Trigger click event of the html cell
-    html_cell.trigger( "click" );
-  }
-
-}
-
-function update_attr() {
-  
-  //2.Update Player turn element
-  let player_turn_element = $('.game-turn .player-turn');
-  let text_turn_element   = $('.game-turn .text-turn');
-  
-  if (GAME_IS_ON) {
-    player_turn_element.text(GAME_DATA["player_turn"]);
-    text_turn_element.text("Turn");
-  } else if (!GAME_IS_ON && GAME_DATA["winner_found"]) {
-    let win_mark = GAME_DATA["game_winner"].Mark
-    let win_role = GAME_DATA["game_winner"].Role
-    player_turn_element.text('');
-    text_turn_element.text(`Congratulations : ${win_mark} (${win_role})`);
-  } else if (!GAME_IS_ON) {
-    player_turn_element.text('');
-    text_turn_element.text("Start game or select player");
-  }
-
-  //3.Update board cells element
-  let btn_cell =  $('.game-board .squares .square')
-  if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
-  else if (GAME_IS_ON === true)  { btn_cell.removeClass('disabled'); }
-  
-  //4.Update game re-start button
-  let btn_restart = $(".game-restart a.btn")
-  if(GAME_IS_ON) {
-    btn_restart.text('in game');
-    btn_restart.addClass('disabled in_game');
-  } else if (!GAME_IS_ON) {
-    btn_restart.text('Restart Game');
-    btn_restart.removeClass('disabled in_game');
-  }
-  
-}
-
 // ----------------------------------------------------------------------------
 // Game Level - Function to select level
 // ----------------------------------------------------------------------------
@@ -245,6 +157,95 @@ $(document).ready(function () {
 // ----------------------------------------------------------------------------
 // OTHERS
 // ----------------------------------------------------------------------------
+function get_Flask_Data() {
+
+    let deferredData = new jQuery.Deferred();
+    $.ajax({
+        type     : "GET",
+        url      : "/get_ajax",
+        dataType : "json",
+        success  : function(data) { deferredData.resolve(data); },
+        complete : function(xhr, textStatus) {
+          // console.log("AJAX Request complete -> ", xhr, " -> ", textStatus); console.log('Data Updated') 
+        }
+    });
+    return deferredData; // contains the passed data
+};
+
+function check_game_status() {
+  /*Game is start if : game difficulties is selected, and player's role (X or O) is selected
+    Game is over  if : The winner is found, or all cells are selected*/
+  
+  //Get game data & update game status
+  let start = GAME_DATA["game_start"], over = GAME_DATA["game_over"]
+  let total_cells      = GAME_DATA["game_board"]["row"] * GAME_DATA["game_board"]["col"];
+  GAME_IS_ON = ( start === true && over  === false && 
+                 GAME_DATA["open_cells"] > 0 && GAME_DATA["winner_found"] == false );
+  update_attr();
+  check_turn();
+}
+
+function check_turn() {
+  
+  if(GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
+
+    //1.Avoid player click any cell -> disable all buttons
+    let btn_cell =  $('.game-board .squares .square')
+    btn_cell.addClass('disabled');
+   
+    //2.Get auto selected comp cell
+    let comp_cell = GAME_DATA["comp_autoCell"]["cell"]
+    let comp_cell_index = GAME_DATA["comp_autoCell"]["index"]
+
+    //3.Choose html cell which match with auto selected comp cell
+    let open_cells = $('.game-board .squares .square').map( 
+      function() { return $(this); } 
+    );
+    let html_cell  = open_cells[comp_cell_index];
+
+    //4.Trigger click event of the html cell
+    html_cell.trigger( "click" );
+  }
+
+}
+
+function update_attr() {
+  
+  //2.Update Player turn element
+  let player_turn_element = $('.game-turn .player-turn');
+  let text_turn_element   = $('.game-turn .text-turn');
+  
+  if (GAME_IS_ON) {
+    player_turn_element.text(GAME_DATA["player_turn"]);
+    text_turn_element.text("Turn");
+  } else if (!GAME_IS_ON && GAME_DATA["winner_found"]) {
+    let win_mark = GAME_DATA["game_winner"].Mark
+    let win_role = GAME_DATA["game_winner"].Role
+    player_turn_element.text('');
+    text_turn_element.text(`Congratulations : ${win_mark} (${win_role})`);
+  } else if (!GAME_IS_ON) {
+    player_turn_element.text('');
+    text_turn_element.text("Start game or select player");
+  }
+
+  //3.Update board cells element
+  let btn_cell =  $('.game-board .squares .square')
+  if      (GAME_IS_ON === false) { btn_cell.addClass('disabled'); }
+  else if (GAME_IS_ON === true)  { btn_cell.removeClass('disabled'); }
+  
+  //4.Update game re-start button
+  let btn_restart = $(".game-restart a.btn")
+  if(GAME_IS_ON) {
+    btn_restart.text('in game');
+    btn_restart.addClass('disabled in_game');
+  } else if (!GAME_IS_ON) {
+    btn_restart.text('Restart Game');
+    btn_restart.removeClass('disabled in_game');
+  }
+  
+}
+
+//Check if game is on and data is available
 if (GAME_IS_ON === false && GAME_DATA.length === undefined) {
   let update_game_data = get_Flask_Data();
   $.when( update_game_data ).done( function( data ) {
