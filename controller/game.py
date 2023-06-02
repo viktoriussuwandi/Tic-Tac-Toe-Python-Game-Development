@@ -1,12 +1,13 @@
 from controller.player import Player
 from controller.board import Board
 import random
+
 import os
 clear_screen = lambda: os.system('clear')
 
 class Game:
 
-  def __init__(self): 
+  def __init__(self):
     self.game_no    = 0
     self.game_start = False
     self.game_over  = True

@@ -22,6 +22,24 @@ function get_Flask_Data() {
     return deferredData; // contains the passed data
 };
 
+function check_game_status() {
+  /*Game is start when :
+    -Difficulties selected, and
+    -Role (X or O) is selected
+    
+    Game is over if :
+    1.The winner is found, or
+    2.All cells are selected
+  */
+  
+  //1.Get game data & update game status
+  GAME_START = GAME_DATA["game_start"];
+  GAME_OVER  = GAME_DATA["game_over"];
+  GAME_IS_ON = (GAME_START === true && GAME_OVER === false && !GAME_DATA["winner_found"]);
+  
+  check_turn()
+}
+
 function check_turn() {
   
   if(GAME_DATA["player_turn"] === GAME_DATA["game_roles"]["Comp"]) {
@@ -46,17 +64,14 @@ function check_turn() {
 
 }
 
-function update_game() {
-
-  //1.Get game data & update game status
-  GAME_START = GAME_DATA["game_start"];
-  GAME_OVER  = GAME_DATA["game_over"];
-  GAME_IS_ON = (GAME_START === true && GAME_OVER === false && !GAME_DATA["winner_found"]);
-
+function update_attr() {
+  
+  check_game_status()
+  
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
-
+  
   if (GAME_IS_ON) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
@@ -84,9 +99,6 @@ function update_game() {
     btn_restart.text('Restart Game');
     btn_restart.removeClass('disabled in_game');
   }
-
-  //5.Check turn for Comp -> auto selected cell
-  check_turn()
   
 }
 
@@ -117,7 +129,7 @@ $(document).ready(function () {
       level_btn.text(item_btn.text());
       level_btn.val(item_btn.text());
       level_btn.addClass('disabled');
-      update_game();
+      update_attr();
     });
 
   });
@@ -151,7 +163,7 @@ $(document).ready(function () {
       GAME_DATA = data;
       btnX.addClass('disabled-color');
       btnO.addClass('disabled');
-      update_game();
+      update_attr();
     });
 
   });
@@ -181,7 +193,7 @@ $(document).ready(function () {
       GAME_DATA = data;
       btnX.addClass('disabled');
       btnO.addClass('disabled-color');
-      update_game();
+      update_attr();
     });
 
   });
@@ -215,7 +227,7 @@ $(document).ready(function () {
 
       //b.Update data & change text of player turn
       GAME_DATA = data
-      update_game();
+      update_attr();
 
     });
 
@@ -229,7 +241,6 @@ $(document).ready(function () {
   $('.game-restart a.btn').one('click', function (e) {
     e.preventDefault();
     if(!GAME_IS_ON) {
-      
       //Refresh the game, and reload home page
       let request = new XMLHttpRequest();
       request.open("POST", `/restart_game`, false);
@@ -247,6 +258,6 @@ if (GAME_IS_ON === false && GAME_DATA.length === undefined) {
   let update_game_data = get_Flask_Data();
   $.when( update_game_data ).done( function( data ) {
     GAME_DATA = data;
-    update_game();
+    update_attr();
   });
 }
