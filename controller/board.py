@@ -15,7 +15,7 @@ class Board:
       [3,0], [0,3], [3,3], [3,6], [6,3] 
     ] 
     
-    self.board_dimmension = {}
+    self.board_dimmension = {"row": 0, "col": 0}
     self.create_board()
     self.cell_owners = [None for i in self.all_cells]
     self.print_out = ''
@@ -43,7 +43,8 @@ class Board:
       self.all_cells = [
         [row, col] for row in range(self.row) for col in range(self.col)
       ]
-      self.board_dimmension = {"row": self.row, "col": self.col}
+      self.board_dimmension["row"] = self.row
+      self.board_dimmension["col"] = self.col
 
   def update_board(
     self,

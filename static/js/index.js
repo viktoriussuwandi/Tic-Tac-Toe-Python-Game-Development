@@ -1,10 +1,9 @@
 // ----------------------------------------------------------------------------
 // Game Data
 // ----------------------------------------------------------------------------
-let GAME_DATA  = {};
-let GAME_START = false;
-let GAME_OVER  = true;
-let GAME_IS_ON = false;
+let GAME_DATA    = {};
+let WINNER_FOUND = false;
+let GAME_IS_ON   = false;
 
 function get_Flask_Data() {
 
@@ -14,29 +13,28 @@ function get_Flask_Data() {
         url      : "/get_ajax",
         dataType : "json",
         success  : function(data) { deferredData.resolve(data); },
-        complete : function(xhr, textStatus) { 
-          // console.log("AJAX Request complete -> ", xhr, " -> ", textStatus);
-          // console.log('Data Updated')
+        complete : function(xhr, textStatus) {
+          console.log("AJAX Request complete -> ", xhr, " -> ", textStatus); console.log('Data Updated') 
         }
     });
     return deferredData; // contains the passed data
 };
 
 function check_game_status() {
-  /*Game is start when :
-    -Difficulties selected, and
-    -Role (X or O) is selected
-    
-    Game is over if :
-    1.The winner is found, or
-    2.All cells are selected
-  */
+  /*Game is start if : game difficulties is selected, and player's role (X or O) is selected
+    Game is over  if : The winner is found, or all cells are selected*/
   
-  //1.Get game data & update game status
-  GAME_START = GAME_DATA["game_start"];
-  GAME_OVER  = GAME_DATA["game_over"];
-  GAME_IS_ON = (GAME_START === true && GAME_OVER === false && !GAME_DATA["winner_found"]);
-  
+  //.Get game data & update game status
+  let start = GAME_DATA["game_start"], over = GAME_DATA["game_over"]
+  let total_cells      = GAME_DATA["game_board"]["row"] * GAME_DATA["game_board"]["col"];
+  let selected_cells   = GAME_DATA["player_cells"].length + GAME_DATA["comp_cells"].length;
+  let lengh_open_cells = total_cells - selected_cells;
+  GAME_IS_ON = ( start === true && over  === false && 
+                 lengh_open_cells > 0 && GAME_DATA["winner_found"] == false 
+               );
+  console.log(`Length open cells : ${lengh_open_cells}`)
+
+  update_attr(game_is_on, winner_found)
   check_turn()
 }
 
@@ -64,23 +62,21 @@ function check_turn() {
 
 }
 
-function update_attr() {
-  
-  check_game_status()
+function update_attr(game_is_on) {
   
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
   
-  if (GAME_IS_ON) {
+  if (game_is_on) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } else if (!GAME_IS_ON && GAME_DATA["winner_found"]) {
+  } else if (!game_is_on && GAME_DATA["winner_found"]) {
     let win_mark = GAME_DATA["game_winner"].Mark
     let win_role = GAME_DATA["game_winner"].Role
     player_turn_element.text('');
     text_turn_element.text(`Congratulations : ${win_mark} (${win_role})`);
-  } else if (!GAME_IS_ON) {
+  } else if (!game_is_on) {
     player_turn_element.text('');
     text_turn_element.text("Start game or select player");
   }
@@ -129,7 +125,7 @@ $(document).ready(function () {
       level_btn.text(item_btn.text());
       level_btn.val(item_btn.text());
       level_btn.addClass('disabled');
-      update_attr();
+      check_game_status();
     });
 
   });
@@ -163,7 +159,7 @@ $(document).ready(function () {
       GAME_DATA = data;
       btnX.addClass('disabled-color');
       btnO.addClass('disabled');
-      update_attr();
+      check_game_status();
     });
 
   });
@@ -193,7 +189,7 @@ $(document).ready(function () {
       GAME_DATA = data;
       btnX.addClass('disabled');
       btnO.addClass('disabled-color');
-      update_attr();
+      check_game_status();
     });
 
   });
@@ -227,7 +223,7 @@ $(document).ready(function () {
 
       //b.Update data & change text of player turn
       GAME_DATA = data
-      update_attr();
+      check_game_status();
 
     });
 
@@ -258,6 +254,6 @@ if (GAME_IS_ON === false && GAME_DATA.length === undefined) {
   let update_game_data = get_Flask_Data();
   $.when( update_game_data ).done( function( data ) {
     GAME_DATA = data;
-    update_attr();
+    check_game_status();
   });
 }
