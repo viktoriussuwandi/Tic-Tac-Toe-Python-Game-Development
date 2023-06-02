@@ -30,9 +30,9 @@ function check_game_status() {
   let selected_cells   = GAME_DATA["player_cells"].length + GAME_DATA["comp_cells"].length;
   let length_open_cells = total_cells - selected_cells;
   GAME_IS_ON = ( start === true && over  === false && 
-                 length_open_cells > 0 && GAME_DATA["winner_found"] == false 
+                 GAME_DATA["open_cells"] > 0 && GAME_DATA["winner_found"] == false 
                );
-  console.log(`Length open cells : ${length_open_cells}`);
+  console.log(`Length open cells : ${GAME_DATA["open_cells"]}`);
   update_attr();
   check_turn();
 }

@@ -131,7 +131,8 @@ class Board:
           identify_vertical = is_vertical_align
         )
 
-  def winner_checking( self, identify_odd, identify_even, identify_twin, identify_horizontal, identify_vertical ):
+  def winner_checking( self, identify_odd, identify_even, identify_twin, 
+                       identify_horizontal, identify_vertical ):
     # Winner_found is True if :
     # 1. win Diagonally : 
     #    index of all winner_pair cells are even and
