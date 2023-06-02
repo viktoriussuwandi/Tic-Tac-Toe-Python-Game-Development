@@ -35,6 +35,7 @@ class Game:
 
     self.board_printed    = ''
     self.board_dimmension = {}
+    self.board_open_cells = 0
 
   def refresh_attr(self) :
     self.game_no    = 0
@@ -64,6 +65,7 @@ class Game:
 
     self.board_printed    = ''
     self.board_dimmension = {}
+    self.board_open_cells = 0
     self.game_update_attr()
     
 # ----------------------------------------------------------------------------------
@@ -74,13 +76,16 @@ class Game:
     self.update_score()
     self.update_turn()
     self.update_board()
-    if ( self.winner_found == False and self.turn == self.comp.role and 
-         self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
     print(self)
 
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
     if not is_in_game : self.start_game()
+
+    #Trigger to run function for comp auto cell selected
+    if ( self.winner_found == False and self.turn == self.comp.role and 
+         self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
+           
     self.game_loop()
 
   def start_game(self):
@@ -165,7 +170,10 @@ class Game:
         
         is_player_selecting = is_player_select,
         is_comp_selecting   = is_comp_select
-    )
+      )
+      
+      #Update board open cells attribute
+      self.board_open_cells = len(self.board.open_cells)      
 
   def update_winner(self, cells = None):
     cells_check = cells if (

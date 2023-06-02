@@ -14,7 +14,7 @@ function get_Flask_Data() {
         dataType : "json",
         success  : function(data) { deferredData.resolve(data); },
         complete : function(xhr, textStatus) {
-          console.log("AJAX Request complete -> ", xhr, " -> ", textStatus); console.log('Data Updated') 
+          // console.log("AJAX Request complete -> ", xhr, " -> ", textStatus); console.log('Data Updated') 
         }
     });
     return deferredData; // contains the passed data
@@ -28,14 +28,13 @@ function check_game_status() {
   let start = GAME_DATA["game_start"], over = GAME_DATA["game_over"]
   let total_cells      = GAME_DATA["game_board"]["row"] * GAME_DATA["game_board"]["col"];
   let selected_cells   = GAME_DATA["player_cells"].length + GAME_DATA["comp_cells"].length;
-  let lengh_open_cells = total_cells - selected_cells;
+  let length_open_cells = total_cells - selected_cells;
   GAME_IS_ON = ( start === true && over  === false && 
-                 lengh_open_cells > 0 && GAME_DATA["winner_found"] == false 
+                 length_open_cells > 0 && GAME_DATA["winner_found"] == false 
                );
-  console.log(`Length open cells : ${lengh_open_cells}`)
-
-  update_attr(game_is_on, winner_found)
-  check_turn()
+  console.log(`Length open cells : ${length_open_cells}`);
+  update_attr();
+  check_turn();
 }
 
 function check_turn() {
@@ -62,21 +61,21 @@ function check_turn() {
 
 }
 
-function update_attr(game_is_on) {
+function update_attr() {
   
   //2.Update Player turn element
   let player_turn_element = $('.game-turn .player-turn');
   let text_turn_element   = $('.game-turn .text-turn');
   
-  if (game_is_on) {
+  if (GAME_IS_ON) {
     player_turn_element.text(GAME_DATA["player_turn"]);
     text_turn_element.text("Turn");
-  } else if (!game_is_on && GAME_DATA["winner_found"]) {
+  } else if (!GAME_IS_ON && GAME_DATA["winner_found"]) {
     let win_mark = GAME_DATA["game_winner"].Mark
     let win_role = GAME_DATA["game_winner"].Role
     player_turn_element.text('');
     text_turn_element.text(`Congratulations : ${win_mark} (${win_role})`);
-  } else if (!game_is_on) {
+  } else if (!GAME_IS_ON) {
     player_turn_element.text('');
     text_turn_element.text("Start game or select player");
   }

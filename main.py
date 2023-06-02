@@ -23,6 +23,7 @@ ATTR = {
   "player_turn"   : '',
   "player_cells"  : [],
   "comp_cells"    : [],
+  "open_cells"    : 0,
   "comp_autoCell" : {}
 }
 
@@ -40,6 +41,7 @@ def update_attributes():
   ATTR['player_turn']   = game.turn_mark
   ATTR['player_cells']  = game.player.cells_selected
   ATTR['comp_cells']    = game.comp.cells_selected
+  ATTR['open_cells']    = game.board_open_cells
   ATTR['comp_autoCell'] = game.comp_autoCell
 
 # ----------------------------------------------------------------------------------------
