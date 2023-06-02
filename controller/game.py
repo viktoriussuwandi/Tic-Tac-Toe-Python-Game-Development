@@ -169,7 +169,6 @@ class Game:
         is_player_selecting = is_player_select,
         is_comp_selecting   = is_comp_select
       )
-      
       #Update board open cells attribute
       self.board_open_cells = len(self.board.open_cells)      
 
