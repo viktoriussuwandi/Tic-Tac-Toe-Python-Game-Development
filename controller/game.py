@@ -81,12 +81,14 @@ class Game:
   def game_update_attr(self):
     is_in_game = self.game_start == True and self.game_over == False
     if not is_in_game : self.start_game()
-
+    
+    self.game_loop()
+    
     #Trigger to run function for comp auto cell selected
     if ( self.winner_found == False and self.turn == self.comp.role and 
          self.turn_name == 'Comp' ) : self.cell_choose_by_comp()
            
-    self.game_loop()
+    
 
   def start_game(self):
     check_level_and_role = (
