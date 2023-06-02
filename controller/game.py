@@ -231,7 +231,7 @@ class Game:
      Open cells   : 
      {open_cells}
     ------------------------------------------- 
-     Level        : {self.game_level_txt}; 
+     Level        : {self.game_level_txt}
      Roles        : {self.game_roles}
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
