@@ -9,15 +9,15 @@ class Player :
 # Function for comp auto selected cells (based on game level)
 #-------------------------------------------------------------------------------------------
   
-  def easy_comp_cell(self) :
+  def select_easy_cell(self) :
     #comp will select cell randomly
     pass
     
-  def medium_comp_cell(self) :
+  def select_medium_cell(self) :
     #comp will select cell with lowest winning chance
     pass
     
-  def impossible_comp_cell(self) :
+  def select_impossible_cell(self) :
     #comp will select cell with highest winning chance
     pass
     
