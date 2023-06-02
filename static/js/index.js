@@ -27,12 +27,8 @@ function check_game_status() {
   //.Get game data & update game status
   let start = GAME_DATA["game_start"], over = GAME_DATA["game_over"]
   let total_cells      = GAME_DATA["game_board"]["row"] * GAME_DATA["game_board"]["col"];
-  let selected_cells   = GAME_DATA["player_cells"].length + GAME_DATA["comp_cells"].length;
-  let length_open_cells = total_cells - selected_cells;
   GAME_IS_ON = ( start === true && over  === false && 
-                 GAME_DATA["open_cells"] > 0 && GAME_DATA["winner_found"] == false 
-               );
-  console.log(`Length open cells : ${GAME_DATA["open_cells"]}`);
+                 GAME_DATA["open_cells"] > 0 && GAME_DATA["winner_found"] == false );
   update_attr();
   check_turn();
 }
