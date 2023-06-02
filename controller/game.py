@@ -162,12 +162,10 @@ class Game:
       comp_cells_select   = self.comp.cells_selected
     
       self.board.update_board(
-        player_role  = player_role_select, 
-        comp_role    = comp_role_select,
-        
-        player_cells = player_cells_select,
-        comp_cells   = comp_cells_select,
-        
+        player_role         = player_role_select, 
+        comp_role           = comp_role_select,
+        player_cells        = player_cells_select,
+        comp_cells          = comp_cells_select,
         is_player_selecting = is_player_select,
         is_comp_selecting   = is_comp_select
       )
@@ -177,7 +175,7 @@ class Game:
 
   def update_winner(self, cells = None):
     cells_check = cells if (
-     cells is not None and 
+      cells is not None and 
       len(cells) >= self.board.row and 
       len(cells) >= self.board.col
     ) else []
