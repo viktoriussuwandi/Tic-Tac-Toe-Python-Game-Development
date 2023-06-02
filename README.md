@@ -25,5 +25,6 @@
    [Google Tic Tac Toe game](https://www.google.com/search?q=google+tic+tac+toe&rlz=1C1CHBD_enID945ID945&oq=google+tic&aqs=chrome.0.69i59j0i131i433i512j69i57j0i512l7.2550j0j9&sourceid=chrome&ie=UTF-8) for the inspiration.
 
 6. Still checking on :
-   - comp auto selected cell's function on different level
+   - Comp auto selected cell's function on different level
+   - Annimation on comp turn
    - Winning board
