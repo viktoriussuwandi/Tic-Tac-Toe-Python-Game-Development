@@ -7,20 +7,20 @@
 #### Documentation can be found on : [My Github](https://github.com/viktoriussuwandi/Tic-Tac-Toe-Python-Game-Development)
 
 ## SERVER
-![5](5.gif)
+![5](static/img/5.gif)
 
 ## CLIENT
 ### Start the game
-![1](1.gif)
+![1](static/img/1.gif)
 
 ### Play the game
-![2](2.gif)
+![2](static/img/2.gif)
 
 ### End the game
-![3](3.gif)
+![3](static/img/3.gif)
 
 ### Restart the game
-![4](4.gif)
+![4](static/img/4.gif)
 
 ## Future Development :
    - Multiplayer gaming.
