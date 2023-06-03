@@ -7,15 +7,26 @@
 #### Documentation can be found on : [My Github](https://github.com/viktoriussuwandi/Tic-Tac-Toe-Python-Game-Development)
 
 ## SERVER
+![5](5.gif)
 
 ## CLIENT
+### Start the game
+![1](1.gif)
 
+### Play the game
+![2](2.gif)
+
+### End the game
+![3](3.gif)
+
+### Restart the game
+![4](4.gif)
 
 ## Future Development :
    - Multiplayer gaming.
    - Online database to store game attributes.
    - Better UI / UX
-   - Comp auto selected cell's function on different level
+   - Improve comp auto selected cell's function on different level
    - Annimation on comp turn
 
 ## Thanks to :
