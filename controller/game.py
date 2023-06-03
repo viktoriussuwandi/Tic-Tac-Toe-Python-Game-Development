@@ -236,10 +236,8 @@ class Game:
      Player cells : {self.player.cells_selected }
      Comp   cells : {self.comp.cells_selected }
     -------------------------------------------'''
-
-    # test = self.board.print_out
+    
     #-------------------------------------------------------------------
     #-------------------------------------------------------------------
     clear_screen()
     return found_winner if self.winner_found == True else not_found_winner
-    # return test

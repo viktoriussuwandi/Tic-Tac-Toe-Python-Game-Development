@@ -25,32 +25,18 @@ class Board:
 #----------------------------------------------------------------------------------------------------
 
   def update_printOut(self):
-    self.print_out = 'Working on printout\n'
-    self.print_out = '--------------------\n'
-    
+    self.print_out = ''
     blank_value = None; short_space = ' '
     total_char  = len(str(blank_value)) + len(short_space)
     start_space = ('').join([ ' ' for i in range( total_char ) ])
     
     for i in range(self.row) :
-      output = ''
-      output += '\n'
+      output = '\n'
       for j in range(self.col) :
         idx  = (self.row*i) + j; char = self.cell_owners[idx]
-        if idx % self.row == 0 : output += start_space + str(char).center(5)
+        if idx % self.row == 0 : output += start_space + str(char).center(total_char)
         else : output += str(char).center(5)
       self.print_out += output
-    
-    # self.print_out = ''
-    # idx  = 0
-    # char_space = ' '
-    # long_space = ('').join([' ' for i in range(5)])
-    # for i in range(self.row) :
-    #   for j in range(self.col) :
-    #     idx  = (self.row*i) + j
-    #     char = str(self.cell_owners[idx])
-    #     self.print_out += f'{long_space}{char}{char_space}'
-    #   self.print_out +='\n'
 
   def create_board(self):
     if self.total_square is not None:
