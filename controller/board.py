@@ -26,16 +26,20 @@ class Board:
 
   def update_printOut(self):
     self.print_out = 'Working on printout\n'
-    self.print_out = '---------------------'
-    start_space = ('').join([' ' for i in range(5)])
-    output = ''
+    self.print_out = '--------------------\n'
+    
+    blank_value = None; short_space = ' '
+    total_char  = len(str(blank_value)) + len(short_space)
+    start_space = ('').join([ ' ' for i in range( total_char ) ])
+    
     for i in range(self.row) :
-      row = []
+      output = ''
+      output += '\n'
       for j in range(self.col) :
-        idx  = (self.row*i) + j
-        char = str(self.cell_owners[idx])
-        row.apend(char)
-      
+        idx  = (self.row*i) + j; char = self.cell_owners[idx]
+        if idx % self.row == 0 : output += start_space + str(char).center(5)
+        else : output += str(char).center(5)
+      self.print_out += output
     
     # self.print_out = ''
     # idx  = 0
