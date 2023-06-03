@@ -35,7 +35,7 @@ class Board:
       for j in range(self.col) :
         idx  = (self.row*i) + j; char = self.cell_owners[idx]
         if idx % self.row == 0 : output += start_space + str(char).center(total_char)
-        else : output += str(char).center(5)
+        else : output += str(char).center(total_char)
       self.print_out += output
 
   def create_board(self):
