@@ -150,6 +150,7 @@ html,body {
   align-items: center;
   justify-content: center;
   
+  color: rgb(20, 189, 172);
   border-color:#78909C; 
   border-width: 2px;
   border-radius: 0;
@@ -166,7 +167,6 @@ html,body {
 
 .game-board .squares .square:focus, {
   border-color:#78909C;
-  color: rgb(20, 189, 172);
 }
 
 .game-board .squares .square:hover{
